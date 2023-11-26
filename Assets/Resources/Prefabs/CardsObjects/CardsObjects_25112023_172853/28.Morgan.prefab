@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6340242316328527653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6210622458382394449}
+  - component: {fileID: 5095287431968837456}
+  m_Layer: 5
+  m_Name: 28.Morgan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6210622458382394449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6340242316328527653}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.40821788, y: 0.23456968, z: -0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 39.348427, y: 50.988846, z: 61.75968}
+  m_LocalScale: {x: 0.015455951, y: 0.015455949, z: 0.015455959}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5095287431968837456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6340242316328527653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullName: Morgan, The Watchful Protector
+  faction: 7
+  CARD_ID: PW01-RO07
+  cardProductionID: 28
+  level: 2
+  battalion: 2
+  subtitle: 'Unit: Robot'
+  description: Morgan, the Watchful Protector, stands vigilant in the realm of wires
+    and circuits, a silent sentinel with mending hands, offering solace in the watchful
+    embrace of mechanical compassion.
+  abilityDescription: 
+  isHero: 0
+  ability: 2
+  effect: 0
+  affectedFaction: 0
+  texture2D: {fileID: 2800000, guid: 390acdd0b5e3ff543b6005b4b03dd6ba, type: 3}

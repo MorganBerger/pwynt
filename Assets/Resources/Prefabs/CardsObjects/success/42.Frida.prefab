@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3540271997147447214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2739143520664489590}
+  - component: {fileID: 5119975690097199235}
+  m_Layer: 5
+  m_Name: 42.Frida
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2739143520664489590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540271997147447214}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5119975690097199235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540271997147447214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullName: Frida
+  faction: 10
+  CARD_ID: PW01-CO01
+  cardProductionID: 42
+  level: 1
+  battalion: 1
+  subtitle: 'Unit: Companion'
+  description: "\u201CAwhoof\u201D"
+  abilityDescription: 
+  isHero: 0
+  limitPerDeck: 3
+  ability: 0
+  UpgradedVersion: {fileID: 0}
+  texture2D: {fileID: 2800000, guid: 670c99af4d7d9ad4ea4ec7ac30266c24, type: 3}
