@@ -15,20 +15,26 @@ public class GameManager : MonoBehaviour
     public GameObject deckObject;
 
     void Awake() {
-        players = new Player[1];
-
-        var prefab = Resources.Load("Prefabs/Standards/Player", typeof(GameObject));
-        var playerObj = (GameObject)Instantiate(prefab);
-
-        playerObj.transform.localPosition = Vector3.zero;
-        playerObj.transform.SetParent(playerContainer.transform);
-
-        players[0] = playerObj.GetComponent<Player>();
-        // players[0].deckContainer = deckObject;
+        
     }
 
     // Start is called before the first frame update
     void Start() {
+        players = new Player[1];
+        players = GetComponentsInChildren<Player>();
+
+        print("player count: " + players.Length);
+        // var prefab = Resources.Load("Prefabs/Standards/Player", typeof(GameObject));
+        // var playerObj = (GameObject)Instantiate(prefab);
+
+        // playerObj.transform.localPosition = Vector3.zero;
+        // playerObj.transform.SetParent(playerContainer.transform);
+
+        // var player = playerObj.GetComponent<Player>();
+        // player.SetDeckContainer(deckObject);
+
+        // players[0] = player;
+        // players[0].deckContainer = deckObject;
     }
 
     // Update is called once per frame

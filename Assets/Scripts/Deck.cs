@@ -35,9 +35,7 @@ public class Deck : MonoBehaviour
     public void SetDeck(CardObjectCereal[] cereals) {
         foreach (var card in cereals) {
             if (card.numberInDeck == 0) { continue; }
-            
-            print(card.name);
-            
+                        
             var obj = (GameObject)Resources.Load("Cards/3Ds/" + card.name, typeof(GameObject));
             var cardWithStats = Globals.AllCardsObjects
                                 .Cast<Card>()
@@ -62,18 +60,16 @@ public class Deck : MonoBehaviour
 
     void SetPositions() {
         int i = 0;
+        float cardDepth = 0.000685f;
         foreach (var card in filteredCards) {
-            card.gameObject.transform.localPosition = new Vector3(0, 0.1f + i * 0.000685f, 0);
+            card.gameObject.transform.localPosition = new Vector3(0, i * cardDepth, 0);
             i++;
         }
-    }
-
-    void Awake() {
-
-    }
-
-    void Shuffle(List<Card> cardsInDeck) {
-
+        // gameObject.transform.localPosition = new Vector3(
+        //     gameObject.transform.localPosition.x,
+            // gameObject.transform.localPosition.y - (filteredCards.Count / 2 * cardDepth),
+            // gameObject.transform.localPosition.z
+        // );
     }
 
     Card Draw() {
