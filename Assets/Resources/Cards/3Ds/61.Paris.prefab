@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 6008657521707382682}
   - component: {fileID: 7200315092911884797}
   - component: {fileID: 6637412316578650987}
-  - component: {fileID: 5401063252174047174}
   - component: {fileID: 5820353612089712179}
+  - component: {fileID: -3948106377448953685}
+  - component: {fileID: -2563914814594113374}
   m_Layer: 0
   m_Name: 61.Paris
   m_TagString: Untagged
@@ -113,7 +114,32 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
---- !u!54 &5401063252174047174
+  hoverEnabled: 0
+  onHover:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &5820353612089712179
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4986717535515885969}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.13, y: 0.002, z: 0.21}
+  m_Center: {x: -0.000000037252903, y: -5.820766e-11, z: 0.013}
+--- !u!54 &-3948106377448953685
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,29 +161,27 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &5820353612089712179
-BoxCollider:
+--- !u!114 &-2563914814594113374
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4986717535515885969}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 1
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.13, y: 0.01, z: 0.182}
-  m_Center: {x: 0, y: -5.820766e-11, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee66557beda6475981de8e5a454b8f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDragging: 0
+  maxDragDistance: 1
+  draggedOutOfBounds:
+    m_PersistentCalls:
+      m_Calls: []
+  cardSpeed: 0
+  dist: 0
