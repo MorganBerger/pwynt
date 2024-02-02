@@ -882,6 +882,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMousePos: {x: 0, y: 0, z: 0}
   currentDragPlane: {fileID: 0}
+  dragPlaneDidChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1128732762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1527,8 +1530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ce527336b7eaf4ebcd2e4d843c7bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filteredCards: []
-  handGameObject: {fileID: 954012033}
+  shuffledDeck: []
   OnDeckClick:
     m_PersistentCalls:
       m_Calls: []

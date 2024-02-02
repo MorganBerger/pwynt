@@ -114,10 +114,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &-8972794430656585827
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,9 +175,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDragging: 0
-  maxDragDistance: 1
-  draggedOutOfBounds:
-    m_PersistentCalls:
-      m_Calls: []
-  cardSpeed: 0
-  dist: 0
