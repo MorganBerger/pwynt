@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -31,25 +30,18 @@ struct ListExtension {
 public class Deck : MonoBehaviour
 {
     List<Card> cardsInDeck = new List<Card>();
-    public List<Card> filteredCards = new List<Card>();
-
-    public GameObject handGameObject;
-    Hand hand;
-
-    void Awake() {
-        hand = handGameObject.GetComponent<Hand>();
-    }
+    public List<Card> shuffledDeck = new List<Card>();
 
     public void SetDeck(CardObjectCereal[] cereals) {
         print("cereals: " + cereals.Length);
+
+        var allCardsWithStats = Globals.AllCardsObjects.Cast<Card>();
+
         foreach (var card in cereals) {
             if (card.numberInDeck == 0) { continue; }
                         
             var obj = (GameObject)Resources.Load("Cards/3Ds/" + card.name, typeof(GameObject));
-
-            var cardWithStats = Globals.AllCardsObjects
-                                .Cast<Card>()
-                                .First(c => c.cardProductionID + "" == card.ID);
+            var cardWithStats = allCardsWithStats.First(c => c.cardProductionID + "" == card.ID);
 
             if (cardWithStats == null) { continue; }
             if (obj == null) { continue; }
@@ -57,17 +49,17 @@ public class Deck : MonoBehaviour
             for (int y = 0; y < card.numberInDeck; y++) {
                 var cardObj = Instantiate(obj);
                 cardObj.name = obj.name;
-                var cardComponent = cardObj.GetComponent<Card>();
-                cardComponent.CopyCard(cardWithStats);
 
-                cardObj.transform.SetParent(transform);
-                cardObj.transform.localPosition = Vector3.zero;
-                cardObj.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 180));
+                var cardComponent = cardObj.GetComponent<Card>();
+                cardComponent.CopyCardData(cardWithStats);
+
                 cardsInDeck.Add(cardComponent);
             }
         }
-        filteredCards = ListExtension.Shuffle(cardsInDeck);
-        drawIndex = filteredCards.Count - 1;
+
+        shuffledDeck = ListExtension.Shuffle(cardsInDeck);
+        drawIndex = shuffledDeck.Count - 1;
+
         SetPositions();
     }
 
@@ -80,8 +72,12 @@ public class Deck : MonoBehaviour
     void SetPositions() {
         int i = 0;
         float cardDepth = 0.000685f;
-        foreach (var card in filteredCards) {
-            card.gameObject.transform.localPosition = new Vector3(0, i * cardDepth, 0);
+        foreach (var card in shuffledDeck) {
+
+            card.transform.SetParent(transform);
+            card.transform.localPosition = new Vector3(0, i * cardDepth, 0);
+            card.transform.localRotation = Quaternion.Euler(0, 0, 180);
+
             i++;
         }
     }
@@ -89,7 +85,7 @@ public class Deck : MonoBehaviour
     Card DrawSingleCard() {
         if (drawIndex > -1) {
             drawIndex--;
-            return filteredCards[drawIndex + 1];
+            return shuffledDeck[drawIndex + 1];
         }
         return null;
     }

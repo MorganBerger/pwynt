@@ -90,7 +90,7 @@ public class Card : MonoBehaviour {
         effect = GetComponent<CardEffect>();
     }
 
-    public void CopyCard(Card card) {
+    public void CopyCardData(Card card) {
         fullName = card.fullName;
         faction = card.faction;
         CARD_ID = card.CARD_ID;
@@ -122,23 +122,23 @@ public class Card : MonoBehaviour {
             Debug.Log("Prefab failed to save" + prefabSuccess);
     }
 
-    public bool hoverEnabled = false;
-    internal bool hovered = false;
+    // public bool hoverEnabled = false;
+    // internal bool hovered = false;
 
-    [HideInInspector]
-    public UnityEvent<Card, bool> onHover;
+    // [HideInInspector]
+    // public UnityEvent<Card, bool> onHover;
 
-    void OnMouseOver() {
-        if (!hovered && hoverEnabled) {
-            onHover.Invoke(this, true);
-            hovered = true;
-        }
-    }
+    // void OnMouseOver() {
+    //     if (!hovered && hoverEnabled) {
+    //         onHover.Invoke(this, true);
+    //         hovered = true;
+    //     }
+    // }
 
-    void OnMouseExit() {
-        if (!hoverEnabled)
-            return;
-        onHover.Invoke(this, false);
-        hovered = false;
-    }
+    // void OnMouseExit() {
+    //     if (!hoverEnabled)
+    //         return;
+    //     onHover.Invoke(this, false);
+    //     hovered = false;
+    // }
 }

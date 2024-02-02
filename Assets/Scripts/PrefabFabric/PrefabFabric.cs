@@ -116,7 +116,7 @@ public class PrefabFabric : MonoBehaviour {
     }
 
     void Awake() {
-        cardsTextures = Resources.LoadAll("Images/Cards/", typeof(Texture2D));
+        cardsTextures = Resources.LoadAll("Images/Cards2D/", typeof(Texture2D));
 
         popup = popupContainer.GetComponent<Popup>();
         popup.gameObject.SetActive(false);

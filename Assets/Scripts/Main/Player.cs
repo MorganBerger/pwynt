@@ -12,18 +12,19 @@ public class Player : MonoBehaviour
 
     int lifePoints = 2;
 
-    // Start is called before the first frame update
-    void Start() {
-        print("Player start");
-
+    void Awake() {
+        print("Player awake");
         Physics.queriesHitTriggers = true;
         
         deck = GetComponentInChildren<Deck>();
         hand = GetComponentInChildren<Hand2>();
 
         deck.SetDeck(GetDeckFromStorage("deck1"));
+    }
 
-        Draw(10);
+    void Start() {
+        print("Player start");
+        Draw(6);
     }
 
     CardObjectCereal[] GetDeckFromStorage(string deck) {

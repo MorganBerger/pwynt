@@ -69,8 +69,8 @@ public class Hand : MonoBehaviour
 
     void SetupHover(List<Card> cards) {
         foreach (var card in cards) {
-            card.hoverEnabled = true;
-            card.onHover.AddListener(HoverCard);
+            // card.hoverEnabled = true;
+            // card.onHover.AddListener(HoverCard);
         }
     }
 

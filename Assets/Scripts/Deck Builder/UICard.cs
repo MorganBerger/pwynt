@@ -72,7 +72,9 @@ public class UICard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     public void onRightClick() {
         var go = button.gameObject;
         var ped = new PointerEventData(EventSystem.current); 
-        ExecuteEvents.Execute(go, ped, ExecuteEvents.pointerEnterHandler); ExecuteEvents.Execute(go, ped, ExecuteEvents.submitHandler); 
+        
+        ExecuteEvents.Execute(go, ped, ExecuteEvents.pointerEnterHandler); 
+        ExecuteEvents.Execute(go, ped, ExecuteEvents.submitHandler); 
 
         if (card.numberSelected > 0) {
             card.numberSelected--;

@@ -54,9 +54,6 @@ public class Hand2 : MonoBehaviour
         var oldNumberOfCards = cardsInHand.Count - newCardsCount;
         var startPosX = (cardsInHand.Count - 1) * cardStep / 2;
 
-        print(funcStr + "oldNumberOfCards is '" + oldNumberOfCards + "'");
-        print(funcStr + "startPosX is '" + startPosX + "'");
-
         for (int i = oldNumberOfCards; i < cardsInHand.Count; i++)
         {
             var card = cardsInHand[i];
@@ -67,16 +64,53 @@ public class Hand2 : MonoBehaviour
         }
     }
 
-    public void RemoveAt(int index) {
-        if (index < 0 || index > cardsInHand.Count - 1) return;
+
+    [SerializeField]
+    private Card _lastPlayedCard = null;
+    [SerializeField]
+    private int _lastIndexPlayed = -1;
+
+    public void UndoPlay() {
+        print("Undoing play");
+        if (_lastPlayedCard == null)
+            return;
+        print("Last played card good");
+        _lastPlayedCard.transform.SetParent(transform);
+
+        if (_lastIndexPlayed < 0 || _lastIndexPlayed > cardsInHand.Count)
+            return;
+        print("Good index");
+        
+        cardsInHand.Insert(_lastIndexPlayed, _lastPlayedCard);
+        UpdateCardsInHandPos(0);
+    }
+
+    public Card Play(Card card) {
+        if (cardsInHand.Count == 0) 
+            return null;
+
+        var index = cardsInHand.IndexOf(card);
+        var resultCard = RemoveAt(index);
+
+        _lastIndexPlayed = index;
+        _lastPlayedCard = resultCard;
+
+        return resultCard;
+    }
+
+    private Card RemoveAt(int index) {
+        if (index < 0 || index > cardsInHand.Count - 1){ 
+            return null;
+        }
 
         var card = cardsInHand[index];
 
         card.transform.parent = null;
-        card.transform.position = Vector3.zero;
         cardsInHand.RemoveAt(index);
 
         UpdateCardsInHandPos(0);
+
+        return card;
     }
 
     void Move(Card card, Vector3 pos) {
@@ -92,8 +126,8 @@ public class Hand2 : MonoBehaviour
 
     void SetupHover(List<Card> cards) {
         foreach (var card in cards) {
-            card.hoverEnabled = true;
-            card.onHover.AddListener(HoverCard);
+            // card.hoverEnabled = true;
+            // card.onHover.AddListener(HoverCard);
         }
     }
 
