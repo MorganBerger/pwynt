@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -98,6 +97,12 @@ public class Hand2 : MonoBehaviour
         return resultCard;
     }
 
+    // public void CancelPlay(Card card) {
+    //     card.transform.parent = transform;
+    //     var pos = card.transform.localPosition;
+    //     card.transform.localPosition = new Vector3(pos.x, 0, pos.z);
+    // }
+
     private Card RemoveAt(int index) {
         if (index < 0 || index > cardsInHand.Count - 1){ 
             return null;
@@ -126,8 +131,10 @@ public class Hand2 : MonoBehaviour
 
     void SetupHover(List<Card> cards) {
         foreach (var card in cards) {
-            // card.hoverEnabled = true;
-            // card.onHover.AddListener(HoverCard);
+            var cardGO = card.gameObject;
+            var hoverBehaviour = cardGO.GetComponent<HoverableObject>();
+            // hoverBehaviour.hoverEnabled = true;
+            // hoverBehaviour.onHover.AddListener(HoverCard);
         }
     }
 
@@ -136,7 +143,12 @@ public class Hand2 : MonoBehaviour
     [HideInInspector]
     public UnityEvent UIShouldHide;
 
-    void HoverCard(Card card, bool hover) {
+    void HoverCard(GameObject cardGO, bool hover) {
+    // void HoverCard(Card card, bool hover) {
+        var card = cardGO.GetComponent<Card>();
+
+        if (card == null) return;
+
         if (hover) {
             CardHovered.Invoke(card);
         } else {
