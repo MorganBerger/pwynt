@@ -14,11 +14,16 @@ public class GameManager : MonoBehaviour
     public Board board;
 
     public GameObject deckObject;
+
+    [SerializeField]
     private DraggingManager _dragManager;
 
     // Start is called before the first frame update
     void Awake() {
-        print("GameManager awake");
+        
+    }
+    void Start() {
+        print("GameManager start");
 
         _players = GetComponentsInChildren<Player>();
         print("Player count: " + _players.Length);
@@ -32,9 +37,6 @@ public class GameManager : MonoBehaviour
         SetupListeners();
         UdpateText();
     }
-    void Start() {
-
-    }
 
     void ObjectWasDragged(DraggableObject obj, DragPlane from, DragPlane to) {
         if (DraggedOutOfHand(from)) {            
@@ -43,13 +45,16 @@ public class GameManager : MonoBehaviour
                 print("played card out of hand");
                 var hand = _players[0].hand;
                 var playedCard = hand.Play(card);
-                print(playedCard);
+                // print(playedCard);
             }
         }
 
-        var toIsBoard = to.gameObject == board.gameObject;
-        if (toIsBoard) {
-            
+        var fromIsBoard = from.gameObject == board.gameObject;
+        var toIsHand = to.gameObject == _players[0].hand.gameObject;
+        if (toIsHand && fromIsBoard) {
+            print("SHOULD GO BACK TO HAND");
+            // var hand = _players[0].hand;
+            // hand.CancelPlay(obj.GetComponent<Card>());
         }
         print("-- obj :'" + obj.name + "', drag from: " + from.name + ", to: " + to.name);
     }
