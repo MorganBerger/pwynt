@@ -33,9 +33,11 @@ public class DraggableObject : MonoBehaviour
         var dragPlane = DraggingManager.Instance.currentPlane;
         var mousePos = DraggingManager.Instance.currentMousePos;
         
-        var dist = Vector3.Distance(mousePos, position);
-        var speed = Mathf.Exp(8 * dist) + 0.5f;
-        var cardSpeed = Mathf.Clamp(speed, 0f, 20f);
+        // var dist = Vector3.Distance(mousePos, position);
+        // var speed = Mathf.Exp(8 * dist) + 0.5f;
+        // var cardSpeed = Mathf.Clamp(speed, 0f, 20f);
+        var cardSpeed = 5f;
+
 
         var difference = mousePos - position;
 
@@ -45,7 +47,6 @@ public class DraggableObject : MonoBehaviour
         }
 
         var worldVelocity = difference * cardSpeed;
-
         var localVelocity = transform.InverseTransformDirection(worldVelocity);
 
         // No plane drag gesture

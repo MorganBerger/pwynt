@@ -16,6 +16,7 @@ class DraggingManager: MonoBehaviour {
     public UnityEvent<DraggableObject, DragPlane, DragPlane> didDragObject;
 
     private void Awake() {
+        print("DraggingManager: Awake()");
         Instance = this;
     }
 
@@ -65,7 +66,6 @@ class DraggingManager: MonoBehaviour {
         RaycastHit[] hits = Physics.RaycastAll(ray);
 
         if (hits.Length == 0) {
-            print("no hit");
             return;
         }
         currenthits = hits;
@@ -75,26 +75,19 @@ class DraggingManager: MonoBehaviour {
         
         var rayOrigin = ray.origin;
         double distance = double.MaxValue;
+        
         foreach (var h in hits) {
-            var dist = Vector3.Distance(rayOrigin, h.point);//rayOrigin - h.point;
+            // print(h.collider.gameObject);
+
+            var plane = h.transform.GetComponent<DragPlane>();
+            if (plane == null) continue;
+
+            var dist = Vector3.Distance(rayOrigin, h.point);
             if (dist < distance) {
                 distance = dist;
-                var plane = h.transform.GetComponent<DragPlane>();
-                if (plane != null) {
-                    targetPlane = plane;
-                    hit = h;
-                } else {
-                    continue;
-                }
+                targetPlane = plane;
+                hit = h;
             }
-            // var plane = h.transform.GetComponent<DragPlane>();
-            // if (plane == null) {
-            //     continue;
-            // } else {
-            //     targetPlane = plane;
-            //     hit = h;
-            //     break;
-            // }
         }
         
         if (targetPlane == null)
