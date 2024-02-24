@@ -35,15 +35,15 @@ public class Deck : MonoBehaviour
     public void SetDeck(CardObjectCereal[] cereals) {
         print("cereals: " + cereals.Length);
 
-        var allCardsWithStats = Globals.AllCardsObjects.Cast<Card>();
+        var allCardDatas = Globals.AllCardsObjects.Cast<Card>();
 
         foreach (var card in cereals) {
             if (card.numberInDeck == 0) { continue; }
                         
             var obj = (GameObject)Resources.Load("Cards/3Ds/" + card.name, typeof(GameObject));
-            var cardWithStats = allCardsWithStats.First(c => c.cardProductionID + "" == card.ID);
+            var cardData = allCardDatas.First(c => c.cardProductionID + "" == card.ID);
 
-            if (cardWithStats == null) { continue; }
+            if (cardData == null) { continue; }
             if (obj == null) { continue; }
             
             for (int y = 0; y < card.numberInDeck; y++) {
@@ -51,7 +51,7 @@ public class Deck : MonoBehaviour
                 cardObj.name = obj.name;
 
                 var cardComponent = cardObj.GetComponent<Card>();
-                cardComponent.CopyCardData(cardWithStats);
+                cardComponent.CopyCardData(cardData);
 
                 cardsInDeck.Add(cardComponent);
             }
