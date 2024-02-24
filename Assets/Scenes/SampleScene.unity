@@ -629,6 +629,7 @@ GameObject:
   - component: {fileID: 660022599}
   - component: {fileID: 660022600}
   - component: {fileID: 660022601}
+  - component: {fileID: 660022602}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -648,7 +649,8 @@ Transform:
   m_LocalPosition: {x: -0.067, y: 0.68736905, z: 0.90019137}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 858885562}
   m_Father: {fileID: 4484449480511604923}
   m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
 --- !u!114 &660022599
@@ -703,9 +705,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   padding: {x: 0, y: 0, z: 0}
+  dragAxis: {x: 1, y: 0, z: 1}
   cardRotate: 0
   drawsLine: 1
   lineColor: {r: 0, g: 0.34212565, b: 1, a: 1}
+--- !u!114 &660022602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660022597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6d2379442f0a48649f59248170a4a46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardStep: 0.075
+  _lastPlayedCard: {fileID: 0}
+  _lastIndexPlayed: -1
+  CardHovered:
+    m_PersistentCalls:
+      m_Calls: []
+  UIShouldHide:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,8 +962,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1269263031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1, y: 0}
-  m_AnchorMax: {x: 0.9, y: 1}
+  m_AnchorMin: {x: 0.1, y: 0.1}
+  m_AnchorMax: {x: 0.9, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -981,6 +1005,111 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820340993}
   m_CullTransparentMesh: 1
+--- !u!1 &858885561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 858885562}
+  - component: {fileID: 858885565}
+  - component: {fileID: 858885564}
+  - component: {fileID: 858885563}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &858885562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858885561}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.00000004470348, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.005, y: 0.0009999999, z: 0.20000002}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 660022598}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &858885563
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858885561}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &858885564
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858885561}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &858885565
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858885561}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &886445320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1402,40 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1106960504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1106960505}
+  m_Layer: 0
+  m_Name: CardRows
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1106960505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106960504}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1649318184}
+  - {fileID: 2129070646}
+  - {fileID: 2129621690}
+  m_Father: {fileID: 4484449480511604923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1116402753
 GameObject:
@@ -1606,8 +1769,8 @@ RectTransform:
   - {fileID: 820340994}
   m_Father: {fileID: 815459228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.043276653, y: 0.24585028}
-  m_AnchorMax: {x: 0.38873282, y: 0.95600003}
+  m_AnchorMin: {x: 0.05, y: 0.25}
+  m_AnchorMax: {x: 0.32, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1794,6 +1957,244 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530823117}
   m_CullTransparentMesh: 1
+--- !u!1001 &1649318183
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1106960505}
+    m_Modifications:
+    - target: {fileID: 639601065079030757, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 639601065079030757, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 639601065079030757, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2306227223735490900, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_Name
+      value: CloseCombatRow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898468125038717845, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: acceptedType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2945067406298886001, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778580494139450852, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6919954123918404513, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.127
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.095
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.121
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+--- !u!4 &1649318184 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+  m_PrefabInstance: {fileID: 1649318183}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2129070645
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1106960505}
+    m_Modifications:
+    - target: {fileID: 2306227223735490900, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_Name
+      value: ArcheryRow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898468125038717845, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: acceptedType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778580494139450852, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6919954123918404513, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.127
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.095
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+--- !u!4 &2129070646 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+  m_PrefabInstance: {fileID: 2129070645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2129621689
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1106960505}
+    m_Modifications:
+    - target: {fileID: 2306227223735490900, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_Name
+      value: SiegeRow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898468125038717845, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: acceptedType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778580494139450852, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6919954123918404513, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.127
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.095
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.599
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+--- !u!4 &2129621690 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8874994408065491500, guid: c392e6b41d44948cb84380a956b295a8, type: 3}
+  m_PrefabInstance: {fileID: 2129621689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &17128673717062662
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,10 +2539,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &580146366666158640
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2242,10 +2639,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &673475679974592730
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2346,10 +2739,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!23 &719456387435136807
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2446,10 +2835,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &838608854044836425
 GameObject:
   m_ObjectHideFlags: 0
@@ -2512,10 +2897,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &918258076699451267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2542,10 +2923,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &920309793995866385
 GameObject:
   m_ObjectHideFlags: 0
@@ -2711,10 +3088,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1075541599591233791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2741,10 +3114,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1088242074538511645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2771,10 +3140,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1102493961268257564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2801,10 +3166,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &1113765220868783187
 Transform:
   m_ObjectHideFlags: 0
@@ -3204,10 +3565,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &1473462688946357569
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3331,10 +3688,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1726194777239949688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3361,10 +3714,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &1833563708436570925
 Transform:
   m_ObjectHideFlags: 0
@@ -3717,10 +4066,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &2150815661878593550
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3755,10 +4100,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &2173343919956975428
 GameObject:
   m_ObjectHideFlags: 0
@@ -3834,10 +4175,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &2433162075476843253
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4067,10 +4404,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &2775671357889740067
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4167,10 +4500,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!23 &2895639935795170810
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4248,10 +4577,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2971533590774599632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4278,10 +4603,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2979916599083870195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4308,10 +4629,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2996854688546876737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4338,10 +4655,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &3081369896289874881
 GameObject:
   m_ObjectHideFlags: 0
@@ -4395,10 +4708,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &3266941502397068458
 GameObject:
   m_ObjectHideFlags: 0
@@ -4459,10 +4768,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &3458703310450663505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4489,10 +4794,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &3499098391031812192
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4613,10 +4914,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &3683921189060603489
 GameObject:
   m_ObjectHideFlags: 0
@@ -4677,10 +4974,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!23 &3838220021142167637
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5056,10 +5349,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!23 &4103216350087681832
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5129,10 +5418,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &4149244860763114859
 GameObject:
   m_ObjectHideFlags: 0
@@ -5178,10 +5463,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &4180842950656369371
 GameObject:
   m_ObjectHideFlags: 0
@@ -5363,6 +5644,7 @@ Transform:
   - {fileID: 5150910077239427238}
   - {fileID: 4725632520576390679}
   - {fileID: 8318104631263758733}
+  - {fileID: 1106960505}
   m_Father: {fileID: 8965011928638831314}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4552430560635204758
@@ -5470,10 +5752,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &4692987123062286850
 Transform:
   m_ObjectHideFlags: 0
@@ -5583,10 +5861,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &4822984663136985972
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5752,10 +6026,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &5132118629531946388
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5810,8 +6080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ce527336b7eaf4ebcd2e4d843c7bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filteredCards: []
-  handGameObject: {fileID: 660022597}
+  shuffledDeck: []
   OnDeckClick:
     m_PersistentCalls:
       m_Calls: []
@@ -5965,10 +6234,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &5309145269128303606
 Transform:
   m_ObjectHideFlags: 0
@@ -6025,10 +6290,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &5367021273579469147
 Transform:
   m_ObjectHideFlags: 0
@@ -6305,10 +6566,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &5724974829703622081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6335,10 +6592,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &5746771391524177437
 GameObject:
   m_ObjectHideFlags: 0
@@ -6432,10 +6685,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!23 &5881515404842060825
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6548,10 +6797,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &5939111558153549044
 Transform:
   m_ObjectHideFlags: 0
@@ -6609,10 +6854,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &5985146238763960621
 Transform:
   m_ObjectHideFlags: 0
@@ -6654,10 +6895,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &6029247922681425007
 GameObject:
   m_ObjectHideFlags: 0
@@ -6782,10 +7019,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &6236519146064192190
 GameObject:
   m_ObjectHideFlags: 0
@@ -6897,10 +7130,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &6459898058979098305
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7024,10 +7253,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!23 &6737639677197487771
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7112,10 +7337,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!23 &6835816120708245417
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7238,10 +7459,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!23 &6915614355955835344
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7326,10 +7543,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &6982959918214362156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7356,10 +7569,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &6991138088692990073
 Transform:
   m_ObjectHideFlags: 0
@@ -7489,10 +7698,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &7177526624745042368
 Transform:
   m_ObjectHideFlags: 0
@@ -7773,10 +7978,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!23 &7418296532447889616
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7846,10 +8047,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!23 &7436903381351093896
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8017,10 +8214,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &7581277393353548630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8047,10 +8240,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &7612736216106707172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8077,10 +8266,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &7627200233742824377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8107,10 +8292,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &7692064123744466552
 Transform:
   m_ObjectHideFlags: 0
@@ -8281,10 +8462,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &7923667532522034881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8311,10 +8488,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &7936461945195298518
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8700,10 +8873,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &8221407713756068752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8730,10 +8899,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &8226911918883629767
 Transform:
   m_ObjectHideFlags: 0
@@ -8817,10 +8982,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &8336155149814914652
 Transform:
   m_ObjectHideFlags: 0
@@ -8885,10 +9046,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8445351054825853900
 GameObject:
   m_ObjectHideFlags: 0
@@ -8937,6 +9094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   padding: {x: 0, y: 0.1, z: 0}
+  dragAxis: {x: 1, y: 1, z: 1}
   cardRotate: 1
   drawsLine: 1
   lineColor: {r: 1, g: 0, b: 0, a: 1}
@@ -8966,10 +9124,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &8488870692937409659
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9004,10 +9158,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &8530593870993618262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9034,10 +9184,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &8540457382649443764
 Transform:
   m_ObjectHideFlags: 0
@@ -9137,10 +9283,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &8607224985187477560
 Transform:
   m_ObjectHideFlags: 0
@@ -9190,10 +9332,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &8654134100152240449
 Transform:
   m_ObjectHideFlags: 0
@@ -9226,6 +9364,7 @@ MonoBehaviour:
   numberToDraw: 1
   board: {fileID: 7492707745399658576}
   deckObject: {fileID: 4856938466831430514}
+  _dragManager: {fileID: 0}
 --- !u!114 &8663753973616254766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9239,7 +9378,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMousePos: {x: 0, y: 0, z: 0}
-  currentDragPlane: {fileID: 0}
+  currentPlane: {fileID: 0}
+  didReleaseObject:
+    m_PersistentCalls:
+      m_Calls: []
+  didDragObject:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &8710821841292893135
 Transform:
   m_ObjectHideFlags: 0
@@ -9289,10 +9434,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!23 &8757816247874944771
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9397,10 +9538,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &8883965945215368136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9427,10 +9564,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8898258177635839467
 GameObject:
   m_ObjectHideFlags: 0
@@ -9528,10 +9661,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8997589980080252981
 GameObject:
   m_ObjectHideFlags: 0
@@ -9578,10 +9707,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!33 &9024068665084025635
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9616,10 +9741,6 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 0}
-  hoverEnabled: 0
-  onHover:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &9039229247008062716
 Transform:
   m_ObjectHideFlags: 0

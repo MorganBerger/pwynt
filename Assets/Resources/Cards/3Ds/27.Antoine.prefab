@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2648137871253677212}
   - component: {fileID: -7930130667253553945}
   - component: {fileID: 754229044616559195}
+  - component: {fileID: -5967623425038945803}
   m_Layer: 0
   m_Name: 27.Antoine
   m_TagString: Untagged
@@ -175,3 +176,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDragging: 0
+  onDrag:
+    m_PersistentCalls:
+      m_Calls: []
+  onRelease:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-5967623425038945803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366717278718292372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73eb7d504d44345afa70e615e088d2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverEnabled: 0
+  onHover:
+    m_PersistentCalls:
+      m_Calls: []

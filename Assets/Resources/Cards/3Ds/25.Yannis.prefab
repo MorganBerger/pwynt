@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -8860709078780812172}
   - component: {fileID: -2966089003546187109}
   - component: {fileID: -619239547022066307}
+  - component: {fileID: -1806005146738955014}
   m_Layer: 0
   m_Name: 25.Yannis
   m_TagString: Untagged
@@ -175,3 +176,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDragging: 0
+  onDrag:
+    m_PersistentCalls:
+      m_Calls: []
+  onRelease:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-1806005146738955014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694668377664633135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73eb7d504d44345afa70e615e088d2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverEnabled: 0
+  onHover:
+    m_PersistentCalls:
+      m_Calls: []

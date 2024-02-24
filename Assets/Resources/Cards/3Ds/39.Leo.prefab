@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -2614232473185361038}
   - component: {fileID: 5060464881679755290}
   - component: {fileID: -6173010272634891045}
+  - component: {fileID: 2804382019017383378}
   m_Layer: 0
   m_Name: 39.Leo
   m_TagString: Untagged
@@ -175,3 +176,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDragging: 0
+  onDrag:
+    m_PersistentCalls:
+      m_Calls: []
+  onRelease:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2804382019017383378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148642838110481819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73eb7d504d44345afa70e615e088d2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverEnabled: 0
+  onHover:
+    m_PersistentCalls:
+      m_Calls: []

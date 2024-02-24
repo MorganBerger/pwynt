@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7355847283967015919}
   - component: {fileID: -5654042269818209970}
   - component: {fileID: -9164847276205950373}
+  - component: {fileID: -8738903152854544353}
   m_Layer: 0
   m_Name: 28.Morgan
   m_TagString: Untagged
@@ -175,3 +176,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDragging: 0
+  onDrag:
+    m_PersistentCalls:
+      m_Calls: []
+  onRelease:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-8738903152854544353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498829004131444651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73eb7d504d44345afa70e615e088d2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverEnabled: 0
+  onHover:
+    m_PersistentCalls:
+      m_Calls: []

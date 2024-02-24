@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -5655288269915706503}
   - component: {fileID: 6698327926960052453}
   - component: {fileID: -1089822548023764272}
+  - component: {fileID: -8982559145748857746}
   m_Layer: 0
   m_Name: 3.Marion
   m_TagString: Untagged
@@ -175,3 +176,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDragging: 0
+  onDrag:
+    m_PersistentCalls:
+      m_Calls: []
+  onRelease:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-8982559145748857746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7060334629631581311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73eb7d504d44345afa70e615e088d2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverEnabled: 0
+  onHover:
+    m_PersistentCalls:
+      m_Calls: []
