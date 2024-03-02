@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 
     public Hand2 hand;
 
+    public BoardCardRow[] cardRows;
+
     int lifePoints = 2;
 
     void Awake() {
@@ -20,11 +22,23 @@ public class Player : MonoBehaviour
         hand = GetComponentInChildren<Hand2>();
 
         deck.SetDeck(GetDeckFromStorage("deck1"));
+
+        cardRows = GetComponentsInChildren<BoardCardRow>();
     }
+
+    // public BoardCardRow GetCardRow(Battalion by) {
+    //     for (int i = 0; i < cardRows.Length; i++) {
+    //         var row = cardRows[i];
+    //         if (row.acceptedType == by) {
+    //             return row;
+    //         }
+    //     }
+    //     return null;
+    // }
 
     void Start() {
         print("Player start");
-        Draw(1);
+        Draw(5);
     }
 
     CardObjectCereal[] GetDeckFromStorage(string deck) {

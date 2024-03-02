@@ -133,15 +133,15 @@ public class Hand2 : MonoBehaviour
         foreach (var card in cards) {
             var cardGO = card.gameObject;
             var hoverBehaviour = cardGO.GetComponent<HoverableObject>();
-            // hoverBehaviour.hoverEnabled = true;
-            // hoverBehaviour.onHover.AddListener(HoverCard);
+            hoverBehaviour.hoverEnabled = true;
+            hoverBehaviour.onHover.AddListener(HoverCard);
         }
     }
 
     [HideInInspector]
     public UnityEvent<Card> CardHovered;
     [HideInInspector]
-    public UnityEvent UIShouldHide;
+    public UnityEvent CardUnhovered;
 
     void HoverCard(GameObject cardGO, bool hover) {
     // void HoverCard(Card card, bool hover) {
@@ -149,10 +149,38 @@ public class Hand2 : MonoBehaviour
 
         if (card == null) return;
 
-        if (hover) {
+        if (hover) {    
+            AnimateHandHover(card);
             CardHovered.Invoke(card);
         } else {
-            UIShouldHide.Invoke();
+            UnhoverAllCards();
+            CardUnhovered.Invoke();
+        }
+    }
+
+    float hoverAnimationTime = .15f;
+    void AnimateHandHover(Card card) {
+        var pos = card.transform.localPosition;
+        var nextPost = new Vector3(pos.x, pos.y, -.035f);
+
+        var draggable = card.GetComponent<DraggableObject>();
+        if (!draggable.isDragging)
+            StartCoroutine(CardAnimation.MoveTo(card.transform, nextPost, hoverAnimationTime));
+    }
+
+    void UnhoverAllCards() {
+        var cards = cardsInHand;
+        // var cards = player.hand.cardsInHand;
+        foreach (var card in cards) {
+            var pos = card.transform.localPosition;
+
+            var draggable = card.GetComponent<DraggableObject>();
+            if (!draggable.isDragging) {
+                if (pos.z < 0f) {
+                    var nextPost = new Vector3(pos.x, pos.y, 0f);
+                    StartCoroutine(CardAnimation.MoveTo(card.transform, nextPost, hoverAnimationTime));
+                }
+            }
         }
     }
 }

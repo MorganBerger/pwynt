@@ -42,19 +42,17 @@ public class GameManager : MonoBehaviour
         if (DraggedOutOfHand(from)) {            
             var card = CardOutOfObject(obj);
             if (card != null) {
-                print("played card out of hand");
-                var hand = _players[0].hand;
-                var playedCard = hand.Play(card);
-                // print(playedCard);
+                // print("played card out of hand");
+                var hoverBehaviour = card.GetComponent<HoverableObject>();
+                hoverBehaviour.hoverEnabled = false;
             }
         }
 
         var fromIsBoard = from.gameObject == board.gameObject;
         var toIsHand = to.gameObject == _players[0].hand.gameObject;
+
         if (toIsHand && fromIsBoard) {
             print("SHOULD GO BACK TO HAND");
-            // var hand = _players[0].hand;
-            // hand.CancelPlay(obj.GetComponent<Card>());
         }
         print("-- obj :'" + obj.name + "', drag from: " + from.name + ", to: " + to.name);
     }
@@ -80,48 +78,32 @@ public class GameManager : MonoBehaviour
     void SetupListeners() {
         foreach (Player player in _players) {
             player.hand.CardHovered.AddListener(CardInHandWasHovered);
-            player.hand.UIShouldHide.AddListener(() => ShouldHideHandUI(player));
+            player.hand.CardUnhovered.AddListener(() => ShouldHideHandUI(player));
         }
         _dragManager.didReleaseObject.AddListener(DraggableWasDropped);
         _dragManager.didDragObject.AddListener(ObjectWasDragged);
     }
 
     void CardInHandWasHovered(Card card) {
+        // var cardRow = _players[0].GetCardRow(card.battalion);
+        var cardRows = _players[0].cardRows;
+
+        // if (cardRow) {
+        //     cardRow.Shines(true);
+        // }
+        foreach (var row in cardRows)
+            row.Shines(row.acceptedType == card.battalion);
+
         if (cardUIPanel)
             cardUIPanel.Show(card.texture2D);
         
-        AnimateHandHover(card);
+        // AnimateHandHover(card);
     }
     void ShouldHideHandUI(Player player) {
-        UnhoverAllCards(player);
+        // UnhoverAllCards(player);
 
         if (cardUIPanel)
             cardUIPanel.Hide();
-    }
-
-    float hoverAnimationTime = .15f;
-    void UnhoverAllCards(Player player) {
-        var cards = player.hand.cardsInHand;
-        foreach (var card in cards) {
-            var pos = card.transform.localPosition;
-
-            var draggable = card.GetComponent<DraggableObject>();
-            if (!draggable.isDragging) {
-                if (pos.z < 0f) {
-                    var nextPost = new Vector3(pos.x, pos.y, 0f);
-                    StartCoroutine(CardAnimation.MoveTo(card.transform, nextPost, hoverAnimationTime));
-                }
-            }
-        }
-    }
-
-    void AnimateHandHover(Card card) {
-        var pos = card.transform.localPosition;
-        var nextPost = new Vector3(pos.x, pos.y, -.035f);
-
-        var draggable = card.GetComponent<DraggableObject>();
-        if (!draggable.isDragging)
-            StartCoroutine(CardAnimation.MoveTo(card.transform, nextPost, hoverAnimationTime));
     }
 
     void OnDeckClickFor(Player player) {

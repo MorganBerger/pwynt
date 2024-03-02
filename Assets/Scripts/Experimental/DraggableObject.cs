@@ -38,7 +38,6 @@ public class DraggableObject : MonoBehaviour
         // var cardSpeed = Mathf.Clamp(speed, 0f, 20f);
         var cardSpeed = 5f;
 
-
         var difference = mousePos - position;
 
         // No plane drag gesture

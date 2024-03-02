@@ -3,7 +3,6 @@ using UnityEngine;
 
 struct CardAnimation {
     public static IEnumerator MoveTo(Transform objectToMove, Vector3 b, float dur) {
-        // Debug.Log("move");
         float t = 0f;
         Vector3 start = objectToMove.localPosition;
         
@@ -16,7 +15,6 @@ struct CardAnimation {
     }
 
     public static IEnumerator RotateTo(Transform target, Quaternion rot, float dur) {
-        // Debug.Log("rotate");
         float t = 0f;
         Quaternion start = target.localRotation;
         while(t < dur) {
