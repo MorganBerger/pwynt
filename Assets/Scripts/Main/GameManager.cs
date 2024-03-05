@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -39,12 +40,19 @@ public class GameManager : MonoBehaviour
     }
 
     void ObjectWasDragged(DraggableObject obj, DragPlane from, DragPlane to) {
+        print("-- obj :'" + obj.name + "', drag from: " + from.name + ", to: " + to.name);
+
         if (DraggedOutOfHand(from)) {            
-            var card = CardOutOfObject(obj);
+            var card = obj.GetComponent<Card>();
             if (card != null) {
-                // print("played card out of hand");
-                var hoverBehaviour = card.GetComponent<HoverableObject>();
-                hoverBehaviour.hoverEnabled = false;
+                
+                var hoverBehaviour = obj.GetComponent<HoverableObject>();
+                if (hoverBehaviour) {
+                    print("DISABLING HOVER FOR '" + obj.name + "'");
+                    hoverBehaviour.isEnabled = false;
+                }
+
+                _players[0].hand.Play(card);
             }
         }
 
@@ -54,11 +62,6 @@ public class GameManager : MonoBehaviour
         if (toIsHand && fromIsBoard) {
             print("SHOULD GO BACK TO HAND");
         }
-        print("-- obj :'" + obj.name + "', drag from: " + from.name + ", to: " + to.name);
-    }
-
-    private Card CardOutOfObject(DraggableObject obj) {
-        return obj.gameObject.GetComponent<Card>();
     }
 
     private bool DraggedOutOfHand(DragPlane from) {
@@ -67,40 +70,66 @@ public class GameManager : MonoBehaviour
 
     void DraggableWasDropped(DraggableObject obj, DragPlane plane) {
         print("-- dropped: '" + obj.name + "' on: " + plane.name);
-        var card = CardOutOfObject(obj);
-        print("card: " + card);
-        print("plane: " + plane.name);
-        if (plane.name == "red") {
-            _players[0].hand.UndoPlay();
+
+        if (obj.canDrop) {
+            DropCard(obj);
+        } else if (!plane.Is(_players[0].hand)) {
+            UndoPlay(obj);
+        } else if (plane.Is(_players[0].hand)) {
+            _players[0].hand.TidyUpHand();
         }
+    }
+
+    void DropCard(DraggableObject draggableCard) {
+        draggableCard.Drop();
+        draggableCard.draggingEnabled = false;
+
+        foreach (var row in _players[0].cardRows) {
+            row.Shines(false);
+
+            var card = draggableCard.GetComponent<Card>();
+            if (row.currentDraggedCard == card) {
+                row.AddCard(card);
+            }
+        }
+        if (cardUIPanel)
+            cardUIPanel.Hide();
+    }
+
+    void UndoPlay(MonoBehaviour obj) {
+        _players[0].hand.UndoPlay();
+        StartCoroutine(ReenableHoverBehaviour(obj));
+    }
+
+    private IEnumerator ReenableHoverBehaviour(MonoBehaviour obj) {
+        yield return new WaitForSeconds(.201f);
+
+        var hoverBehaviour = obj.GetComponent<HoverableObject>();
+        print("ENABLING HOVER FOR '" + obj.name + "'");
+        hoverBehaviour.isEnabled = true;
+        hoverBehaviour.hovered = false;
     }
 
     void SetupListeners() {
         foreach (Player player in _players) {
             player.hand.CardHovered.AddListener(CardInHandWasHovered);
-            player.hand.CardUnhovered.AddListener(() => ShouldHideHandUI(player));
+            player.hand.CardUnhovered.AddListener(CardInHandWasUnhovered);
         }
         _dragManager.didReleaseObject.AddListener(DraggableWasDropped);
         _dragManager.didDragObject.AddListener(ObjectWasDragged);
     }
 
     void CardInHandWasHovered(Card card) {
-        // var cardRow = _players[0].GetCardRow(card.battalion);
-        var cardRows = _players[0].cardRows;
-
-        // if (cardRow) {
-        //     cardRow.Shines(true);
-        // }
-        foreach (var row in cardRows)
+        foreach (var row in  _players[0].cardRows)
             row.Shines(row.acceptedType == card.battalion);
 
         if (cardUIPanel)
             cardUIPanel.Show(card.texture2D);
-        
-        // AnimateHandHover(card);
     }
-    void ShouldHideHandUI(Player player) {
-        // UnhoverAllCards(player);
+
+    void CardInHandWasUnhovered(Card card) {
+        foreach (var row in _players[0].cardRows)
+            row.Shines(false);
 
         if (cardUIPanel)
             cardUIPanel.Hide();

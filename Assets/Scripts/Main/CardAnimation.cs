@@ -2,26 +2,38 @@ using System.Collections;
 using UnityEngine;
 
 struct CardAnimation {
-    public static IEnumerator MoveTo(Transform objectToMove, Vector3 b, float dur) {
+
+    public static IEnumerator MoveTo(Card target, Vector3 b, float dur) {
+        Transform transform = target.transform;
+        Vector3 start = transform.localPosition;
         float t = 0f;
-        Vector3 start = objectToMove.localPosition;
         
+        target.animating = true;
+
         while (t < dur) {
-            objectToMove.localPosition = Vector3.Lerp(start, b, t / dur);
+            transform.localPosition = Vector3.Lerp(start, b, t / dur);
             yield return null;
             t += Time.deltaTime;
         }
-        objectToMove.localPosition = b;
+        transform.localPosition = b;
+
+        target.animating = false;
     }
 
-    public static IEnumerator RotateTo(Transform target, Quaternion rot, float dur) {
+    public static IEnumerator RotateTo(Card target, Quaternion rot, float dur) {
+        Transform transform = target.transform;
+        Quaternion start = transform.localRotation;
         float t = 0f;
-        Quaternion start = target.localRotation;
+
+        target.animating = true;
+
         while(t < dur) {
-            target.localRotation = Quaternion.Slerp(start, rot, t / dur);
+            transform.localRotation = Quaternion.Slerp(start, rot, t / dur);
             yield return null;
             t += Time.deltaTime;
         }
-        target.localRotation = rot;
+        transform.localRotation = rot;
+
+        target.animating = false;
     }
 }

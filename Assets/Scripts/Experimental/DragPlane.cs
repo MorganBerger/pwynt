@@ -10,4 +10,8 @@ public class DragPlane: MonoBehaviour {
     public bool drawsLine = true;
     public Color lineColor = Color.red;
 
+    public bool Is(MonoBehaviour go) {
+        return this == go.GetComponent<DragPlane>();
+    }
+
 }

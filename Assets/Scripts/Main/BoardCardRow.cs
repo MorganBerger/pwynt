@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class BoardCardRow : MonoBehaviour
@@ -10,6 +12,8 @@ public class BoardCardRow : MonoBehaviour
 
     private List<Card> cardList = new List<Card>();
 
+    public TextMeshProUGUI rowText;
+
     void Awake() {
         hightlightPlane = transform.GetChild(0).gameObject;
         hightlightPlane.SetActive(false);
@@ -18,14 +22,21 @@ public class BoardCardRow : MonoBehaviour
         canDropCardHerePlane.SetActive(false);
 
         cardContainer = transform.GetChild(2).gameObject;
-    }
 
-    public void AddCard(GameObject card) {
-        card.transform.SetParent(transform);
+        rowText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void AddCard(Card card) {
         card.transform.SetParent(cardContainer.transform);
+        cardList.Add(card);
+        UpdateRowText();
+    }
+
+    void UpdateRowText() {
+        var total = cardList.Sum(c => {
+            return c.level;
+        });
+        rowText.text =  "" + total;
     }
 
     public void Shines(bool shines) {
@@ -37,18 +48,27 @@ public class BoardCardRow : MonoBehaviour
     }
 
     public Card currentDraggedCard = null;
+    
     void OnTriggerEnter(Collider other) {
-        // print("Row '" + gameObject + "' has collided with '" + other.gameObject + "'");
-        var card = other.gameObject.GetComponent<Card>();
+        var card = other.GetComponent<Card>();
 		if (card != null && card.battalion == acceptedType) {
             currentDraggedCard = card;
+
+            var draggable = card.GetComponent<DraggableObject>();
+            draggable.canDrop = true;
+
 			hightlightPlane.SetActive(true);
 		}
 	}
 	
 	void OnTriggerExit(Collider other) {
-        // print("Row '" + gameObject + "' exited collision with '" + other.gameObject + "'");
-        currentDraggedCard = null;
-        hightlightPlane.SetActive(false);
+		if (other.GetComponent<Card>()) {
+            currentDraggedCard = null;
+
+            var draggable = other.GetComponent<DraggableObject>();
+            draggable.canDrop = false;
+
+			hightlightPlane.SetActive(false);
+		}
 	}
 }

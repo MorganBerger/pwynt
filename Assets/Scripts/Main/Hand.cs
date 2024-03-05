@@ -1,89 +1,179 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Hand : MonoBehaviour
 {
-    float cardStep = 0.08f;
-
+    public float cardStep = 0.08f;
+    private float cardDepthDiff = 0.0001f;
+    
     internal List<Card> cardsInHand = new List<Card>();
 
-    void Start() {
-        
-    }
-
-    // Several things happen when adding cards: 
-    // - First we have to move the existing cards in hand to the left to leave some space for the one we're adding.
-    // - Then play the draw (rotate/move) animation for each card, from deck to hand.
-    // - Then we setup the onHover listener for each card after a lilte delay (basically wait for the draw animation to finish)
     public void AddCards(List<Card> cards) {
-        MoveHand(cards.Count);
-        StartCoroutine(AnimateDraw(cards));
-        StartCoroutine(DelaySetupHover(cards));
-    } 
 
-    // Play the 
-    private void MoveHand(int newCardsCount) {
-        var distanceToMove = cardStep * newCardsCount / 2;
+        UpdateCardsInHandPos(cards.Count, .4f);
 
-        if (cardsInHand.Count == 0)
-            distanceToMove -= cardStep / 2;
-        
-        var oldpos = transform.localPosition;
-        var newPos = new Vector3(oldpos.x + distanceToMove, oldpos.y, oldpos.z);
-        StartCoroutine(CardAnimation.MoveTo(transform, newPos, .4f));
-    }
-
-    float lastY = 0;
-    private IEnumerator AnimateDraw(List<Card> cards) {
-        int i = 0;
-
-        float cardPosX = -cardStep * cardsInHand.Count;
-
-        foreach (var card in cards) {
-            card.transform.SetParent(transform);
+        foreach (var card in cards)
+        {
             cardsInHand.Add(card);
-            var pos = new Vector3(cardPosX, lastY - 0.0001f * i, 0);
-
-            AnimateDraw(card, pos);
-
-            yield return new WaitForSeconds(0.1f);
-            cardPosX -= cardStep;
-            i++;
+            card.transform.SetParent(transform);
         }
-        lastY = -cardsInHand.Count * 0.0001f;
+
+        StartCoroutine(UpdateNewCardsPos(cards.Count, .4f));
+        StartCoroutine(DelaySetupHover(cards));
     }
 
-    void AnimateDraw(Card card, Vector3 pos) {
-        StartCoroutine(CardAnimation.RotateTo(card.transform, Quaternion.identity, .4f));
-        StartCoroutine(CardAnimation.MoveTo(card.transform, pos, .4f));
+    public void TidyUpHand() {
+        UpdateCardsInHandPos(0, .2f);
+    }
+
+    private void UpdateCardsInHandPos(int newCardsNumber, float animDuration) {
+        if (cardsInHand.Count == 0)
+            return;
+        
+        var startPosX = (cardsInHand.Count + newCardsNumber - 1) * cardStep / 2;
+        for (int i = 0; i < cardsInHand.Count; i++) {
+            var card = cardsInHand[i];
+            var newPos = new Vector3(startPosX - cardStep * i, -cardDepthDiff * i, 0);
+
+            Move(card, newPos, animDuration);
+        }
+    }
+
+    IEnumerator UpdateNewCardsPos(int newCardsCount, float animDuration) {
+        if (cardsInHand.Count == 0) {
+            yield return null;
+        }
+
+        var oldNumberOfCards = cardsInHand.Count - newCardsCount;
+        var startPosX = (cardsInHand.Count - 1) * cardStep / 2;
+
+        for (int i = oldNumberOfCards; i < cardsInHand.Count; i++)
+        {
+            var card = cardsInHand[i];
+            var newPos = new Vector3(startPosX - cardStep * i, -cardDepthDiff * i, 0);
+
+            Move(card, newPos, animDuration);
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+
+
+    [SerializeField]
+    private Card _lastPlayedCard = null;
+    [SerializeField]
+    private int _lastIndexPlayed = -1;
+
+    public Card Play(Card card) {
+        if (cardsInHand.Count == 0) 
+            return null;
+
+        var index = cardsInHand.IndexOf(card);
+        var resultCard = RemoveAt(index);
+
+        _lastIndexPlayed = index;
+        _lastPlayedCard = resultCard;
+
+        return resultCard;
+    }
+
+    public void UndoPlay() {
+        if (_lastPlayedCard == null)
+            return;
+        if (_lastIndexPlayed < 0 || _lastIndexPlayed > cardsInHand.Count)
+            return;
+
+        _lastPlayedCard.transform.SetParent(transform);
+        
+        cardsInHand.Insert(_lastIndexPlayed, _lastPlayedCard);
+        UpdateCardsInHandPos(0, .2f);
+        // StartCoroutine(Prout(_lastPlayedCard));
+    }
+
+    private Card RemoveAt(int index) {
+        if (index < 0 || index > cardsInHand.Count - 1)
+            return null;
+
+        var card = cardsInHand[index];
+
+        card.transform.parent = null;
+        cardsInHand.RemoveAt(index);
+
+        UpdateCardsInHandPos(0, .4f);
+
+        return card;
+    }
+
+    void Move(Card card, Vector3 pos, float moveDuration) {
+        StartCoroutine(CardAnimation.RotateTo(card, Quaternion.identity, moveDuration));
+        StartCoroutine(CardAnimation.MoveTo(card, pos, moveDuration));
     }
 
     // Setup hover listeners when cards are added to hand.
     IEnumerator DelaySetupHover(List<Card> cards) {
-        yield return new WaitForSeconds(0.1f * cards.Count + 0.5f);
+        yield return new WaitForSeconds(0.1f * cards.Count + 0.4f);
         SetupHover(cards);
-    }   
+    }
 
     void SetupHover(List<Card> cards) {
         foreach (var card in cards) {
-            // card.hoverEnabled = true;
-            // card.onHover.AddListener(HoverCard);
+            var cardGO = card.gameObject;
+            var hoverBehaviour = cardGO.GetComponent<HoverableObject>();
+            hoverBehaviour.onHover.AddListener(HoverCard);
         }
     }
 
     [HideInInspector]
     public UnityEvent<Card> CardHovered;
     [HideInInspector]
-    public UnityEvent UIShouldHide;
+    public UnityEvent<Card> CardUnhovered;
 
-    void HoverCard(Card card, bool hover) {
+    void HoverCard(GameObject cardGO, bool hover) {
+        var card = cardGO.GetComponent<Card>();
+        // if (card == null) return;
+        print("Hand.HoverCard('" + cardGO.name + "') -> " + hover);
+
         if (hover) {
+            AnimateHandHover(card);
             CardHovered.Invoke(card);
         } else {
-            UIShouldHide.Invoke();
+            UnhoverAllCards();
+            // AnimateHandUnhover(card);
+            CardUnhovered.Invoke(card);
+        }
+    }
+
+    float hoverAnimationTime = .15f;
+    void AnimateHandHover(Card card) {
+
+        // if (card.animating) {
+        //     print("card '" + card.name + "' is already animating. Cannot animate hover effect.");
+        //     return;
+        // }
+
+        var pos = card.transform.localPosition;
+        var nextPost = new Vector3(pos.x, pos.y, -.035f);
+
+        var draggable = card.GetComponent<DraggableObject>();
+        if (!draggable.isDragging)
+            StartCoroutine(CardAnimation.MoveTo(card, nextPost, hoverAnimationTime));
+    }
+
+    void UnhoverAllCards() {
+        foreach (var card in cardsInHand) {
+
+            // if (card.animating) {
+            //     print("card '" + card.name + "' is already animating. Cannot animate unhover effect.");
+            //     return;
+            // }
+
+            var draggable = card.GetComponent<DraggableObject>();
+            if (!draggable.isDragging) {
+                var pos = card.transform.localPosition;
+                var nextPost = new Vector3(pos.x, pos.y, 0f);
+                StartCoroutine(CardAnimation.MoveTo(card, nextPost, hoverAnimationTime));
+            }
         }
     }
 }

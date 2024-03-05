@@ -60,6 +60,9 @@ public enum UnitAbility: int {
 }
 
 public class Card : MonoBehaviour {
+    
+    public bool animating = false;
+
     public string fullName;
     public Faction faction;
 
@@ -87,6 +90,7 @@ public class Card : MonoBehaviour {
     public Texture2D texture2D;
 
     void Awake() {
+        // animating = false;
         effect = GetComponent<CardEffect>();
     }
 
@@ -121,24 +125,4 @@ public class Card : MonoBehaviour {
         else
             Debug.Log("Prefab failed to save" + prefabSuccess);
     }
-
-    // public bool hoverEnabled = false;
-    // internal bool hovered = false;
-
-    // [HideInInspector]
-    // public UnityEvent<Card, bool> onHover;
-
-    // void OnMouseOver() {
-    //     if (!hovered && hoverEnabled) {
-    //         onHover.Invoke(this, true);
-    //         hovered = true;
-    //     }
-    // }
-
-    // void OnMouseExit() {
-    //     if (!hoverEnabled)
-    //         return;
-    //     onHover.Invoke(this, false);
-    //     hovered = false;
-    // }
 }

@@ -3,22 +3,31 @@ using UnityEngine.Events;
 
 class HoverableObject: MonoBehaviour {
     
-    public bool hoverEnabled = false;
     internal bool hovered = false;
+    public bool isEnabled = true;
 
     [HideInInspector]
     public UnityEvent<GameObject, bool> onHover;
 
     void OnMouseOver() {
-        if (!hovered && hoverEnabled) {
-            onHover.Invoke(gameObject, true);
+        if (!isEnabled)
+            return;
+
+        if (!hovered) {
+            print("Hoverable object '" + name + "' has been hovered.");
             hovered = true;
+            onHover.Invoke(gameObject, true);
         }
     }
 
+    // public void TriggerOnMouseExit() {
+    //     OnMouseExit();
+    // }
     void OnMouseExit() {
-        if (!hoverEnabled)
+        if (!isEnabled)
             return;
+
+        print("Hoverable object '" + name + "' has been unhovered.");
         onHover.Invoke(gameObject, false);
         hovered = false;
     }

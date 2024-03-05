@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     public Deck deck;
 
-    public Hand2 hand;
+    public Hand hand;
 
     public BoardCardRow[] cardRows;
 
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
         Physics.queriesHitTriggers = true;
         
         deck = GetComponentInChildren<Deck>();
-        hand = GetComponentInChildren<Hand2>();
+        hand = GetComponentInChildren<Hand>();
 
         deck.SetDeck(GetDeckFromStorage("deck1"));
 
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
     void Start() {
         print("Player start");
-        Draw(5);
+        Draw(1);
     }
 
     CardObjectCereal[] GetDeckFromStorage(string deck) {
