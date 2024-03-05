@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: 
   faction: 0
   CARD_ID: 
@@ -134,7 +135,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.13, y: 0.002, z: 0.21}
+  m_Size: {x: 0.13, y: 0.005, z: 0.21}
   m_Center: {x: -0.000000037252903, y: -5.820766e-11, z: 0.013}
 --- !u!54 &-6642579818826786803
 Rigidbody:
@@ -162,7 +163,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &4719193299962809447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +183,7 @@ MonoBehaviour:
   onRelease:
     m_PersistentCalls:
       m_Calls: []
+  canDrop: 0
 --- !u!114 &-6309014407060843981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73eb7d504d44345afa70e615e088d2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverEnabled: 0
+  isEnabled: 1
   onHover:
     m_PersistentCalls:
       m_Calls: []
