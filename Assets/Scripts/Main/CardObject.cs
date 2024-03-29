@@ -37,11 +37,14 @@ public class CardObjectCereal {
 public class CardObject {
     public string ID;
     public string name;
+    public string fullName;
+    public int level;
     public int numberInDeck;
     public int numberSelected;
     public int limitInDeck;
     public UICardMode mode;
     public Texture2D texture2D;
+    public Texture2D thumbnail;
 
     public int limit {
         get {
@@ -53,14 +56,28 @@ public class CardObject {
         }
     }
 
-    public CardObject(string ID, string name, Texture2D texture, int number, int numberSelected, int limitInDeck, UICardMode mode) {
+    public CardObject(
+        string ID, 
+        string name,
+        string fullName,
+        int level,
+        Texture2D texture,
+        Texture2D thumbnail,
+        int number,
+        int numberSelected,
+        int limitInDeck,
+        UICardMode mode
+    ) {
         if (ID != null) {
             this.ID = ID;
         } else {
             this.ID = String.RandomString();
         }
         this.texture2D = texture;
+        this.thumbnail = thumbnail;
         this.name = name;
+        this.fullName = fullName;
+        this.level = level;
         this.numberInDeck = number;
         this.mode = mode;
         this.numberSelected = numberSelected;

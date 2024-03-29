@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Eric, The Fearless King
   faction: 5
   CARD_ID: PW01-ME04
@@ -59,3 +60,4 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 9a6ede316749e484e959b1b2526e5d16, type: 3}
+  thumbnail: {fileID: 2800000, guid: b33ad7fe4ca5c40bc93efaf3cf3de362, type: 3}

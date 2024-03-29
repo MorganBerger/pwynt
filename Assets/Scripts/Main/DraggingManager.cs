@@ -17,7 +17,13 @@ class DraggingManager: MonoBehaviour {
 
     private void Awake() {
         print("DraggingManager: Awake()");
-        Instance = this;
+        // Instance = this;
+
+        if (Instance != null && Instance != this) { 
+            Destroy(this); 
+        } else { 
+            Instance = this; 
+        } 
     }
 
     private void Start() {
@@ -52,10 +58,10 @@ class DraggingManager: MonoBehaviour {
     }
 
     private void OnDestroy() {
-        foreach (var d in _draggables) {
-            d.onDrag.RemoveListener(OnDragObject);
-            d.onRelease.RemoveListener(OnReleaseObject);
-        }
+        // foreach (var d in _draggables) {
+        //     d.onDrag?.RemoveListener(OnDragObject);
+        //     d.onRelease?.RemoveListener(OnReleaseObject);
+        // }
     }
 
     [SerializeField]

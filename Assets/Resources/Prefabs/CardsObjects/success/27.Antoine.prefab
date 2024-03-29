@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Antoine, The Silent Lurker
   faction: 7
   CARD_ID: PW01-RO06
@@ -60,3 +61,4 @@ MonoBehaviour:
   ability: 3
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 9bd96c5b5a420734587c02e9d29fdb51, type: 3}
+  thumbnail: {fileID: 2800000, guid: 760ce072861ad4e87bf5840ee1e5a467, type: 3}

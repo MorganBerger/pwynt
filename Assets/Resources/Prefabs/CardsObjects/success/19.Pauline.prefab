@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Pauline, Princess of the Occult
   faction: 6
   CARD_ID: PW01-AR01
@@ -59,3 +60,4 @@ MonoBehaviour:
   ability: 5
   UpgradedVersion: {fileID: 1789525003068715396, guid: 6a78d0dd69b3b164dad8397fea023031, type: 3}
   texture2D: {fileID: 2800000, guid: d663ec1a5a2da72498a4465e7c17d518, type: 3}
+  thumbnail: {fileID: 2800000, guid: bf5907dff8d3b47d4935d50264f16f5c, type: 3}

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Marc-Antoine, Guardian of Stasis
   faction: 8
   CARD_ID: PW01-AC04
@@ -60,3 +61,4 @@ MonoBehaviour:
   ability: 4
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 05800265fb55a4942861d2d9923f7f7e, type: 3}
+  thumbnail: {fileID: 2800000, guid: 79d89a2cf513c4a458f34229f7d2478c, type: 3}

@@ -1,11 +1,11 @@
-using System;
-using System.IO;
-using Unity.VisualScripting;
+// using System;
+// using System.IO;
+// using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.SceneManagement;
+// using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
+// using UnityEngine.Events;
+// using UnityEngine.EventSystems;
 
 public enum Faction: int {
     None,
@@ -88,6 +88,7 @@ public class Card : MonoBehaviour {
     public GameObject UpgradedVersion;
 
     public Texture2D texture2D;
+    public Texture2D thumbnail;
 
     void Awake() {
         // animating = false;
@@ -110,8 +111,10 @@ public class Card : MonoBehaviour {
         effect = card.effect;
         UpgradedVersion = card.UpgradedVersion;
         texture2D = card.texture2D;
+        thumbnail = card.thumbnail;
     }
 
+    #if UNITY_EDITOR
     public void SavePrefab(string path) {
 
         string localPath = path + "/" + gameObject.name + ".prefab";
@@ -125,4 +128,5 @@ public class Card : MonoBehaviour {
         else
             Debug.Log("Prefab failed to save" + prefabSuccess);
     }
+    #endif
 }

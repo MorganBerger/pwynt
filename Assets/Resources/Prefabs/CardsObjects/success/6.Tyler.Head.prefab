@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Tyler, The Destroyer
   faction: 2
   CARD_ID: PW01-TY01
@@ -59,3 +60,4 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 49870ad2dc14462478dc129bf5882e16, type: 3}
+  thumbnail: {fileID: 2800000, guid: 988bfa1b378624cc79feaf2634ea0afb, type: 3}

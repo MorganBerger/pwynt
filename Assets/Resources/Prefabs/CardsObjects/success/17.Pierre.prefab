@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Pierre, The Dual-wielding Protector
   faction: 5
   CARD_ID: PW01-ME03
@@ -59,3 +60,4 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: cc94beac660c3e845b712e0bc0b2f264, type: 3}
+  thumbnail: {fileID: 2800000, guid: 8ce39e76596d849268eb32c2c90cf277, type: 3}

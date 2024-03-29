@@ -12,7 +12,7 @@ public class DraggableObject : MonoBehaviour
 
     private float dragSpeed = 5f;
 
-    internal bool draggingEnabled = true;
+    public bool draggingEnabled = true;
 
     void Start() {
         _rigidbody = GetComponent<Rigidbody>();

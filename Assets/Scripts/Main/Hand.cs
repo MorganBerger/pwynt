@@ -8,7 +8,7 @@ public class Hand : MonoBehaviour
     public float cardStep = 0.08f;
     private float cardDepthDiff = 0.0001f;
     
-    internal List<Card> cardsInHand = new List<Card>();
+    public List<Card> cardsInHand = new List<Card>();
 
     public void AddCards(List<Card> cards) {
 
@@ -21,7 +21,7 @@ public class Hand : MonoBehaviour
         }
 
         StartCoroutine(UpdateNewCardsPos(cards.Count, .4f));
-        StartCoroutine(DelaySetupHover(cards));
+        // StartCoroutine(DelaySetupHover(cards));
     }
 
     public void TidyUpHand() {
@@ -35,7 +35,7 @@ public class Hand : MonoBehaviour
         var startPosX = (cardsInHand.Count + newCardsNumber - 1) * cardStep / 2;
         for (int i = 0; i < cardsInHand.Count; i++) {
             var card = cardsInHand[i];
-            var newPos = new Vector3(startPosX - cardStep * i, -cardDepthDiff * i, 0);
+            var newPos = new Vector3(startPosX - cardStep * i, cardDepthDiff * i, 0);
 
             Move(card, newPos, animDuration);
         }
@@ -52,9 +52,12 @@ public class Hand : MonoBehaviour
         for (int i = oldNumberOfCards; i < cardsInHand.Count; i++)
         {
             var card = cardsInHand[i];
-            var newPos = new Vector3(startPosX - cardStep * i, -cardDepthDiff * i, 0);
+            var newPos = new Vector3(startPosX - cardStep * i, cardDepthDiff * i, 0);
 
             Move(card, newPos, animDuration);
+
+            StartCoroutine(SetupHover(card, animDuration));
+
             yield return new WaitForSeconds(0.05f);
         }
     }
@@ -110,19 +113,25 @@ public class Hand : MonoBehaviour
         StartCoroutine(CardAnimation.MoveTo(card, pos, moveDuration));
     }
 
-    // Setup hover listeners when cards are added to hand.
-    IEnumerator DelaySetupHover(List<Card> cards) {
-        yield return new WaitForSeconds(0.1f * cards.Count + 0.4f);
-        SetupHover(cards);
+    IEnumerator SetupHover(Card card, float animDuration) {
+        yield return new WaitForSeconds(animDuration);
+        var hoverBehaviour = card.GetComponent<HoverableObject>();
+        hoverBehaviour.onHover.AddListener(HoverCard);
     }
 
-    void SetupHover(List<Card> cards) {
-        foreach (var card in cards) {
-            var cardGO = card.gameObject;
-            var hoverBehaviour = cardGO.GetComponent<HoverableObject>();
-            hoverBehaviour.onHover.AddListener(HoverCard);
-        }
-    }
+    // Setup hover listeners when cards are added to hand.
+    // IEnumerator DelaySetupHover(List<Card> cards) {
+    //     yield return new WaitForSeconds(0.1f * cards.Count + 0.4f);
+    //     SetupHover(cards);
+    // }
+
+    // void SetupHover(List<Card> cards) {
+    //     foreach (var card in cards) {
+    //         var cardGO = card.gameObject;
+    //         var hoverBehaviour = cardGO.GetComponent<HoverableObject>();
+    //         hoverBehaviour.onHover.AddListener(HoverCard);
+    //     }
+    // }
 
     [HideInInspector]
     public UnityEvent<Card> CardHovered;
@@ -138,8 +147,8 @@ public class Hand : MonoBehaviour
             AnimateHandHover(card);
             CardHovered.Invoke(card);
         } else {
-            UnhoverAllCards();
-            // AnimateHandUnhover(card);
+            // UnhoverAllCards();
+            AnimateHandUnhover(card);
             CardUnhovered.Invoke(card);
         }
     }
@@ -147,13 +156,17 @@ public class Hand : MonoBehaviour
     float hoverAnimationTime = .15f;
     void AnimateHandHover(Card card) {
 
-        // if (card.animating) {
-        //     print("card '" + card.name + "' is already animating. Cannot animate hover effect.");
-        //     return;
-        // }
-
         var pos = card.transform.localPosition;
         var nextPost = new Vector3(pos.x, pos.y, -.035f);
+
+        var draggable = card.GetComponent<DraggableObject>();
+        if (!draggable.isDragging)
+            StartCoroutine(CardAnimation.MoveTo(card, nextPost, hoverAnimationTime));
+    }
+
+    void AnimateHandUnhover(Card card) {
+        var pos = card.transform.localPosition;
+        var nextPost = new Vector3(pos.x, pos.y, 0f);
 
         var draggable = card.GetComponent<DraggableObject>();
         if (!draggable.isDragging)

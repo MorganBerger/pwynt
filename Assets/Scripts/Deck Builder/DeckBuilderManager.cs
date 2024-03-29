@@ -3,143 +3,91 @@ using System.Linq;
 using UnityEngine;
 using System.Data;
 using UnityEditor;
-using TMPro;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Unity.VisualScripting;
+using System.Collections;
+// using System.Numerics;
 
 public class DeckBuilderManager : MonoBehaviour
 {
-    public GameObject allCardsPanel;
-    public GameObject deckPanel;
+    public GameObject allCardsContainer;
+    public GameObject cardsInDeckContainer;
 
-    public GameObject cardDetailPanel;
+    UICardList allCardsListView;
 
-    public GameObject cardList;
-
-    UICardList leftListView;
-    UICardList rightListView;
-
-    List<CardObject> allCardsList = new List<CardObject>();
-    List<CardObject> storageList;
-    List<CardObject> deckList;
-
-    Object[] cards;
-
-    bool needsRefresh = false;
-
-    public GameObject storageLabel;
-    public GameObject deckLabel;
-    public GameObject errorLabel;
-    TextMeshProUGUI storageText;
-    TextMeshProUGUI deckText;
-    TextMeshProUGUI errorText;
+    List<CardObject> allCards = new List<CardObject>();
 
     const int maxNumberInDeck = 40;
     const int minNumberInDeck = 25;
 
-    /// <summary>
-    /// LifeCycle
-    /// </summary>
     void Awake() {
         Setup();
     }
 
     void Setup() {
-        cards = Globals.AllCardsObjects;
+        allCardsListView = allCardsContainer.GetComponentInChildren<UICardList>();
+        allCardsListView.didClickOnCard.AddListener(DidClickOnCard);
 
         CreateAllCards();
 
-        leftListView = allCardsPanel.GetComponentInChildren<UICardList>();
-        rightListView = deckPanel.GetComponentInChildren<UICardList>();
-
-        if (leftListView != null) {
-            SetStorageList();
-            leftListView.SetCards(storageList);
-            needsRefresh = true;
+        if (allCardsListView != null) {
+            allCardsListView.SetCards(allCards);
         }
-
-        storageText = storageLabel.GetComponent<TextMeshProUGUI>();
-        deckText = deckLabel.GetComponent<TextMeshProUGUI>();
-        errorText = errorLabel.GetComponent<TextMeshProUGUI>();
     }
 
+    public ScrollRect scrollRect;
+
+    bool shouldScrollToBottom = false;
+
+    void DidClickOnCard(CardObject card) {
+        print("clicked on '" + card.name + "'");
+        GameObject cardIndeckPrefab = (GameObject)Resources.Load("Prefabs/CardsUI/CardInDeckRow", typeof(GameObject));
+        
+        GameObject cardInDeckObject = Instantiate(cardIndeckPrefab);
+        CardInDeckRow cardInDeckRow = cardInDeckObject.GetComponent<CardInDeckRow>();
+
+        cardInDeckRow.transform.SetParent(cardsInDeckContainer.transform);
+        cardInDeckRow.transform.localScale = Vector3.one;
+        cardInDeckRow.transform.localPosition = Vector3.zero;
+
+        cardInDeckRow.SetCard(card);
+
+        // shouldScrollToBottom = true;
+        // scrollRect.verticalNormalizedPosition = 0;
+        // var scroller = scrollView.verticalScroller;
+        // scroller.value = scroller.highValue > 0 ? scroller.highValue : 0;
+        // scrollView.ScrollTo();
+        StartCoroutine(waitToScroll());
+    }
+
+    IEnumerator waitToScroll() {
+        yield return new WaitForEndOfFrame();
+        // yield return new WaitForEndOfFrame
+        scrollRect.verticalNormalizedPosition = 0;
+    }
+
+    // void LateUpdate() {
+    //     if (shouldScrollToBottom) {
+    //         shouldScrollToBottom = false;
+    //         scrollRect.verticalNormalizedPosition = 0;
+    //     }
+    // }
 
     void Update() {
-        if (needsRefresh) {
-            needsRefresh = false;
-            SetDeckList();
-            rightListView.SetCards(deckList);
-            UpdateText();
-        }
+
     }
 
-    void UpdateText() {
-        storageText.text = "All cards (" + allCardsList.Count + ")";
-        deckText.text = "Deck (" + deckList.Count + ")";
-
-        if (deckList.Count > maxNumberInDeck) {
-            errorText.text = " - Max. number of cards exceeded (" + maxNumberInDeck + ").";
-        } else if (deckList.Count < minNumberInDeck) {
-            errorText.text = "- Min. number of cards required (" + minNumberInDeck + ").";
-        } else {
-            errorText.text = "";
-        }
-    }
-
-    /// <summary>
-    /// Setters for filtered lists
-    /// </summary>
-    void SetStorageList() {
-        var list = new List<CardObject>();
-        foreach (var card in allCardsList) {
-            list.Add(card);
-        }
-        storageList = list;
-    }
-    void SetDeckList() {
-        var list = new List<CardObject>();
-        foreach (var card in allCardsList) {
-            if (card.numberInDeck > 0) {
-                for (int i = 0; i < card.numberInDeck; i++) {
-                    var newCard = new CardObject(
-                        card.ID, 
-                        card.name, 
-                        card.texture2D, 
-                        card.numberInDeck,
-                        card.numberSelected, 
-                        card.limitInDeck, 
-                        card.mode
-                    );
-                    newCard.mode = UICardMode.Toggle;
-                    newCard.numberSelected = 0;
-                    list.Add(newCard);
-                }
-            }
-        }
-        deckList = list;
+    void CreateAllCards() {
+        allCards = Globals.AllCardsObjects.Cast<Card>()
+                            .OrderBy((card) => card.cardProductionID).Select(c => {
+                            return new CardObject("" + c.cardProductionID, c.name, c.fullName, c.level, c.texture2D, c.thumbnail, 0, 0, c.limitPerDeck, UICardMode.NumberSelected);
+                        })
+                        .ToList();
     }
 
 
-    /// <summary>
-    /// User intents.
-    /// </summary>
-    public void AddClicked() {
-        foreach(var card in allCardsList) {
-            if (card.numberSelected > 0) {
-                card.numberInDeck += card.numberSelected;
-                card.numberSelected = 0;
-            }
-        }
-        needsRefresh = true;
-    }
 
-    public void RemoveClicked() {
-        foreach(var card in deckList) { 
-            if (card.numberSelected > 0) {
-                var target = allCardsList.First(c => card.ID == c.ID);
-                target.numberInDeck--;
-            }
-        }
-        needsRefresh = true;
-    }
 
     public void Save() {      
         InternalSave();
@@ -150,24 +98,12 @@ public class DeckBuilderManager : MonoBehaviour
     }
 
     public void ClearDeck() {
-       InternalClear();
-    }
-
-
-    /// <summary>
-    /// Private methods.
-    /// </summary>
-    void CreateAllCards() {
-        allCardsList = cards.Cast<Card>()
-                            .OrderBy((card) => card.cardProductionID).Select(c => {
-                            return new CardObject("" + c.cardProductionID, c.name, c.texture2D, 0, 0, c.limitPerDeck, UICardMode.NumberSelected);
-                        })
-                        .ToList();
+        InternalClear();
     }
 
     void InternalSave() {
         StorageHandler handler = new StorageHandler();
-        var array = allCardsList.Select(card => {
+        var array = allCards.Select(card => {
             return new CardObjectCereal(
                 card.ID,
                 card.name,
@@ -180,20 +116,18 @@ public class DeckBuilderManager : MonoBehaviour
         handler.SaveData(array, "deck1");
     }
     void InternalLoad() {
-        StorageHandler handler = new StorageHandler();
-        var cerealList = (CardObjectCereal[])handler.LoadData("deck1");
+        // StorageHandler handler = new StorageHandler();
+        // var cerealList = (CardObjectCereal[])handler.LoadData("deck1");
         
-        if (cerealList.Length == allCardsList.Count) {
-            for (int i = 0; i < cerealList.Length; i++) {
-                allCardsList[i].CopyData(cerealList[i]);
-            }
-        }
-        needsRefresh = true;
+        // if (cerealList.Length == allCards.Count) {
+        //     for (int i = 0; i < cerealList.Length; i++) {
+        //         allCards[i].CopyData(cerealList[i]);
+        //     }
+        // }
     }
     void InternalClear() {
-        foreach(var card in allCardsList) {
-            card.numberInDeck = 0;
-        }
-        needsRefresh = true;
+        // foreach(var card in allCards) {
+        //     card.numberInDeck = 0;
+        // }
     }
 }

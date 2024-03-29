@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: The Audiencers Festival
   faction: 11
   CARD_ID: PW01-EF02
@@ -59,6 +60,7 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 3063c2629957a2b4f82cc716d25577b3, type: 3}
+  thumbnail: {fileID: 2800000, guid: 14a544671737549e4a6460616d63a719, type: 3}
 --- !u!114 &4838120167556399301
 MonoBehaviour:
   m_ObjectHideFlags: 0

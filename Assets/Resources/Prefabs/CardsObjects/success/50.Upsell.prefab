@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Upsell
   faction: 11
   CARD_ID: PW01-EF03
@@ -59,6 +60,7 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: c1740750d358c3a4da2111500f44d68a, type: 3}
+  thumbnail: {fileID: 2800000, guid: 154e2939bd5124585996998659df1fa3, type: 3}
 --- !u!114 &-7617201703495549743
 MonoBehaviour:
   m_ObjectHideFlags: 0

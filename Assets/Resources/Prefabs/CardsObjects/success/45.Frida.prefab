@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Frida
   faction: 10
   CARD_ID: PW01-SP01
@@ -58,3 +59,4 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 78a8858ec3b45764aa9cc917e3c069aa, type: 3}
+  thumbnail: {fileID: 2800000, guid: 64d2dd1b8ad4240b7a5da4319e754a5a, type: 3}

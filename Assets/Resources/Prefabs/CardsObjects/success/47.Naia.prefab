@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Naia
   faction: 10
   CARD_ID: PW01-SP03
@@ -58,3 +59,4 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: e09883f54dfb0f043b1466c687b3e508, type: 3}
+  thumbnail: {fileID: 2800000, guid: bac56f53837694496b70c2c33c8a2583, type: 3}

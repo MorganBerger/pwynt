@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Pauline, Queen of the Shadows
   faction: 6
   CARD_ID: PW01-AR02
@@ -60,3 +61,4 @@ MonoBehaviour:
   ability: 6
   UpgradedVersion: {fileID: 3174727755120487830, guid: 4b856b7463b74a94ca40a4a0d6223557, type: 3}
   texture2D: {fileID: 2800000, guid: 1e96004ddfea1d340bdb5f4769ced9e1, type: 3}
+  thumbnail: {fileID: 2800000, guid: 2f0d6e848386c442585f4850cab61f88, type: 3}

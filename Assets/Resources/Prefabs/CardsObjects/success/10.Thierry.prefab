@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: "Thierry, The wolf of la D\xE9fense"
   faction: 3
   CARD_ID: PW01-BA01
@@ -59,3 +60,4 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 2ebde4d76b437a947b5e4c51ff609cb1, type: 3}
+  thumbnail: {fileID: 2800000, guid: d217b6405ce444398897a68266255238, type: 3}

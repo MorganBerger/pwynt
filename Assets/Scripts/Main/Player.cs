@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
     void Start() {
         print("Player start");
-        Draw(1);
+        Draw(10);
     }
 
     CardObjectCereal[] GetDeckFromStorage(string deck) {

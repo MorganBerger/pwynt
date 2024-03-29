@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Simon, The Nano Noob
   faction: 7
   CARD_ID: PW01-RO08
@@ -59,3 +60,4 @@ MonoBehaviour:
   ability: 5
   UpgradedVersion: {fileID: 7986749762079806155, guid: 154a9a20f95fdfb4689c0344339a1394, type: 3}
   texture2D: {fileID: 2800000, guid: 7bdcd556a0dae9e44bae11653b4d3f15, type: 3}
+  thumbnail: {fileID: 2800000, guid: e66f3de66f60a4a1a860f39ac7040212, type: 3}

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Elizabeth, The Spectrum Demi-god
   faction: 5
   CARD_ID: PW01-ME02
@@ -59,3 +60,4 @@ MonoBehaviour:
   ability: 4
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 00213c767f4dd0944b1e06728b30fb1d, type: 3}
+  thumbnail: {fileID: 2800000, guid: 4a13836fffc1643de81fe253c2a64b76, type: 3}

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Yannis, Master of Time & Space
   faction: 7
   CARD_ID: PW01-RO04
@@ -60,3 +61,4 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 1adfed939ea13174897f3d51464cbf56, type: 3}
+  thumbnail: {fileID: 2800000, guid: acd040afcb7aa4303bb969c674363080, type: 3}

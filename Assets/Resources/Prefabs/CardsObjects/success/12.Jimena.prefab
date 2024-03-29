@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Jimena, Author of the Dark Scriptures
   faction: 3
   CARD_ID: PW01-BA03
@@ -59,3 +60,4 @@ MonoBehaviour:
   ability: 2
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: e86b77cce27123d4b951540ca0cbd855, type: 3}
+  thumbnail: {fileID: 2800000, guid: 41f689b70e365441ea1e43f5c272457c, type: 3}

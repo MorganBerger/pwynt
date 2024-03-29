@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     void Awake() {
         
     }
+
     void Start() {
         print("GameManager start");
 
@@ -46,9 +47,9 @@ public class GameManager : MonoBehaviour
             var card = obj.GetComponent<Card>();
             if (card != null) {
                 
+                // Disabling hover behaviour when card is dragged on board.
                 var hoverBehaviour = obj.GetComponent<HoverableObject>();
                 if (hoverBehaviour) {
-                    print("DISABLING HOVER FOR '" + obj.name + "'");
                     hoverBehaviour.isEnabled = false;
                 }
 
@@ -56,12 +57,12 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        var fromIsBoard = from.gameObject == board.gameObject;
-        var toIsHand = to.gameObject == _players[0].hand.gameObject;
+        // var fromIsBoard = from.gameObject == board.gameObject;
+        // var toIsHand = to.gameObject == _players[0].hand.gameObject;
 
-        if (toIsHand && fromIsBoard) {
-            print("SHOULD GO BACK TO HAND");
-        }
+        // if (toIsHand && fromIsBoard) {
+        //     print("SHOULD GO BACK TO HAND");
+        // }
     }
 
     private bool DraggedOutOfHand(DragPlane from) {
@@ -98,11 +99,13 @@ public class GameManager : MonoBehaviour
 
     void UndoPlay(MonoBehaviour obj) {
         _players[0].hand.UndoPlay();
+
+        // Re-enabling hover behaviour on card when it goes back to hand.
         StartCoroutine(ReenableHoverBehaviour(obj));
     }
 
     private IEnumerator ReenableHoverBehaviour(MonoBehaviour obj) {
-        yield return new WaitForSeconds(.201f);
+        yield return new WaitForSeconds(.21f);
 
         var hoverBehaviour = obj.GetComponent<HoverableObject>();
         print("ENABLING HOVER FOR '" + obj.name + "'");

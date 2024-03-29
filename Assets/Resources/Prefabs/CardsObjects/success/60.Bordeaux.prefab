@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Bordeaux
   faction: 12
   CARD_ID: PW01-TR01
@@ -60,6 +61,7 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 247b7189e8166b44d90af5d33c4843a2, type: 3}
+  thumbnail: {fileID: 2800000, guid: e50b86f59435f4239a2922158bfdbbfe, type: 3}
 --- !u!114 &312846948833921554
 MonoBehaviour:
   m_ObjectHideFlags: 0

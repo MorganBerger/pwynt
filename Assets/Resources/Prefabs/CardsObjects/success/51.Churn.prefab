@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Churn
   faction: 11
   CARD_ID: PW01-EF04
@@ -59,6 +60,7 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: d54bad32336b0a34abbaefc183cf3d48, type: 3}
+  thumbnail: {fileID: 2800000, guid: 9b84d2e693d2a4082ad4b00e85500448, type: 3}
 --- !u!114 &-3464290486765535604
 MonoBehaviour:
   m_ObjectHideFlags: 0

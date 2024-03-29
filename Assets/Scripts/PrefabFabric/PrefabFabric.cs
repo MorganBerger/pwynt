@@ -5,6 +5,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class PrefabFabric : MonoBehaviour {
 
     public GameObject textfieldContainer;
@@ -127,7 +128,7 @@ public class PrefabFabric : MonoBehaviour {
         CreateFromTexture();
     }
 
-
+    
     public string CreateUniqueDir(string dirName) {
         var timeCloseToTheSecond = System.DateTime.UtcNow.ToString("ddMMyyyy_HHmmss");
         string dir = "CardsObjects_" + timeCloseToTheSecond;
@@ -172,6 +173,7 @@ public class PrefabFabric : MonoBehaviour {
     }
 }
 
+#endif
 
 // GOES THERE
  // var tempPath = path + "/" + dirName;

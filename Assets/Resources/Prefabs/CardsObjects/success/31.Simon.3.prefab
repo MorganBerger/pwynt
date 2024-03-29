@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: Simon 3
   faction: 7
   CARD_ID: PW01-RO10
@@ -60,3 +61,4 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 508a5d64129661443b83c9023fc82bba, type: 3}
+  thumbnail: {fileID: 2800000, guid: aeb4abc81fb474898bba10f235323393, type: 3}

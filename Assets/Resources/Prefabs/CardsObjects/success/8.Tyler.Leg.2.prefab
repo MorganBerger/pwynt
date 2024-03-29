@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69338c809a62f594182135220f01552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
   fullName: The second leg of the Destroyer
   faction: 2
   CARD_ID: PW01-TY03
@@ -59,3 +60,4 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: 19ecc2f98852b034583f31869bce2a1b, type: 3}
+  thumbnail: {fileID: 2800000, guid: c0db01b8f2db7444b89703c583592f50, type: 3}
