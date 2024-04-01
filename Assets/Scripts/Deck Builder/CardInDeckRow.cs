@@ -1,13 +1,14 @@
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CardInDeckRow : MonoBehaviour
 {
     public GameObject imageGO;
 
-    [SerializeField]
     Image cardImage;
+    Button button;
 
     public TextMeshProUGUI cardName;
     public TextMeshProUGUI cardLevel;
@@ -15,10 +16,24 @@ public class CardInDeckRow : MonoBehaviour
     [SerializeField]
     CardObject card;
 
+    public UnityEvent<CardInDeckRow> onClick;
+
     // Start is called before the first frame update
     void Awake() {
-        print("cardInDeckRow awake");
         cardImage = imageGO.GetComponent<Image>();
+        button = GetComponent<Button>();
+    }
+
+    void Start() {
+        button.onClick.AddListener(DidClickOnRow);
+    }
+
+    void DidClickOnRow() {
+        onClick.Invoke(this);
+    }
+
+    public CardObject GetCard() {
+        return card;
     }
 
     public void SetCard(CardObject card) {

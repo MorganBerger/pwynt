@@ -32,13 +32,13 @@ public class UICard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
         button.onClick.AddListener(onClick);
     }
 
-    void Update() {
-        // UpdateTexture();
-    }
-
     public void SetCard(CardObject card) {
         this.card = card;
         UpdateTexture();
+    }
+
+    public CardObject GetCard() {
+        return card;
     }
 
     public void UpdateTexture() {
@@ -46,6 +46,10 @@ public class UICard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
         if (texture != null && image.mainTexture != texture) {
             image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0f, 0.5f));
         }
+    }
+
+    public void SetEnabled() {
+        button.interactable = true;
     }
 
     public void onClick() {

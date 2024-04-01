@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class UICardList : MonoBehaviour { 
     List<CardObject> cardList = new List<CardObject>();
-    List<GameObject> viewList = new List<GameObject>();
+    List<UICard> uiCardList = new List<UICard>();
 
     public UnityEvent<CardObject> didClickOnCard;
 
@@ -15,9 +15,17 @@ public class UICardList : MonoBehaviour {
         UpdateList();
     }
 
+    public void EnableCard(CardObject card) {
+        var uiCard = uiCardList.Find(uiCard => {
+            return uiCard.GetCard() == card;
+        });
+        uiCard.SetEnabled();
+    }
+
     void UpdateList() {
-        viewList.RemoveAll(card => {
-            Destroy(card);
+
+        uiCardList.RemoveAll(card => {
+            Destroy(card.gameObject);
             return true;
         });
 
@@ -26,14 +34,15 @@ public class UICardList : MonoBehaviour {
         foreach(var card in cardList) {
             GameObject obj = Instantiate(uiCardPrefab);
             obj.name = card.name;
-            var ui = obj.GetComponent<UICard>();
-            ui.SetCard(card);
 
-            ui.didClickOnCard.AddListener(DidClickOnCard);
+            var uiCard = obj.GetComponent<UICard>();
+            uiCard.SetCard(card);
+
+            uiCard.didClickOnCard.AddListener(DidClickOnCard);
+
+            uiCardList.Add(uiCard);
 
             SetObjTransform(obj, transform);
-
-            viewList.Add(obj);
         }
     }
 

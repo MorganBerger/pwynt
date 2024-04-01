@@ -61,19 +61,16 @@ public class CardObject {
         string name,
         string fullName,
         int level,
-        Texture2D texture,
+        Texture2D texture2D,
         Texture2D thumbnail,
         int number,
         int numberSelected,
         int limitInDeck,
         UICardMode mode
     ) {
-        if (ID != null) {
-            this.ID = ID;
-        } else {
-            this.ID = String.RandomString();
-        }
-        this.texture2D = texture;
+        this.ID = ID != null ? ID : String.RandomString();
+
+        this.texture2D = texture2D;
         this.thumbnail = thumbnail;
         this.name = name;
         this.fullName = fullName;

@@ -1512,6 +1512,7 @@ GameObject:
   - component: {fileID: 780425449}
   - component: {fileID: 780425452}
   - component: {fileID: 780425450}
+  - component: {fileID: 780425453}
   m_Layer: 5
   m_Name: Cards In Deck Panel
   m_TagString: Untagged
@@ -1570,6 +1571,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780425448}
   m_CullTransparentMesh: 1
+--- !u!114 &780425453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780425448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6df8a5128ef44e9b620b490ccfc210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardContainer: {fileID: 1454718154}
+  loadPanel: {fileID: 580728464}
+  cardsInDeck: []
+  didRemoveCardFromDeck:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &798324947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,8 +2229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allCardsContainer: {fileID: 178493952}
-  cardsInDeckContainer: {fileID: 1454718154}
-  scrollRect: {fileID: 1357872740}
+  cardsInDeckContainer: {fileID: 780425448}
 --- !u!1 &1119957988
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,20 +3,17 @@ using System.Linq;
 using UnityEngine;
 using System.Data;
 using UnityEditor;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Unity.VisualScripting;
-using System.Collections;
-// using System.Numerics;
+using TMPro;
 
-public class DeckBuilderManager : MonoBehaviour
-{
+public class DeckBuilderManager : MonoBehaviour {
     public GameObject allCardsContainer;
     public GameObject cardsInDeckContainer;
 
     UICardList allCardsListView;
+    CardsInDeckList cardsInDeckList;
 
     List<CardObject> allCards = new List<CardObject>();
+    TMP_InputField deckNameTextfield;
 
     const int maxNumberInDeck = 40;
     const int minNumberInDeck = 25;
@@ -27,7 +24,10 @@ public class DeckBuilderManager : MonoBehaviour
 
     void Setup() {
         allCardsListView = allCardsContainer.GetComponentInChildren<UICardList>();
+        cardsInDeckList = cardsInDeckContainer.GetComponent<CardsInDeckList>();
+
         allCardsListView.didClickOnCard.AddListener(DidClickOnCard);
+        cardsInDeckList.didRemoveCardFromDeck.AddListener(DidRemoveCard);
 
         CreateAllCards();
 
@@ -35,47 +35,13 @@ public class DeckBuilderManager : MonoBehaviour
             allCardsListView.SetCards(allCards);
         }
     }
-
-    public ScrollRect scrollRect;
-
-    bool shouldScrollToBottom = false;
-
+    
     void DidClickOnCard(CardObject card) {
-        print("clicked on '" + card.name + "'");
-        GameObject cardIndeckPrefab = (GameObject)Resources.Load("Prefabs/CardsUI/CardInDeckRow", typeof(GameObject));
-        
-        GameObject cardInDeckObject = Instantiate(cardIndeckPrefab);
-        CardInDeckRow cardInDeckRow = cardInDeckObject.GetComponent<CardInDeckRow>();
-
-        cardInDeckRow.transform.SetParent(cardsInDeckContainer.transform);
-        cardInDeckRow.transform.localScale = Vector3.one;
-        cardInDeckRow.transform.localPosition = Vector3.zero;
-
-        cardInDeckRow.SetCard(card);
-
-        // shouldScrollToBottom = true;
-        // scrollRect.verticalNormalizedPosition = 0;
-        // var scroller = scrollView.verticalScroller;
-        // scroller.value = scroller.highValue > 0 ? scroller.highValue : 0;
-        // scrollView.ScrollTo();
-        StartCoroutine(waitToScroll());
+        cardsInDeckList.AddCard(card);
     }
 
-    IEnumerator waitToScroll() {
-        yield return new WaitForEndOfFrame();
-        // yield return new WaitForEndOfFrame
-        scrollRect.verticalNormalizedPosition = 0;
-    }
-
-    // void LateUpdate() {
-    //     if (shouldScrollToBottom) {
-    //         shouldScrollToBottom = false;
-    //         scrollRect.verticalNormalizedPosition = 0;
-    //     }
-    // }
-
-    void Update() {
-
+    void DidRemoveCard(CardObject card) {
+        allCardsListView.EnableCard(card);
     }
 
     void CreateAllCards() {
@@ -85,8 +51,6 @@ public class DeckBuilderManager : MonoBehaviour
                         })
                         .ToList();
     }
-
-
 
 
     public void Save() {      
