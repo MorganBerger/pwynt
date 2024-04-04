@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine.Events;
 
 
@@ -15,11 +14,11 @@ public class UICardList : MonoBehaviour {
         UpdateList();
     }
 
-    public void EnableCard(CardObject card) {
+    public void EnableCard(CardObject card, bool enabled) {
         var uiCard = uiCardList.Find(uiCard => {
-            return uiCard.GetCard() == card;
+            return uiCard.GetCard().ID == card.ID;
         });
-        uiCard.SetEnabled();
+        uiCard.SetEnabled(enabled);
     }
 
     void UpdateList() {

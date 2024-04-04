@@ -28,10 +28,10 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadScene("LobbyScene");
     }
 
-    void ShowJoinGamePopup() {
-
+    public void BuildDeck() {
+        SceneManager.LoadScene("DeckMaker");
     }
-
+    
     public void QuitGame() {
         Application.Quit();
     }

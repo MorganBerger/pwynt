@@ -59,7 +59,6 @@ public class LobbyManager: MonoBehaviour {
 
     public void GoBackToMenu() {
         SceneManager.LoadScene("MainMenuScene");       
-        // StartCoroutine(DelayShutdownServer());
         StopNetworking();
         Destroy(gameObject);
     }

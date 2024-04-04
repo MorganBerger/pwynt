@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-
 struct String {
     public static string RandomString() {
         const string glyphs= "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -19,18 +18,41 @@ struct String {
 public class CardObjectCereal {
     public string ID;
     public string name;
+    public string fullName;
+    public int level;
     public int numberInDeck;
     public int numberSelected;
     public int limitInDeck;
     public UICardMode mode;
 
-    public CardObjectCereal(string ID, string name, int numberInDeck, int numberSelected, int limitInDeck, UICardMode mode) {
-        this.ID = ID;
-        this.name = name;
-        this.numberInDeck = numberInDeck;
-        this.mode = mode;
-        this.numberSelected = numberSelected;
-        this.limitInDeck = limitInDeck;
+    // public Texture2D texture2D;
+    // public Texture2D thumbnail;
+
+    public byte[] textureBytes;
+    public byte[] thumbnailBytes;
+
+    // public CardObjectCereal(string ID, string name, int numberInDeck, int numberSelected, int limitInDeck, UICardMode mode) {
+    //     this.ID = ID;
+    //     this.name = name;
+    //     this.numberInDeck = numberInDeck;
+    //     this.mode = mode;
+    //     this.numberSelected = numberSelected;
+    //     this.limitInDeck = limitInDeck;
+    // }
+
+    public CardObjectCereal(CardObject cardObj) {
+        ID = cardObj.ID;
+        name = cardObj.name;
+        fullName = cardObj.fullName;
+        level = cardObj.level;
+
+        numberInDeck = cardObj.numberInDeck;
+        mode = cardObj.mode;
+        numberSelected = cardObj.numberSelected;
+        limitInDeck = cardObj.limitInDeck;
+
+        textureBytes = ImageConversion.EncodeToPNG(cardObj.texture2D);
+        thumbnailBytes = ImageConversion.EncodeToPNG(cardObj.thumbnail);
     }
 }
 
@@ -54,6 +76,27 @@ public class CardObject {
             }
             return limit;
         }
+    }
+
+    public CardObject(CardObjectCereal cereal) {
+        this.ID = cereal.ID != null ? cereal.ID : String.RandomString();
+
+        // this.texture2D = texture2D;
+        this.texture2D = new Texture2D(0, 0);
+        ImageConversion.LoadImage(this.texture2D, cereal.textureBytes);
+
+        this.thumbnail = new Texture2D(0, 0);
+        ImageConversion.LoadImage(this.thumbnail, cereal.thumbnailBytes);
+
+        this.name = cereal.name;
+
+        this.fullName = cereal.fullName;
+        this.level = cereal.level;
+
+        this.numberInDeck = cereal.numberInDeck;
+        this.mode = cereal.mode;
+        this.numberSelected = cereal.numberSelected;
+        this.limitInDeck = cereal.limitInDeck;
     }
 
     public CardObject(

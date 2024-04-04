@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Data;
 using UnityEditor;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DeckBuilderManager : MonoBehaviour {
     public GameObject allCardsContainer;
@@ -13,7 +14,6 @@ public class DeckBuilderManager : MonoBehaviour {
     CardsInDeckList cardsInDeckList;
 
     List<CardObject> allCards = new List<CardObject>();
-    TMP_InputField deckNameTextfield;
 
     const int maxNumberInDeck = 40;
     const int minNumberInDeck = 25;
@@ -27,6 +27,8 @@ public class DeckBuilderManager : MonoBehaviour {
         cardsInDeckList = cardsInDeckContainer.GetComponent<CardsInDeckList>();
 
         allCardsListView.didClickOnCard.AddListener(DidClickOnCard);
+
+        cardsInDeckList.didLoadDeck.AddListener(DidLoadDeck);
         cardsInDeckList.didRemoveCardFromDeck.AddListener(DidRemoveCard);
 
         CreateAllCards();
@@ -34,14 +36,6 @@ public class DeckBuilderManager : MonoBehaviour {
         if (allCardsListView != null) {
             allCardsListView.SetCards(allCards);
         }
-    }
-    
-    void DidClickOnCard(CardObject card) {
-        cardsInDeckList.AddCard(card);
-    }
-
-    void DidRemoveCard(CardObject card) {
-        allCardsListView.EnableCard(card);
     }
 
     void CreateAllCards() {
@@ -51,47 +45,22 @@ public class DeckBuilderManager : MonoBehaviour {
                         })
                         .ToList();
     }
-
-
-    public void Save() {      
-        InternalSave();
+    
+    void DidClickOnCard(CardObject card) {
+        cardsInDeckList.AddCard(card);
     }
 
-    public void Load() {
-        InternalLoad();
+    void DidLoadDeck(CardObject[] cards) {
+        foreach (CardObject card in cards) {
+            allCardsListView.EnableCard(card, false);
+        }
     }
 
-    public void ClearDeck() {
-        InternalClear();
+    void DidRemoveCard(CardObject card) {
+        allCardsListView.EnableCard(card, true);
     }
 
-    void InternalSave() {
-        StorageHandler handler = new StorageHandler();
-        var array = allCards.Select(card => {
-            return new CardObjectCereal(
-                card.ID,
-                card.name,
-                card.numberInDeck, 
-                card.numberSelected, 
-                card.limitInDeck, 
-                card.mode
-            );
-        }).ToArray();
-        handler.SaveData(array, "deck1");
-    }
-    void InternalLoad() {
-        // StorageHandler handler = new StorageHandler();
-        // var cerealList = (CardObjectCereal[])handler.LoadData("deck1");
-        
-        // if (cerealList.Length == allCards.Count) {
-        //     for (int i = 0; i < cerealList.Length; i++) {
-        //         allCards[i].CopyData(cerealList[i]);
-        //     }
-        // }
-    }
-    void InternalClear() {
-        // foreach(var card in allCards) {
-        //     card.numberInDeck = 0;
-        // }
+    public void GoBackToMenu() {
+        SceneManager.LoadScene("MainMenuScene");
     }
 }

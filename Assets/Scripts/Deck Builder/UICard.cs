@@ -48,8 +48,8 @@ public class UICard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
         }
     }
 
-    public void SetEnabled() {
-        button.interactable = true;
+    public void SetEnabled(bool enabled) {
+        button.interactable = enabled;
     }
 
     public void onClick() {

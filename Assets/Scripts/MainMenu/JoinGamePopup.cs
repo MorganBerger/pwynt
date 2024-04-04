@@ -52,6 +52,6 @@ public class JoinGamePopup : MonoBehaviour
     }
 
     private void onIPChanged(string value) {
-        joinButton.interactable = value != "";
+        joinButton.interactable = value.Length > 0;
     }
 }
