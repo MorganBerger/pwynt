@@ -38,6 +38,11 @@ public class CustomDropdown : TMP_Dropdown {
         }
     }
 
+    public void ShowMainLabel(bool show) {
+        mainLabel.SetActive(show);
+        placeholderLabel.SetActive(!show);
+    }
+
     override public void OnPointerClick(PointerEventData eventData) {
         base.OnPointerClick(eventData);
         CustomizeItems();
@@ -139,7 +144,6 @@ public class CustomDropdown : TMP_Dropdown {
 
     public void ResetState() {
         value = 0;
-        mainLabel.SetActive(false);
-        placeholderLabel.SetActive(true);
+        ShowMainLabel(false);
     }
 }

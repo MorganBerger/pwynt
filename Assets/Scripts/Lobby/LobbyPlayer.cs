@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Unity.Collections;
 
 public class LobbyPlayer : NetworkBehaviour {
 
@@ -10,10 +10,40 @@ public class LobbyPlayer : NetworkBehaviour {
 
     CustomDropdown deckDropdown; 
 
+    public TextMeshProUGUI playerNameLabel;
+
+    NetworkVariable<FixedString64Bytes> PlayerName = new NetworkVariable<FixedString64Bytes>();
+    NetworkVariable<FixedString64Bytes> DeckName = new NetworkVariable<FixedString64Bytes>();
+
     public void Start() {
         deckDropdown = GetComponentInChildren<CustomDropdown>();
 
-        PopulateLoadDropdown();
+        if (IsOwner) {
+            PopulateLoadDropdown();
+            deckDropdown.onValueChanged.AddListener(DeckValueChanged);
+
+            SetName();
+        } else {
+            deckDropdown.interactable = false;
+        }
+    }
+
+    public override void OnNetworkSpawn() {}
+
+    void DeckValueChanged(int index) {
+        var value = index - 1;
+        var decks = DeckStorageHandler.ListSavedDecks();
+
+        if (value >= 0 && value < decks.Length) {
+            var deck = decks[value];
+            SubmitDeckChangeRpc(deck);
+        }
+    }
+
+    public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject) {
+        print("NetworkObjectParentChanged for player: " + playerIndex);
+        transform.SetSiblingIndex(playerIndex);
+        transform.localScale = new Vector3(1, 1, 1);
     }
 
     void ClearDropdown() {
@@ -30,7 +60,6 @@ public class LobbyPlayer : NetworkBehaviour {
 
         optionsData.Add(new TMP_Dropdown.OptionData("none"));
 
-
         if (decks.Length == 0) {
             var option = new TMP_Dropdown.OptionData("No saved decks...");
             optionsData.Add(option);
@@ -44,13 +73,29 @@ public class LobbyPlayer : NetworkBehaviour {
         deckDropdown.AddOptions(optionsData);
     }
 
-    public override void OnNetworkSpawn() {
-        print("Spawned player");
+    public void SetName() {
+        var key = Globals.PlayerPrefsKey.playerName;
+        SubmitNameChangeRpc(PlayerPrefs.GetString(key));
     }
 
-    public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject) {
-        print("NetworkObjectParentChanged for player: " + playerIndex);
-        transform.SetSiblingIndex(playerIndex);
-        transform.localScale = new Vector3(1, 1, 1);
+    [Rpc(SendTo.Server)]
+    void SubmitDeckChangeRpc(string deck, RpcParams rpcParams = default) {
+        DeckName.Value = deck;
+    }
+
+    [Rpc(SendTo.Server)]
+    void SubmitNameChangeRpc(string playerName, RpcParams rpcParams = default) {
+        playerNameLabel.text = playerName;
+        PlayerName.Value = playerName;
+    }
+
+    void Update() {
+        playerNameLabel.text = PlayerName.Value.ToString();
+
+        var deckName = DeckName.Value.ToString();
+        if (deckName.Length > 0) {
+            deckDropdown.ShowMainLabel(true);
+            deckDropdown.captionText.text = deckName;
+        }
     }
 }

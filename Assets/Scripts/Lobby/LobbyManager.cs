@@ -6,11 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class LobbyManager: MonoBehaviour {
 
+    private NetworkManager networkManager;
+    private int maxNumberOfPlayers = 1;
+
     public GameObject playerlist;
 
     void Start() {
-       SetupCallbacks();
-       CreateLobby();
+        networkManager = GetComponent<NetworkManager>();
+        
+        SetupCallbacks();
+        CreateLobby();
     }
 
     void CreateLobby() {
@@ -28,14 +33,35 @@ public class LobbyManager: MonoBehaviour {
     }
 
     void SetupCallbacks() {
-        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+        networkManager.ConnectionApprovalCallback = ApprovalCheck;
+        networkManager.OnClientConnectedCallback += OnClientConnected;
+        networkManager.OnClientDisconnectCallback += OnClientDisconnect;
+    }
+
+    private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response) {
+        print("Approval check");
+        if (networkManager.ConnectedClientsIds.Count >= maxNumberOfPlayers) {
+            print("Approval denied, lobby full.");
+            response.Approved = false;
+            response.Reason = "Lobby is full";
+        } else {
+            print("Approval approved!");
+            response.Approved = true;
+            response.CreatePlayerObject = true;
+        }
+        response.Pending = false;
     }
 
     private void OnClientConnected(ulong clientId) {
-        Debug.Log($"client connected: {clientId}");
-        var client = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(clientId);
+        Debug.Log("client connected: " + clientId);
+        var client = networkManager.SpawnManager.GetPlayerNetworkObject(clientId);
+
+        if (client == null) { return; }
 
         var player = client.GetComponent<LobbyPlayer>();
+        
+        if (player == null) { return; }
+        
         player.playerIndex = (int)clientId;
 
         print("playerIndex in row: " + player.playerIndex);
@@ -45,6 +71,14 @@ public class LobbyManager: MonoBehaviour {
         }
 
         PutPlayerInList(client.transform);
+    }
+
+    private void OnClientDisconnect(ulong clientId) {
+        print("Client disconnect: " + clientId);
+        if (!networkManager.IsServer && networkManager.DisconnectReason != string.Empty) {
+            NetworkHelper.networkError = networkManager.DisconnectReason;
+            GoBackToMenu();
+        }
     }
 
     private void PutPlayerInList(Transform t) {
@@ -58,7 +92,7 @@ public class LobbyManager: MonoBehaviour {
     }
 
     public void GoBackToMenu() {
-        SceneManager.LoadScene("MainMenuScene");       
+        SceneManager.LoadScene("MainMenuScene");
         StopNetworking();
         Destroy(gameObject);
     }

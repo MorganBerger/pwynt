@@ -36,8 +36,7 @@ namespace HelloWorld
             }
         }
 
-        static void StatusLabels()
-        {
+        static void StatusLabels() {
             // Set description labels
             var mode = NetworkManager.Singleton.IsHost ?
                 "Host" : NetworkManager.Singleton.IsServer ? "Server" : "Client";
@@ -47,10 +46,9 @@ namespace HelloWorld
             GUILayout.Label("Mode: " + mode);
         }
 
-        static void SubmitNewPosition()
-        {
-            if (GUILayout.Button(NetworkManager.Singleton.IsServer ? "Move" : "Request Position Change"))
-            {
+        static void SubmitNewPosition() {
+
+            if (GUILayout.Button(NetworkManager.Singleton.IsServer ? "Move" : "Request Position Change")) {
                 // If game instance is server, ask every clients to move.
                 if (NetworkManager.Singleton.IsServer && !NetworkManager.Singleton.IsClient)
                 {
