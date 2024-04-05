@@ -1289,6 +1289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerlist: {fileID: 2112830282}
+  waitForP2GO: {fileID: 901756437}
 --- !u!114 &1836643893
 MonoBehaviour:
   m_ObjectHideFlags: 0

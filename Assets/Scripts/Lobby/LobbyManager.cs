@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 public class LobbyManager: MonoBehaviour {
 
     private NetworkManager networkManager;
-    private int maxNumberOfPlayers = 1;
+    private int maxNumberOfPlayers = 2;
 
     public GameObject playerlist;
+    public GameObject waitForP2GO;
 
     void Start() {
         networkManager = GetComponent<NetworkManager>();
@@ -66,11 +67,11 @@ public class LobbyManager: MonoBehaviour {
 
         print("playerIndex in row: " + player.playerIndex);
 
-        if (client == null) {
-            print("client is null");
-        }
-
         PutPlayerInList(client.transform);
+
+        if (networkManager.ConnectedClientsIds.Count >= maxNumberOfPlayers) {
+            Destroy(waitForP2GO);
+        }
     }
 
     private void OnClientDisconnect(ulong clientId) {

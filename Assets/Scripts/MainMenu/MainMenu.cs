@@ -38,6 +38,8 @@ public class MainMenu : MonoBehaviour {
     }
 
     void CheckForPlayername() {
+        // PlayerPrefs.DeleteAll();
+
         var key = Globals.PlayerPrefsKey.playerName;
         var name = PlayerPrefs.GetString(key);
 
