@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2507124691072508005}
   - component: {fileID: 6786037135953363115}
-  - component: {fileID: 7355624110889315394}
   m_Layer: 5
   m_Name: 67.LoneFox
   m_TagString: Untagged
@@ -63,17 +62,3 @@ MonoBehaviour:
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: d68383f6e27f46645be37e140f5e3c2f, type: 3}
   thumbnail: {fileID: 2800000, guid: d1b6bcd751aa8451cafc2b6b5f88bee4, type: 3}
---- !u!114 &7355624110889315394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2354966188531012776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a24df626528eaa48ae7dbed40775756, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effect: 1
-  targetFaction: 0
