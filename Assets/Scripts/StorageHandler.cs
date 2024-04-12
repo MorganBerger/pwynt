@@ -46,6 +46,7 @@ public class DeckStorageHandler {
 
     public static string[] ListSavedDecks() {
         string path = Application.persistentDataPath + "/" + deckSavePath;
+        Directory.CreateDirectory(path);
 
         var info = new DirectoryInfo(path);
         var fileInfo = info.GetFiles();

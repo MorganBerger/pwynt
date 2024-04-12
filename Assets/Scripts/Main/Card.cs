@@ -20,7 +20,8 @@ public enum Faction: int {
     Hybrids,
     Companions,
     Effects,
-    Terrains
+    Terrains,
+    Creature
 }
 
 public enum Effect: int {
