@@ -61,4 +61,4 @@ MonoBehaviour:
   ability: 0
   UpgradedVersion: {fileID: 0}
   texture2D: {fileID: 2800000, guid: b53b344d3754bc941bb6c713af7cbb58, type: 3}
-  thumbnail: {fileID: 2800000, guid: d1b6bcd751aa8451cafc2b6b5f88bee4, type: 3}
+  thumbnail: {fileID: 2800000, guid: 45b6bc11c8ec343cdb545e747c0d37d2, type: 3}
