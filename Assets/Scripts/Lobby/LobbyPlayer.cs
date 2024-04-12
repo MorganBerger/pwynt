@@ -3,24 +3,35 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using Unity.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LobbyPlayer : NetworkBehaviour {
 
     public int playerIndex;
 
-    CustomDropdown deckDropdown; 
+    CustomDropdown deckDropdown;
+
+    Toggle readyToggle;
 
     public TextMeshProUGUI playerNameLabel;
 
     NetworkVariable<FixedString64Bytes> PlayerName = new NetworkVariable<FixedString64Bytes>();
-    NetworkVariable<FixedString64Bytes> DeckName = new NetworkVariable<FixedString64Bytes>();
+    public NetworkVariable<FixedString64Bytes> DeckName = new NetworkVariable<FixedString64Bytes>();
+
+    public NetworkVariable<bool> IsReady = new NetworkVariable<bool>();
 
     public void Start() {
         deckDropdown = GetComponentInChildren<CustomDropdown>();
 
+        readyToggle = GetComponentInChildren<Toggle>();
+        readyToggle.interactable = false;
+
         if (IsOwner) {
             PopulateLoadDropdown();
+
             deckDropdown.onValueChanged.AddListener(DeckValueChanged);
+            readyToggle.onValueChanged.AddListener(OnReadyToggleValueChanged);
 
             SetName();
         } else {
@@ -28,14 +39,26 @@ public class LobbyPlayer : NetworkBehaviour {
         }
     }
 
+    void OnReadyToggleValueChanged(bool value) {
+        SubmitIsReadyRpc(value);
+        if (IsOwner) {
+            deckDropdown.interactable = !value;
+        }
+    }
+
     public override void OnNetworkSpawn() {}
 
     void DeckValueChanged(int index) {
+        readyToggle.interactable = true;
+
         var value = index - 1;
         var decks = DeckStorageHandler.ListSavedDecks();
 
         if (value >= 0 && value < decks.Length) {
             var deck = decks[value];
+
+            GameHelper.chosenDeck = deck;
+
             SubmitDeckChangeRpc(deck);
         }
     }
@@ -79,6 +102,11 @@ public class LobbyPlayer : NetworkBehaviour {
     }
 
     [Rpc(SendTo.Server)]
+    void SubmitIsReadyRpc(bool ready, RpcParams rpcParams = default) {
+        IsReady.Value = ready;
+    }
+
+    [Rpc(SendTo.Server)]
     void SubmitDeckChangeRpc(string deck, RpcParams rpcParams = default) {
         DeckName.Value = deck;
     }
@@ -97,5 +125,14 @@ public class LobbyPlayer : NetworkBehaviour {
             deckDropdown.ShowMainLabel(true);
             deckDropdown.captionText.text = deckName;
         }
+
+        readyToggle.SetIsOnWithoutNotify(IsReady.Value);
+    }
+
+    public void StartGame() {
+        // print("GAME START!");
+        // GameHelper.chosenDeck = DeckName.Value.ToString();
+        // print("chosen deck = " + GameHelper.chosenDeck);
+        SceneManager.LoadScene("SampleScene");
     }
 }

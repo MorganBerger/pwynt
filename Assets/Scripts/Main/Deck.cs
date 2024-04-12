@@ -38,7 +38,7 @@ public class Deck : MonoBehaviour
         var allCardDatas = Globals.AllCardsObjects.Cast<Card>();
 
         foreach (var card in cereals) {
-            if (card.numberInDeck == 0) { continue; }
+            // if (card.numberInDeck == 0) { continue; }
                         
             var obj = (GameObject)Resources.Load("Cards/3Ds/" + card.name, typeof(GameObject));
             var cardData = allCardDatas.First(c => c.cardProductionID + "" == card.ID);
@@ -46,15 +46,15 @@ public class Deck : MonoBehaviour
             if (cardData == null) { continue; }
             if (obj == null) { continue; }
             
-            for (int y = 0; y < card.numberInDeck; y++) {
-                var cardObj = Instantiate(obj);
-                cardObj.name = obj.name;
+            // for (int y = 0; y < card.numberInDeck; y++) {
+            var cardObj = Instantiate(obj);
+            cardObj.name = obj.name;
 
-                var cardComponent = cardObj.GetComponent<Card>();
-                cardComponent.CopyCardData(cardData);
+            var cardComponent = cardObj.GetComponent<Card>();
+            cardComponent.CopyCardData(cardData);
 
-                cardsInDeck.Add(cardComponent);
-            }
+            cardsInDeck.Add(cardComponent);
+            // }
         }
 
         shuffledDeck = ListExtension.Shuffle(cardsInDeck);

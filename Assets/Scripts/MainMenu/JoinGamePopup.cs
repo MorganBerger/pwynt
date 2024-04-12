@@ -25,6 +25,11 @@ public class JoinGamePopup : MonoBehaviour
 
         joinButton.onClick.AddListener(DidClickJoinButton);
         cancelButton.onClick.AddListener(DidClickCancelButton);
+
+        #if UNITY_EDITOR
+            ipTextfield.text = "127.0.0.1:7777";
+            joinButton.interactable = true;
+        #endif
     }
 
     private void DidClickJoinButton() {

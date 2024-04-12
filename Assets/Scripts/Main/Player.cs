@@ -17,8 +17,6 @@ public class Player : MonoBehaviour
         deck = GetComponentInChildren<Deck>();
         hand = GetComponentInChildren<Hand>();
 
-        deck.SetDeck(GetDeckFromStorage("deck1"));
-
         cardRows = GetComponentsInChildren<BoardCardRow>();
     }
 
@@ -34,11 +32,19 @@ public class Player : MonoBehaviour
 
     void Start() {
         print("Player start");
-        Draw(10);
+
+        var chosenDeck = GameHelper.chosenDeck;
+        if (chosenDeck.Length == 0) {
+            chosenDeck = "deck uno";
+        }
+        print("player start chosen deck: " + chosenDeck);
+
+        deck.SetDeck(GetDeckFromStorage(chosenDeck));
+        Draw(5);
     }
 
     CardObjectCereal[] GetDeckFromStorage(string deck) {
-        var cerealDeck = (CardObjectCereal[])StorageHandler.LoadData(deck);
+        var cerealDeck = (CardObjectCereal[])DeckStorageHandler.LoadDeck(deck);
         return cerealDeck;
     }
 

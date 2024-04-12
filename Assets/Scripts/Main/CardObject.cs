@@ -25,20 +25,8 @@ public class CardObjectCereal {
     public int limitInDeck;
     public UICardMode mode;
 
-    // public Texture2D texture2D;
-    // public Texture2D thumbnail;
-
     public byte[] textureBytes;
     public byte[] thumbnailBytes;
-
-    // public CardObjectCereal(string ID, string name, int numberInDeck, int numberSelected, int limitInDeck, UICardMode mode) {
-    //     this.ID = ID;
-    //     this.name = name;
-    //     this.numberInDeck = numberInDeck;
-    //     this.mode = mode;
-    //     this.numberSelected = numberSelected;
-    //     this.limitInDeck = limitInDeck;
-    // }
 
     public CardObjectCereal(CardObject cardObj) {
         ID = cardObj.ID;
