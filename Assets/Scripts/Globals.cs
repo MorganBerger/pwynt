@@ -1,11 +1,37 @@
 using UnityEngine;
 using Unity.Multiplayer.Playmode;
 using System.Linq;
+using System.Collections.Generic;
+using Unity.Networking.Transport.Error;
 
 public static class Globals {
     public static GameObject cardUIPrefab = (GameObject)Resources.Load("Prefabs/CardsUI/UICard", typeof(GameObject));
-    public static GameObject prefabsYO = (GameObject)Resources.Load("Prefabs/Test/Card", typeof(GameObject));
-    public static Object[] AllCardsObjects = Resources.LoadAll("Prefabs/CardsObjects/success/", typeof(Card));
+    // public static GameObject prefabsYO = (GameObject)Resources.Load("Prefabs/Test/Card", typeof(GameObject));
+   
+    public static GameObject cardPrefab = Resources.Load<GameObject>("Prefabs/CardsObjects/Card");
+    public static CardBehaviour cardPrefabBehaviour = cardPrefab.GetComponent<CardBehaviour>();
+
+    public static CardScriptableList cardsList;
+
+    public static List<CardData> Cards {
+        get {
+            return cardsList.content;
+        }
+    }
+
+    public static List<CardData> playableCards {
+        get {
+            return cardsList.content.Where(card => card.productionID != 0).ToList();
+        }
+    }
+
+    public static CardData CardScriptableForID(int id) {
+        return Cards.First(c => c.productionID == id);
+    }
+
+    public static List<CardData> CardScriptableForIDs(int[] IDs) {
+        return Cards.FindAll(c => IDs.Contains(c.productionID));
+    }
 
     public struct PlayerPrefsKey {
         #if UNITY_EDITOR

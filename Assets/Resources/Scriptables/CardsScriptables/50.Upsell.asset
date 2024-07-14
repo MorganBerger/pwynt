@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 50.Upsell
+  m_EditorClassIdentifier: 
+  objName: 50.Upsell
+  fullName: Upsell
+  faction: 11
+  CARD_ID: PW01-EF03
+  productionID: 50
+  level: 0
+  battalion: 0
+  subtitle: Effect / Magic
+  description: Multiplies Architects power by 2.
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 82ad4a9233df9461f9f1997a544dbe76, type: 3}
+  thumbnail: {fileID: 2800000, guid: 154e2939bd5124585996998659df1fa3, type: 3}
+  materialFront: {fileID: 2100000, guid: f591a3ddf99b44535b410e9e9ee10357, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

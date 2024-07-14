@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 61.Paris
+  m_EditorClassIdentifier: 
+  objName: 61.Paris
+  fullName: Paris
+  faction: 12
+  CARD_ID: PW01-TR02
+  productionID: 61
+  level: 0
+  battalion: 0
+  subtitle: Terrain
+  description: Adds 1 power to all units, companions and founders with a       symbol.
+    Draws 1 power to all the cards with a       symbol.
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 39f364f3946554b50b0835205a3e18e9, type: 3}
+  thumbnail: {fileID: 2800000, guid: d1b6bcd751aa8451cafc2b6b5f88bee4, type: 3}
+  materialFront: {fileID: 2100000, guid: cdd934f6ddfaa4532a714a35c2aacf61, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

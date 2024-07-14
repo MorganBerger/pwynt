@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 14.Charlene
+  m_EditorClassIdentifier: 
+  objName: 14.Charlene
+  fullName: "Charl\xE8ne, Mistress of Rules"
+  faction: 4
+  CARD_ID: PW01-RU02
+  productionID: 14
+  level: 5
+  battalion: 1
+  subtitle: 'Unit: Ruler'
+  description: In the underworld's embrace, shadows whisper and darkness traces,
+    where secrets coil and echoes linger, a realm unseen, the Mistress of Rules governs
+    the clandestine with a subtle finger.
+  abilityDescription: "Can be combined with \u201CManola, Mistress of Numbers\u201D."
+  isHero: 0
+  ability: 4
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 5485da8ed4195421f93a5d58796db4b6, type: 3}
+  thumbnail: {fileID: 2800000, guid: d1e3acfea9238465f90581c6b7dce87a, type: 3}
+  materialFront: {fileID: 2100000, guid: 6b1d6f286c7e34adaa18597b86c86b08, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

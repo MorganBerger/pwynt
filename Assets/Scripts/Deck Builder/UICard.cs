@@ -4,18 +4,19 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public enum UICardMode: int {
-    Toggle,
-    NumberSelected
-}
+// public enum UICardMode: int {
+//     Toggle,
+//     NumberSelected
+// }
 
 public class UICard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
     Button button;
     Image image;
 
-    CardObject card;
-    public UnityEvent<CardObject> didClickOnCard;
+    CardData card;
+    // public UnityEvent<CardObject> didClickOnCard;
+    public UnityEvent<CardData> didClickOnCard;
 
     bool mouse_over = false;
     public void OnPointerEnter(PointerEventData eventData) {
@@ -32,12 +33,12 @@ public class UICard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
         button.onClick.AddListener(onClick);
     }
 
-    public void SetCard(CardObject card) {
+    public void SetCard(CardData card) {
         this.card = card;
         UpdateTexture();
     }
 
-    public CardObject GetCard() {
+    public CardData GetCard() {
         return card;
     }
 

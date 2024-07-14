@@ -122,7 +122,8 @@ public class CustomDropdown : TMP_Dropdown {
     public void RemoveAllCustomization() {
         var tmpDict = indexesCustomized;
         for (int i = 0; i < tmpDict.Count; i++) {
-            RemoveCustomization(i);   
+            // RemoveCustomization(i); 
+            indexesCustomized.Remove(i);  
         }
     }
 

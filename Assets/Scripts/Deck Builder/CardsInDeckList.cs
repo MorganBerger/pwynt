@@ -23,8 +23,8 @@ public class CardsInDeckList : MonoBehaviour
 
     ScrollRect scrollView;
 
-    public UnityEvent<CardObject[]> didLoadDeck;
-    public UnityEvent<CardObject> didRemoveCardFromDeck;
+    public UnityEvent<CardData[]> didLoadDeck;
+    public UnityEvent<CardData> didRemoveCardFromDeck;
 
     void Awake() {
         scrollView = GetComponentInChildren<ScrollRect>();
@@ -60,11 +60,15 @@ public class CardsInDeckList : MonoBehaviour
     }
 
     void LoadDeck(string deck) {
-        var cerealsList = (CardObjectCereal[])DeckStorageHandler.LoadDeck(deck);
+        var idList = (int[])DeckStorageHandler.LoadDeck(deck);
         RemoveAllCards();
 
-        foreach (var cardCereal in cerealsList) {
-            var card = new CardObject(cardCereal);
+        foreach (var cardID in idList) {
+            // var cardGO = Globals.CardForID(cardID);
+            // var card = cardGO.GetComponent<Card>();
+            var card = Globals.CardScriptableForID(cardID);
+
+            // var cardObj = new CardObject(cardSc);
             AddCard(card, false);
         }
         didLoadDeck.Invoke(cardsInDeck.Select(cardRow => { return cardRow.GetCard(); }).ToArray());
@@ -89,7 +93,7 @@ public class CardsInDeckList : MonoBehaviour
         if (decks.Length == 0) {
             var option = new TMP_Dropdown.OptionData("No saved decks...");
             optionsData.Add(option);
-            loadDeckDropDown.AddCustomization(0, false, false, FontStyles.Italic);
+            loadDeckDropDown.AddCustomization(1, false, false, FontStyles.Italic);
         }
         
         foreach (string deck in decks) {
@@ -107,7 +111,7 @@ public class CardsInDeckList : MonoBehaviour
         saveDeckButton.interactable = deckNameTextfield.text.Length > 0 && cardsInDeck.Count > 0;
     }
 
-    public void AddCard(CardObject card, bool shouldScroll = true) {
+    public void AddCard(CardData card, bool shouldScroll = true) {
         GameObject cardIndeckPrefab = (GameObject)Resources.Load("Prefabs/CardsUI/CardInDeckRow", typeof(GameObject));
         
         GameObject cardInDeckObject = Instantiate(cardIndeckPrefab);
@@ -130,6 +134,30 @@ public class CardsInDeckList : MonoBehaviour
 
         UpdateSaveButton();
     }
+
+    // public void AddCard(CardObject card, bool shouldScroll = true) {
+    //     GameObject cardIndeckPrefab = (GameObject)Resources.Load("Prefabs/CardsUI/CardInDeckRow", typeof(GameObject));
+        
+    //     GameObject cardInDeckObject = Instantiate(cardIndeckPrefab);
+    //     CardInDeckRow cardInDeckRow = cardInDeckObject.GetComponent<CardInDeckRow>();
+
+    //     cardInDeckObject.transform.SetParent(cardContainer.transform);
+    //     cardInDeckObject.transform.localScale = Vector3.one;
+    //     cardInDeckObject.transform.localPosition = Vector3.zero;
+
+    //     cardInDeckRow.SetCard(card);
+
+    //     cardsInDeck.Add(cardInDeckRow);
+
+    //     clearDeckButton.interactable = cardsInDeck.Count > 0;
+
+    //     cardInDeckRow.onClick.AddListener(DidClickOnRow);
+
+    //     if (shouldScroll)
+    //         StartCoroutine(ScrollToBottom());
+
+    //     UpdateSaveButton();
+    // }
 
     IEnumerator ScrollToBottom() {
         yield return new WaitForEndOfFrame();
@@ -155,10 +183,9 @@ public class CardsInDeckList : MonoBehaviour
 
     void SaveDeck() {
         var deckName = deckNameTextfield.text;
-
         var array = cardsInDeck.Select(row => {
             var card = row.GetCard();
-            return new CardObjectCereal(card);
+            return card.productionID;
         }).ToArray();
 
         DeckStorageHandler.SaveDeck(array, deckName);

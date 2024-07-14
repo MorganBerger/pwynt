@@ -4,10 +4,10 @@ using UnityEngine;
 using System.Security.Cryptography;
 using System;
 using UnityEngine.Events;
+using Unity.VisualScripting;
 
-struct ListExtension {
-    public static List<T> Shuffle<T>(List<T> list)
-    {
+public struct ListExtension {
+    public static List<T> Shuffle<T>(List<T> list) {
         var list2 = list;
         RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
         int n = list2.Count;
@@ -24,43 +24,55 @@ struct ListExtension {
         }
         return list2;
     }
-}
 
+    public static List<T> Swap<T>(List<T> list, int indexA, int indexB) {
+        T tmp = list[indexA];
+        list[indexA] = list[indexB];
+        list[indexB] = tmp;
+        return list;
+    }
+
+}
 
 public class Deck : MonoBehaviour
 {
-    List<Card> cardsInDeck = new List<Card>();
-    public List<Card> shuffledDeck = new List<Card>();
+    List<CardBehaviour> cardsInDeck = new List<CardBehaviour>();
+    public List<CardBehaviour> shuffledDeck = new List<CardBehaviour>();
 
-    public void SetDeck(CardObjectCereal[] cereals) {
-        print("cereals: " + cereals.Length);
+    private GameObject _cardPrefab;
+    private void Start() {
+        _cardPrefab = Globals.cardPrefab;
+    }
 
-        var allCardDatas = Globals.AllCardsObjects.Cast<Card>();
+    private void instantiateCard(int cardId) {
+        GameObject cardGO = Instantiate(_cardPrefab);
+        CardBehaviour cardBehaviour= cardGO.GetComponent<CardBehaviour>();
 
-        foreach (var card in cereals) {
-            // if (card.numberInDeck == 0) { continue; }
-                        
-            var obj = (GameObject)Resources.Load("Cards/3Ds/" + card.name, typeof(GameObject));
-            var cardData = allCardDatas.First(c => c.cardProductionID + "" == card.ID);
+        CardData newCardData = Globals.CardScriptableForID(cardId);
+        cardBehaviour.SetCardData(newCardData);
+        
+        cardsInDeck.Add(cardBehaviour);
+    }
 
-            if (cardData == null) { continue; }
-            if (obj == null) { continue; }
-            
-            // for (int y = 0; y < card.numberInDeck; y++) {
-            var cardObj = Instantiate(obj);
-            cardObj.name = obj.name;
-
-            var cardComponent = cardObj.GetComponent<Card>();
-            cardComponent.CopyCardData(cardData);
-
-            cardsInDeck.Add(cardComponent);
-            // }
-        }
-
+    private void Organise() {
         shuffledDeck = ListExtension.Shuffle(cardsInDeck);
         drawIndex = shuffledDeck.Count - 1;
-
+        
         SetPositions();
+    }
+
+    public void SetBlankDeck(int numberOfCards) {
+        for (int i = 0; i < numberOfCards; i++) {
+            instantiateCard(0); // '0.BlankCard'.productionID = 0
+        }
+        Organise();
+    }
+
+    public void SetDeck(int[] deck) {
+        foreach (var cardId in deck) {
+            instantiateCard(cardId);
+        }
+        Organise();
     }
 
     [HideInInspector]
@@ -69,20 +81,19 @@ public class Deck : MonoBehaviour
         OnDeckClick.Invoke();
     }
 
-    void SetPositions() {
+    private void SetPositions() {
         int i = 0;
         float cardDepth = 0.000685f;
+        
         foreach (var card in shuffledDeck) {
-
             card.transform.SetParent(transform);
             card.transform.localPosition = new Vector3(0, i * cardDepth, 0);
             card.transform.localRotation = Quaternion.Euler(0, 0, 180);
-
             i++;
         }
     }
 
-    Card DrawSingleCard() {
+    CardBehaviour DrawSingleCard() {
         if (drawIndex > -1) {
             drawIndex--;
             return shuffledDeck[drawIndex + 1];
@@ -91,13 +102,14 @@ public class Deck : MonoBehaviour
     }
 
     public int drawIndex;
-    public List<Card> DrawCards(int nb) {
-        var list = new List<Card>();
+    public List<CardBehaviour> DrawCards(int nb) {
+        var list = new List<CardBehaviour>();
         
         for (int i = 0; i < nb; i++) {
             var card = DrawSingleCard();
-            if (card != null) 
+            if (card != null) {
                 list.Add(card);
+            }
         }
         return list;
     }

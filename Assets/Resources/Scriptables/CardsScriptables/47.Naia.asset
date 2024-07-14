@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 47.Naia
+  m_EditorClassIdentifier: 
+  objName: 47.Naia
+  fullName: Naia
+  faction: 10
+  CARD_ID: PW01-SP03
+  productionID: 47
+  level: 1
+  battalion: 1
+  subtitle: 'Unit: Companion'
+  description: "\u201CMaouh\u201D"
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 4985ceedacc3b4cc09a3b7d75b0459e2, type: 3}
+  thumbnail: {fileID: 2800000, guid: bac56f53837694496b70c2c33c8a2583, type: 3}
+  materialFront: {fileID: 2100000, guid: 3da8cfcd874134d42bb3b416cc2805fc, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

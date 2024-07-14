@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 10.Thierry
+  m_EditorClassIdentifier: 
+  objName: 10.Thierry
+  fullName: "Thierry, The wolf of la D\xE9fense"
+  faction: 3
+  CARD_ID: PW01-BA01
+  productionID: 10
+  level: 6
+  battalion: 2
+  subtitle: 'Unit: Bard'
+  description: "In the tender cadence of affection's tune, Thierry, the wolf of la
+    D\xE9fense, serenades hearts beneath the enamored moon."
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 8ed3265674ffb4e1abb0557d110f5c62, type: 3}
+  thumbnail: {fileID: 2800000, guid: d217b6405ce444398897a68266255238, type: 3}
+  materialFront: {fileID: 2100000, guid: ad6dd590039eb48ba81c0420e7ec5258, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

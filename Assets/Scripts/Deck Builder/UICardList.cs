@@ -4,19 +4,25 @@ using UnityEngine.Events;
 
 
 public class UICardList : MonoBehaviour { 
-    List<CardObject> cardList = new List<CardObject>();
+    List<CardData> cardList = new List<CardData>();
     List<UICard> uiCardList = new List<UICard>();
 
-    public UnityEvent<CardObject> didClickOnCard;
+    // public UnityEvent<CardObject> didClickOnCard;
+    public UnityEvent<CardData> didClickOnCard;
 
-    public void SetCards(List<CardObject> list) {
+    public void SetCards(List<CardData> list) {
         cardList = list;
         UpdateList();
     }
 
-    public void EnableCard(CardObject card, bool enabled) {
+    // public void SetCards(List<CardObject> list) {
+    //     cardList = list;
+    //     UpdateList();
+    // }
+
+    public void EnableCard(CardData card, bool enabled) {
         var uiCard = uiCardList.Find(uiCard => {
-            return uiCard.GetCard().ID == card.ID;
+            return uiCard.GetCard().productionID == card.productionID;
         });
         uiCard.SetEnabled(enabled);
     }
@@ -45,9 +51,12 @@ public class UICardList : MonoBehaviour {
         }
     }
 
-    void DidClickOnCard(CardObject card) {
+    void DidClickOnCard(CardData card) {
         didClickOnCard.Invoke(card);
     }
+    // void DidClickOnCard(CardObject card) {
+    //     didClickOnCard.Invoke(card);
+    // }
 
     void SetObjTransform(GameObject obj, Transform target) {     
         obj.transform.SetParent(target);

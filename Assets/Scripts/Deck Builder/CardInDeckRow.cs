@@ -14,7 +14,7 @@ public class CardInDeckRow : MonoBehaviour
     public TextMeshProUGUI cardLevel;
 
     [SerializeField]
-    CardObject card;
+    CardData card;
 
     public UnityEvent<CardInDeckRow> onClick;
 
@@ -32,19 +32,31 @@ public class CardInDeckRow : MonoBehaviour
         onClick.Invoke(this);
     }
 
-    public CardObject GetCard() {
+    public CardData GetCard() {
         return card;
     }
 
-    public void SetCard(CardObject card) {
-        this.card = card;
-
+    public void SetCard(CardData card) {
         cardName.text = card.fullName;
         cardLevel.text = card.level + "";
-
-        UpdateTexture();
+        SetTexture(card.texture2D);
     }
 
+    // public void SetCard(CardObject card) {
+    //     this.card = card;
+
+    //     cardName.text = card.fullName;
+    //     cardLevel.text = card.level + "";
+
+    //     UpdateTexture();
+    // }
+     public void SetTexture(Texture2D texture) {
+        // var texture = card.thumbnail;
+        if (texture != null && cardImage.mainTexture != texture) {
+            cardImage.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0f, 0.5f));
+        }
+    }
+    
     public void UpdateTexture() {
         var texture = card.thumbnail;
         if (texture != null && cardImage.mainTexture != texture) {

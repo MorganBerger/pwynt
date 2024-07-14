@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 17.Pierre
+  m_EditorClassIdentifier: 
+  objName: 17.Pierre
+  fullName: Pierre, The Dual-wielding Protector
+  faction: 5
+  CARD_ID: PW01-ME03
+  productionID: 17
+  level: 5
+  battalion: 1
+  subtitle: 'Unit: Minstrel'
+  description: In the dance of blades and the melody of steel, Pierre, The Dual-Wielding
+    Protector, safeguards with a symphony that foes can feel.
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: dca41e9c79e0b4067ac11192c6721f82, type: 3}
+  thumbnail: {fileID: 2800000, guid: 8ce39e76596d849268eb32c2c90cf277, type: 3}
+  materialFront: {fileID: 2100000, guid: 4a79a7d3340544a069dc34e4d9729602, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

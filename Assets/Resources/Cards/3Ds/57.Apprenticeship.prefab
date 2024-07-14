@@ -63,6 +63,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -105,7 +107,7 @@ MonoBehaviour:
   fullName: 
   faction: 0
   CARD_ID: 
-  cardProductionID: 0
+  productionID: 0
   level: 0
   battalion: 0
   subtitle: 
@@ -114,8 +116,11 @@ MonoBehaviour:
   isHero: 0
   limitPerDeck: 0
   ability: 0
+  effect: {fileID: 0}
   UpgradedVersion: {fileID: 0}
+  targetUpgraded: -1
   texture2D: {fileID: 0}
+  thumbnail: {fileID: 0}
 --- !u!65 &11129214344479909
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -177,12 +182,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDragging: 0
+  originPlane: {fileID: 0}
+  onStartDragging:
+    m_PersistentCalls:
+      m_Calls: []
   onDrag:
     m_PersistentCalls:
       m_Calls: []
   onRelease:
     m_PersistentCalls:
       m_Calls: []
+  draggingEnabled: 1
   canDrop: 0
 --- !u!114 &-6913239689861315063
 MonoBehaviour:

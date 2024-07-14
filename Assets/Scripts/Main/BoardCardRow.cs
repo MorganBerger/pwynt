@@ -11,7 +11,7 @@ public class BoardCardRow : MonoBehaviour
     [SerializeField]
     private GameObject hightlightPlane, canDropCardHerePlane, cardContainer;
 
-    private List<Card> cardList = new List<Card>();
+    private List<CardBehaviour> cardList = new List<CardBehaviour>();
 
     public TextMeshProUGUI rowText;
 
@@ -31,10 +31,14 @@ public class BoardCardRow : MonoBehaviour
         sortButton = GetComponentInChildren<BoardCardRowSortButton>();
         sortButton.gameObject.SetActive(false);
         
-        sortButton?.onClick.AddListener(TidyUp);
+        sortButton?.onClick.AddListener(() => { TidyUp(); });
     }
 
-    public void AddCard(Card card) {
+    public void Play(CardBehaviour card) {
+        AddCard(card);
+        TidyUp(true);
+    }
+    public void AddCard(CardBehaviour card) {
         card.transform.SetParent(cardContainer.transform);
         cardList.Add(card);
 
@@ -46,7 +50,7 @@ public class BoardCardRow : MonoBehaviour
 
     void UpdateRowText() {
         var total = cardList.Sum(c => {
-            return c.level;
+            return c.data.level;
         });
         rowText.text =  "" + total;
     }
@@ -56,7 +60,7 @@ public class BoardCardRow : MonoBehaviour
     }
 
     private bool clean = true;
-    public void TidyUp() {
+    public void TidyUp(bool isOpponent = false) {
         print("Tidying up row '" + name + "'");
 
         if (cardList.Count <= 12) {
@@ -67,7 +71,7 @@ public class BoardCardRow : MonoBehaviour
             cardStep = 0.025f;
         }
 
-        StartCoroutine(UpdateCardsPos());
+        StartCoroutine(UpdateCardsPos(isOpponent));
         
         clean = true;
         sortButton.gameObject.SetActive(!clean);
@@ -75,17 +79,16 @@ public class BoardCardRow : MonoBehaviour
 
     float cardStep = 0.1f;
     float cardDepthDiff = 0.0001f;
-    IEnumerator UpdateCardsPos() {
+    IEnumerator UpdateCardsPos(bool isOpponent) {
         if (cardList.Count == 0)
             yield return null;
         
-        float animDuration = 0.1f;
+        float animDuration = isOpponent ? 0.25f : 0.1f;
         var wait = new WaitForSeconds(0.05f);    
 
         var startPosX = (cardList.Count - 1) * cardStep / 2;
 
-        for (int i = 0; i < cardList.Count; i++)
-        {
+        for (int i = 0; i < cardList.Count; i++) {
             var card = cardList[i];
 
             var rigidbody = card.GetComponent<Rigidbody>();
@@ -95,20 +98,22 @@ public class BoardCardRow : MonoBehaviour
             var newPos = new Vector3(startPosX - cardStep * i, cardDepthDiff * i, 0);
 
             Move(card, newPos, animDuration);
-            yield return wait;
+
+            if (!isOpponent)
+                yield return wait;
         }
     }
 
-    void Move(Card card, Vector3 pos, float moveDuration) {
+    void Move(CardBehaviour card, Vector3 pos, float moveDuration) {
         StartCoroutine(CardAnimation.RotateTo(card, Quaternion.identity, moveDuration));
         StartCoroutine(CardAnimation.MoveTo(card, pos, moveDuration));
     }
 
-    public Card currentDraggedCard = null;
+    public CardBehaviour currentDraggedCard = null;
     
     void OnTriggerEnter(Collider other) {
-        var card = other.GetComponent<Card>();
-		if (card != null && card.battalion == acceptedType) {
+        var card = other.GetComponent<CardBehaviour>();
+		if (card != null && card.data.battalion == acceptedType) {
             currentDraggedCard = card;
 
             var draggable = card.GetComponent<DraggableObject>();
@@ -119,11 +124,13 @@ public class BoardCardRow : MonoBehaviour
 	}
 	
 	void OnTriggerExit(Collider other) {
-		if (other.GetComponent<Card>()) {
+		if (other.GetComponent<CardBehaviour>()) {
             currentDraggedCard = null;
-
             var draggable = other.GetComponent<DraggableObject>();
-            draggable.canDrop = false;
+
+            if (draggable != null) {
+                draggable.canDrop = false;
+            }
 
 			hightlightPlane.SetActive(false);
 		}

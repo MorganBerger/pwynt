@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 64.Sanglochon
+  m_EditorClassIdentifier: 
+  objName: 64.Sanglochon
+  fullName: The Sanglochon
+  faction: 13
+  CARD_ID: PW01-CR01
+  productionID: 64
+  level: 1
+  battalion: 0
+  subtitle: 'Unit: Creature'
+  description: "\u201CGruntgruntgrunturrrghurrghurruuuiiiiiiiigh\u201D"
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 728b677ee245a41f8b935343e549f242, type: 3}
+  thumbnail: {fileID: 2800000, guid: bf06b6d36bc444c408cde70235936cb8, type: 3}
+  materialFront: {fileID: 2100000, guid: 5628a537a819a4a14ad108420ff48961, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

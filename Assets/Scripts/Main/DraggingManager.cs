@@ -13,7 +13,9 @@ class DraggingManager: MonoBehaviour {
     private List<DraggableObject> _draggables;
 
     public UnityEvent<DraggableObject, DragPlane> didReleaseObject;
-    public UnityEvent<DraggableObject, DragPlane, DragPlane> didDragObject;
+    public UnityEvent<DraggableObject, DragPlane, DragPlane> objectDidChangePlane;
+    public UnityEvent<DraggableObject> didStartDragging;
+    public UnityEvent<DraggableObject, Vector3> onDrag;
 
     private void Awake() {
         print("DraggingManager: Awake()");
@@ -38,14 +40,24 @@ class DraggingManager: MonoBehaviour {
 
         _draggables.AddRange(draggables);
         foreach (var d in _draggables) {
-            d.onDrag.AddListener(OnDragObject);
+            d.onStartDragging.AddListener(OnStartDraggingObject);
             d.onRelease.AddListener(OnReleaseObject);
+            d.onDrag.AddListener(OnDragObject);
         }
     }
 
+    private void OnDragObject(DraggableObject obj, Vector3 distance) {
+        // if (snapping) { return; }
+        
+        onDrag.Invoke(obj, distance);
+    }
+
+
     private DraggableObject _currentDraggedObject = null;
-    private void OnDragObject(DraggableObject obj) {
+    private void OnStartDraggingObject(DraggableObject obj) {
+        print("dragged: " + obj.name);
         _currentDraggedObject = obj;
+        didStartDragging.Invoke(obj);
     }
 
     private void OnReleaseObject(DraggableObject obj) {
@@ -63,6 +75,23 @@ class DraggingManager: MonoBehaviour {
         //     d.onRelease?.RemoveListener(OnReleaseObject);
         // }
     }
+
+    // private RaycastHit GetCloserHit(RaycastHit[] hits, Ray ray) {
+    //     var rayOrigin = ray.origin;
+    //     double distance = double.MaxValue;
+
+    //     foreach (var h in hits) {
+    //         var plane = h.transform.GetComponent<DragPlane>();
+    //         if (plane == null) continue;
+
+    //         var dist = Vector3.Distance(rayOrigin, h.point);
+    //         if (dist < distance) {
+    //             distance = dist;
+    //             targetPlane = plane;
+    //             hit = h;
+    //         }
+    //     }
+    // }
 
     [SerializeField]
     public RaycastHit[] currenthits;
@@ -104,7 +133,7 @@ class DraggingManager: MonoBehaviour {
             oldPlane = currentPlane;
 
         if (oldPlane != targetPlane && _currentDraggedObject != null) {
-            didDragObject.Invoke(_currentDraggedObject, oldPlane, currentPlane);
+            objectDidChangePlane.Invoke(_currentDraggedObject, oldPlane, currentPlane);
         }
 
         currentMousePos = new Vector3(

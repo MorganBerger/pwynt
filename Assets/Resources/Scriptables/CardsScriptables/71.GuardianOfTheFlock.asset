@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 71.GuardianOfTheFlock
+  m_EditorClassIdentifier: 
+  objName: 71.GuardianOfTheFlock
+  fullName: Guardian of the Flock
+  faction: 13
+  CARD_ID: PW01-CR08
+  productionID: 71
+  level: 1
+  battalion: 0
+  subtitle: 'Unit: Creature'
+  description: With a weathered staff in hand and a watchful eye, the shepherd surveys
+    the rolling hills, guiding their flock with gentle authority.
+  abilityDescription: "Spawns two \u201CDevious Sheep (1)\u201D when played."
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: b8fa0d972b62340f88a41dd01e2f385a, type: 3}
+  thumbnail: {fileID: 2800000, guid: 1a63ca7eba3104830a1ad1946dd609cb, type: 3}
+  materialFront: {fileID: 2100000, guid: 498fc0cd0f7c348de97707449e421a32, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

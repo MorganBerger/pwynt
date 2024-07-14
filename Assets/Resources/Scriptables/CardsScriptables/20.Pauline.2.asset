@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 20.Pauline.2
+  m_EditorClassIdentifier: 
+  objName: 20.Pauline.2
+  fullName: Pauline, Queen of the Shadows
+  faction: 6
+  CARD_ID: PW01-AR02
+  productionID: 20
+  level: 6
+  battalion: 1
+  subtitle: 'Unit: Artist'
+  description: Crowned in shadows, where the brush commands and spells enthrall,
+    Pauline, the Queen of Shadows, reigns with artistry and occult might, as a true
+    sovereign of the dusk.
+  abilityDescription: "Can be upgraded to \u201CPauline, Goddess of the Abyss\u201D."
+  isHero: 0
+  ability: 6
+  effect: {fileID: 0}
+  targetUpgraded: 21
+  texture2D: {fileID: 2800000, guid: 8acff2bb295c3464c86456789e4d168e, type: 3}
+  thumbnail: {fileID: 2800000, guid: 2f0d6e848386c442585f4850cab61f88, type: 3}
+  materialFront: {fileID: 2100000, guid: ea0c4363081e1442fb256cb6ef471818, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

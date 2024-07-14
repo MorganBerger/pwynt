@@ -8,13 +8,13 @@ public class CardEffectBehaviour: MonoBehaviour {
 
     Faction targetFaction;
 
-    List<Card> cards;
+    List<CardBehaviour> cards;
 
-    List<Card> handCards;
-    List<Card> boardCards;
+    List<CardBehaviour> handCards;
+    List<CardBehaviour> boardCards;
 
-    public CardEffectBehaviour(Card card) {
-        List<Card> targetCards = new List<Card>();
+    public CardEffectBehaviour(CardBehaviour card) {
+        List<CardBehaviour> targetCards = new List<CardBehaviour>();
         // card.effect = effect;
 
         // switch (effect) {
@@ -48,10 +48,10 @@ public class CardEffectBehaviour: MonoBehaviour {
     }
     void ActivateTylerRitual()
     {
-        var hasHead = handCards.First(c => c.CARD_ID == "PW01-TY01") != null;
-        var hasLeftLeg = handCards.First(c => c.CARD_ID == "PW01-TY02") != null;
-        var hasRightLeg = handCards.First(c => c.CARD_ID == "PW01-TY03") != null;
-        var hasThirdLeg = handCards.First(c => c.CARD_ID == "PW01-TY04") != null;
+        var hasHead = handCards.First(c => c.data.CARD_ID == "PW01-TY01") != null;
+        var hasLeftLeg = handCards.First(c => c.data.CARD_ID == "PW01-TY02") != null;
+        var hasRightLeg = handCards.First(c => c.data.CARD_ID == "PW01-TY03") != null;
+        var hasThirdLeg = handCards.First(c => c.data.CARD_ID == "PW01-TY04") != null;
 
         if (hasHead && hasLeftLeg && hasRightLeg && hasThirdLeg) { 
             // Win game;

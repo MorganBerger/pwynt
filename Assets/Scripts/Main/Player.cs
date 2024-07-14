@@ -1,56 +1,74 @@
+using System;
+using System.Linq;
 using UnityEngine;
+
+public enum PlayerType {
+    main, opponent
+}
 
 public class Player : MonoBehaviour
 {
-    public Deck deck;
+    public Deck _deck;
 
-    public Hand hand;
+    public PlayerType playerType;
+
+    public Hand _hand;
+
+    public string chosenDeck = "deck uno";
 
     public BoardCardRow[] cardRows;
 
     int lifePoints = 2;
 
     void Awake() {
-        print("Player awake");
+        // print("Player awake" + playerType);
         Physics.queriesHitTriggers = true;
         
-        deck = GetComponentInChildren<Deck>();
-        hand = GetComponentInChildren<Hand>();
+        _deck = GetComponentInChildren<Deck>();
+
+        if (_deck == null) { print("deck (" + playerType + ") is null"); }
+        _hand = GetComponentInChildren<Hand>();
+
+        if (_hand == null) { print("hand (" + playerType + ") is null"); }
 
         cardRows = GetComponentsInChildren<BoardCardRow>();
     }
 
-    // public BoardCardRow GetCardRow(Battalion by) {
-    //     for (int i = 0; i < cardRows.Length; i++) {
-    //         var row = cardRows[i];
-    //         if (row.acceptedType == by) {
-    //             return row;
-    //         }
-    //     }
-    //     return null;
-    // }
-
-    void Start() {
-        print("Player start");
-
+    private void SetDeckMainPlayer() {
         var chosenDeck = GameHelper.chosenDeck;
         if (chosenDeck.Length == 0) {
-            chosenDeck = "deck uno";
+            chosenDeck = "something";
+            // chosenDeck = "1234";
+            // chosenDeck = "2rows";
+            // chosenDeck = "deck uno";
+            // chosenDeck = "full";
+            print("should not happen");
         }
         print("player start chosen deck: " + chosenDeck);
 
-        deck.SetDeck(GetDeckFromStorage(chosenDeck));
-        Draw(5);
+        // int[] deck = GetDeckFromStorage(chosenDeck);
+        int[] deck = (int[])DeckStorageHandler.LoadDeck(chosenDeck);
+        print("deck Length: " + deck.Length);
+        _deck.SetDeck(deck);
     }
 
-    CardObjectCereal[] GetDeckFromStorage(string deck) {
-        var cerealDeck = (CardObjectCereal[])DeckStorageHandler.LoadDeck(deck);
-        return cerealDeck;
+
+    public virtual void SetDeck() {
+        SetDeckMainPlayer();
     }
+
+    void Start() {
+        print("Player start, type: " + playerType);
+
+        SetDeck();
+        Draw(4);
+    }
+
+    public virtual void Play(int cardID) {}
 
     public void Draw(int nb) {
-        hand.AddCards(
-            deck.DrawCards(nb)
+        _hand.AddCards(
+            _deck.DrawCards(nb)
         );
     }
 }

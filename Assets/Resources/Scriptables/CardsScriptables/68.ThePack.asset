@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 68.ThePack
+  m_EditorClassIdentifier: 
+  objName: 68.ThePack
+  fullName: The pack
+  faction: 13
+  CARD_ID: PW01-CR05
+  productionID: 68
+  level: 4
+  battalion: 0
+  subtitle: 'Unit: Creature'
+  description: Their eyes gleam like shards of ice, reflecting the hunger that drives
+    them forward. With every step, their snarls mingle with the rustle of leaves,
+    signaling imminent danger to any who dare to cross their path.
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 61dfc1840377249e99ce40959214bff2, type: 3}
+  thumbnail: {fileID: 2800000, guid: 45b6bc11c8ec343cdb545e747c0d37d2, type: 3}
+  materialFront: {fileID: 2100000, guid: 4ef20e907e90741bcb0b060e8ee997f4, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 31.Simon.3
+  m_EditorClassIdentifier: 
+  objName: 31.Simon.3
+  fullName: Simon 3
+  faction: 7
+  CARD_ID: PW01-RO10
+  productionID: 31
+  level: 10
+  battalion: 1
+  subtitle: 'Unit: Robot'
+  description: In the labyrinth of bytes, where fortune is a byte away, Simon, the
+    Mega Noob, tiptoes through the electronic maze with a dash of misfortune, a oversized
+    adventurer in the ballet of bad luck.
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: f28da1f5492cb4dbd94679d4c64b4b92, type: 3}
+  thumbnail: {fileID: 2800000, guid: aeb4abc81fb474898bba10f235323393, type: 3}
+  materialFront: {fileID: 2100000, guid: 5259499e9e9074316b1c1c377572a01b, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

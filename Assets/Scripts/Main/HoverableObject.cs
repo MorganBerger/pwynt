@@ -14,7 +14,7 @@ class HoverableObject: MonoBehaviour {
             return;
 
         if (!hovered) {
-            print("Hoverable object '" + name + "' has been hovered.");
+            // print("Hoverable object '" + name + "' has been hovered.");
             hovered = true;
             onHover.Invoke(gameObject, true);
         }
@@ -27,7 +27,7 @@ class HoverableObject: MonoBehaviour {
         if (!isEnabled)
             return;
 
-        print("Hoverable object '" + name + "' has been unhovered.");
+        // print("Hoverable object '" + name + "' has been unhovered.");
         onHover.Invoke(gameObject, false);
         hovered = false;
     }

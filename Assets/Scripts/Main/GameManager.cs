@@ -1,6 +1,9 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System;
+using NUnit.Framework.Constraints;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +13,9 @@ public class GameManager : MonoBehaviour
     public GameObject cardNumberText;
     public int numberToDraw = 1;
     
-    Player[] _players;
+    // Player[] _players;
+    public Player _player;
+    public Player _opponent;
 
     public Board board;
 
@@ -19,17 +24,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private DraggingManager _dragManager;
 
+    public CardScriptableList cardsList;
+
     // Start is called before the first frame update
     void Awake() {
-        
+        print("Game manager awake");
+        Globals.cardsList = cardsList;
     }
 
     void Start() {
         print("GameManager start");
-
-        _players = GetComponentsInChildren<Player>();
-        print("Player count: " + _players.Length);
-
+        
         if (cardUIPanelGO) {
             cardUIPanel = cardUIPanelGO.GetComponent<CardPanel>();
             cardUIPanelGO.SetActive(false);
@@ -40,11 +45,24 @@ public class GameManager : MonoBehaviour
         UdpateText();
     }
 
+    public void OpponentPlays(int cardID) {
+
+        System.Random rand = new System.Random();
+        int randID = rand.Next(1, 72);
+
+        _opponent.Play(randID);
+    }
+
     void ObjectWasDragged(DraggableObject obj, DragPlane from, DragPlane to) {
         print("-- obj :'" + obj.name + "', drag from: " + from.name + ", to: " + to.name);
 
+        // if (DraggedBackToHand(obj, to)) {
+            
+        //     // _player.hand.UndoPlay();
+        // }
+
         if (DraggedOutOfHand(from)) {            
-            var card = obj.GetComponent<Card>();
+            var card = obj.GetComponent<CardBehaviour>();
             if (card != null) {
                 
                 // Disabling hover behaviour when card is dragged on board.
@@ -53,42 +71,54 @@ public class GameManager : MonoBehaviour
                     hoverBehaviour.isEnabled = false;
                 }
 
-                _players[0].hand.Play(card);
+                _player._hand.Play(card);
             }
         }
 
-        // var fromIsBoard = from.gameObject == board.gameObject;
-        // var toIsHand = to.gameObject == _players[0].hand.gameObject;
+        var fromIsBoard = from.gameObject == board.gameObject;
+        var toIsHand = to.gameObject == _player._hand.gameObject;
 
-        // if (toIsHand && fromIsBoard) {
-        //     print("SHOULD GO BACK TO HAND");
-        // }
+        if (toIsHand && fromIsBoard) {
+            UndoPlay(obj, false);
+        }
+    }
+
+    bool DraggedBackToHand(DraggableObject obj, DragPlane to) {
+        return obj.originPlane == to && to.gameObject == _player._hand.gameObject;
     }
 
     private bool DraggedOutOfHand(DragPlane from) {
-        return from.gameObject == _players[0].hand.gameObject;
+        return from.gameObject == _player._hand.gameObject;
     }
 
     void DraggableWasDropped(DraggableObject obj, DragPlane plane) {
         print("-- dropped: '" + obj.name + "' on: " + plane.name);
+        stepsDragged = 0;
 
         if (obj.canDrop) {
             DropCard(obj);
-        } else if (!plane.Is(_players[0].hand)) {
+        } else if (!plane.Is(_player._hand)) {
             UndoPlay(obj);
-        } else if (plane.Is(_players[0].hand)) {
-            _players[0].hand.TidyUpHand();
+        } else if (plane.Is(_player._hand)) {
+            _player._hand.TidyUpHand();
         }
+
+        StartCoroutine(DelaysShit());
+    }
+
+    IEnumerator DelaysShit() {
+        yield return new WaitForSeconds(0.205f);
+        _player._hand.hoverEnabled = true;
     }
 
     void DropCard(DraggableObject draggableCard) {
         draggableCard.Drop();
         draggableCard.draggingEnabled = false;
 
-        foreach (var row in _players[0].cardRows) {
+        foreach (var row in _player.cardRows) {
             row.Shines(false);
 
-            var card = draggableCard.GetComponent<Card>();
+            var card = draggableCard.GetComponent<CardBehaviour>();
             if (row.currentDraggedCard == card) {
                 row.AddCard(card);
             }
@@ -97,15 +127,15 @@ public class GameManager : MonoBehaviour
             cardUIPanel.Hide();
     }
 
-    void UndoPlay(MonoBehaviour obj) {
-        _players[0].hand.UndoPlay();
+    void UndoPlay(MonoBehaviour obj, bool animated = true) {
+        _player._hand.UndoPlay(animated);
 
         // Re-enabling hover behaviour on card when it goes back to hand.
         StartCoroutine(ReenableHoverBehaviour(obj));
     }
 
     private IEnumerator ReenableHoverBehaviour(MonoBehaviour obj) {
-        yield return new WaitForSeconds(.21f);
+        yield return new WaitForSeconds(.205f);
 
         var hoverBehaviour = obj.GetComponent<HoverableObject>();
         print("ENABLING HOVER FOR '" + obj.name + "'");
@@ -114,24 +144,67 @@ public class GameManager : MonoBehaviour
     }
 
     void SetupListeners() {
-        foreach (Player player in _players) {
-            player.hand.CardHovered.AddListener(CardInHandWasHovered);
-            player.hand.CardUnhovered.AddListener(CardInHandWasUnhovered);
-        }
+        _player._hand.CardHovered.AddListener(CardInHandWasHovered);
+        _player._hand.CardUnhovered.AddListener(CardInHandWasUnhovered);
+
         _dragManager.didReleaseObject.AddListener(DraggableWasDropped);
-        _dragManager.didDragObject.AddListener(ObjectWasDragged);
+        _dragManager.objectDidChangePlane.AddListener(ObjectWasDragged);
+        _dragManager.didStartDragging.AddListener(DidStartDragging);
+        _dragManager.onDrag.AddListener(OnDrag);
     }
 
-    void CardInHandWasHovered(Card card) {
-        foreach (var row in  _players[0].cardRows)
-            row.Shines(row.acceptedType == card.battalion);
+    public int stepsDragged = 0;
+    private int lastIndex = -1;
+    private void OnDrag(DraggableObject obj, Vector3 distance) {
+        
+        var pos = obj.transform.position;
+        var localPos = obj.transform.localPosition;
+
+        var card = obj.GetComponent<CardBehaviour>();
+
+        var index = _player._hand.cardsInHand.IndexOf(card);
+
+        if (index < 0) return;
+
+        int tmpSteps = 0;
+        double numberOfSteps = distance.x / _player._hand.cardStep;
+
+        if ((int)numberOfSteps > 0) {
+            tmpSteps = -(int)Math.Floor(numberOfSteps);
+        } else if ((int)numberOfSteps < 0) {
+            tmpSteps = -(int)Math.Ceiling(numberOfSteps);
+        } else {
+            tmpSteps = 0;
+        }
+    
+        if (tmpSteps != stepsDragged) {
+            print("steps changed from: " + stepsDragged + ", to: " + tmpSteps);
+            var yo = 0;
+            if (tmpSteps > stepsDragged) {
+                yo = tmpSteps - stepsDragged;
+            } else if (tmpSteps < stepsDragged) {
+                yo = -(stepsDragged - tmpSteps);
+            }
+            _player._hand.MoveCard(obj.GetComponent<CardBehaviour>(), yo);
+        }
+        stepsDragged = tmpSteps;
+    }
+
+    void DidStartDragging(DraggableObject obj) {
+        stepsDragged = 0;
+        _player._hand.hoverEnabled = false;
+    }
+
+    void CardInHandWasHovered(CardBehaviour card) {
+        foreach (var row in  _player.cardRows)
+            row.Shines(row.acceptedType == card.data.battalion);
 
         if (cardUIPanel)
-            cardUIPanel.Show(card.texture2D);
+            cardUIPanel.Show(card.data.texture2D);
     }
 
-    void CardInHandWasUnhovered(Card card) {
-        foreach (var row in _players[0].cardRows)
+    void CardInHandWasUnhovered(CardBehaviour card) {
+        foreach (var row in _player.cardRows)
             row.Shines(false);
 
         if (cardUIPanel)
@@ -160,6 +233,7 @@ public class GameManager : MonoBehaviour
     public void DrawSome() {
         var nb = numberToDraw;
         print("Drawing " + nb + " cards!");
-        _players[0].Draw(numberToDraw);
+        _player.Draw(numberToDraw);
+        _opponent.Draw(numberToDraw);
     }
 }

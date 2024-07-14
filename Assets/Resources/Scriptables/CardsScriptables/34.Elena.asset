@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 34.Elena
+  m_EditorClassIdentifier: 
+  objName: 34.Elena
+  fullName: Elena, The Truce Apostle
+  faction: 8
+  CARD_ID: PW01-AC03
+  productionID: 34
+  level: 4
+  battalion: 1
+  subtitle: 'Unit: Architect'
+  description: Elena, The Truce Apostle, leads with courage and diplomacy, forging
+    alliances in the crucible of conflict, where fear yields to the strength of peace's
+    unwavering embrace.
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: b1ebf6169ab0a45ee895a068fd01d822, type: 3}
+  thumbnail: {fileID: 2800000, guid: b5723a86c18a6480e963d829b3a1dc7b, type: 3}
+  materialFront: {fileID: 2100000, guid: 51fc900ff25e54952901bc5092fadd3f, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

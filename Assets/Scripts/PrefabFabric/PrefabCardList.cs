@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PrefabCardList : MonoBehaviour
 {
-    Card[] objects;
+    // Card[] objects;
 
-    public void SetObjects(Card[] objects) {
+    // public void SetObjects(Card[] objects) {
         
-    }
+    // }
 
 }

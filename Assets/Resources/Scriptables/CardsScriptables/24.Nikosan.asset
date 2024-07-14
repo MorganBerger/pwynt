@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 24.Nikosan
+  m_EditorClassIdentifier: 
+  objName: 24.Nikosan
+  fullName: Nikosan
+  faction: 7
+  CARD_ID: PW01-RO03
+  productionID: 24
+  level: 6
+  battalion: 1
+  subtitle: 'Unit: Robot'
+  description: Nikosan, the metallic warrior, flows through the binary battlefield
+    with grace and steel, a symphony of precision in the dance of martial code.
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 433c0893160e34349a82d1129fbba17b, type: 3}
+  thumbnail: {fileID: 2800000, guid: df9efa6e7aa754dd887462d5c421cbe5, type: 3}
+  materialFront: {fileID: 2100000, guid: 13b088e3fc709456f84aef4d9eea58e0, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

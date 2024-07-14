@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 54.SeminarAtJeanLucs
+  m_EditorClassIdentifier: 
+  objName: 54.SeminarAtJeanLucs
+  fullName: "Seminar at Jean-Luc\u2019s"
+  faction: 11
+  CARD_ID: PW01-EF07
+  productionID: 54
+  level: 0
+  battalion: 0
+  subtitle: Effect / Magic
+  description: Divides Rulers power by 2.
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: aca0994bdbb8b4c27880d685cbb27743, type: 3}
+  thumbnail: {fileID: 2800000, guid: b36043aeac42146f0a1f8f33c00fd082, type: 3}
+  materialFront: {fileID: 2100000, guid: cc5bf1b6b61dd4ae2ad6cbc68a921fa5, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

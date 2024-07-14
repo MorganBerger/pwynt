@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 66.BoarRiderII
+  m_EditorClassIdentifier: 
+  objName: 66.BoarRiderII
+  fullName: Boar Rider II
+  faction: 13
+  CARD_ID: PW01-CR03
+  productionID: 66
+  level: 3
+  battalion: 1
+  subtitle: 'Unit: Creature'
+  description: Mounted atop a ferocious beast of the forest, this warrior charges
+    into battle with reckless abandon, leaving chaos and devastation in his wake.
+  abilityDescription: "Spawns a \u201CSanglochon (2)\u201D when played."
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 6675dca016c9f4dffa37f1cab27512e2, type: 3}
+  thumbnail: {fileID: 2800000, guid: 4628aa750fd0745fda05a495a917df21, type: 3}
+  materialFront: {fileID: 2100000, guid: 9fbae504ced374a5fb9db7fd9b48a6e9, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

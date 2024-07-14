@@ -2,19 +2,30 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
+// public class DraggableCard: DraggableObject {
+//     UnityEvent updatePos;
+
+//     public override void Start () {
+//         base.Start();
+//     }
+// }
+
 public class DraggableObject : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     public bool isDragging = false;
+    
+    private Vector3 originPos = Vector3.zero;
+    public DragPlane originPlane;
 
-    public UnityEvent<DraggableObject> onDrag;
+    public UnityEvent<DraggableObject> onStartDragging;
+    public UnityEvent<DraggableObject, Vector3> onDrag;
     public UnityEvent<DraggableObject> onRelease;
 
     private float dragSpeed = 5f;
-
     public bool draggingEnabled = true;
 
-    void Start() {
+    public virtual void Start() {
         _rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -28,8 +39,11 @@ public class DraggableObject : MonoBehaviour
         if (!draggingEnabled)
             return;
 
-        isDragging = true;
-        onDrag.Invoke(this);
+        if (!isDragging) {
+            isDragging = true;
+            originPos = transform.position;
+            onStartDragging.Invoke(this);
+        }    
     }
 
     private void OnMouseDragWorldSpace() {
@@ -42,17 +56,22 @@ public class DraggableObject : MonoBehaviour
         // var dist = Vector3.Distance(mousePos, position);
         // var speed = Mathf.Exp(8 * dist) + 0.5f;
         // var cardSpeed = Mathf.Clamp(speed, 0f, 20f);
-        var cardSpeed = dragSpeed;
+        var cardSpeed = dragSpeed * 2;
 
         var difference = mousePos - position;
 
+        onDrag.Invoke(this, position - originPos);
+        
         // No plane drag gesture
         if (dragPlane == null) {
             difference = Vector3.zero;
         }
 
+        // var worldVelocity = difference.normalized * cardSpeed;
         var worldVelocity = difference * cardSpeed;
         var localVelocity = transform.InverseTransformDirection(worldVelocity);
+
+        // print("speed: " + worldVelocity);
 
         // No plane drag gesture
         if (dragPlane != null) {

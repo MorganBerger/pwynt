@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 30.Simon.2
+  m_EditorClassIdentifier: 
+  objName: 30.Simon.2
+  fullName: Simon, the micro noob
+  faction: 7
+  CARD_ID: PW01-RO09
+  productionID: 30
+  level: 6
+  battalion: 1
+  subtitle: 'Unit: Robot'
+  description: Simon, the Micro Noob, stumbles through the micro-world with the charm
+    of misfortune, a pint-sized explorer facing tiny tribulations in a vast realm
+    of quantum quirkiness.
+  abilityDescription: "Can be upgraded to \u201CSimon, The Mega Noob\u201D."
+  isHero: 0
+  ability: 6
+  effect: {fileID: 0}
+  targetUpgraded: 31
+  texture2D: {fileID: 2800000, guid: bc7a9ed530d904ffe8be1cdbfdf1eede, type: 3}
+  thumbnail: {fileID: 2800000, guid: ba7976a0f11dd41f2809e3ef362cde0f, type: 3}
+  materialFront: {fileID: 2100000, guid: ffb89d52bb78647869fd4972471a2e7a, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

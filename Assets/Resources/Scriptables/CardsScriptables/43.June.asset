@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 43.June
+  m_EditorClassIdentifier: 
+  objName: 43.June
+  fullName: June
+  faction: 10
+  CARD_ID: PW01-CO02
+  productionID: 43
+  level: 1
+  battalion: 1
+  subtitle: 'Unit: Companion'
+  description: "\u201CGnarlgnarlgnarlgnarl\u201D"
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 542e8ff03cdef46d4944b4ff8f7f5827, type: 3}
+  thumbnail: {fileID: 2800000, guid: ec9cbd7b448e3438393d7545988f9b55, type: 3}
+  materialFront: {fileID: 2100000, guid: 466dbde6516d846999ed456b07914031, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

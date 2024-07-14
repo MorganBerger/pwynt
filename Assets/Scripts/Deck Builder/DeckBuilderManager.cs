@@ -13,7 +13,8 @@ public class DeckBuilderManager : MonoBehaviour {
     UICardList allCardsListView;
     CardsInDeckList cardsInDeckList;
 
-    List<CardObject> allCards = new List<CardObject>();
+    // List<CardObject> allCards = new List<CardObject>();
+    List<CardData> allCards = new List<CardData>();
 
     const int maxNumberInDeck = 40;
     const int minNumberInDeck = 25;
@@ -39,24 +40,32 @@ public class DeckBuilderManager : MonoBehaviour {
     }
 
     void CreateAllCards() {
-        allCards = Globals.AllCardsObjects.Cast<Card>()
-                            .OrderBy((card) => card.cardProductionID).Select(c => {
-                            return new CardObject("" + c.cardProductionID, c.name, c.fullName, c.level, c.texture2D, c.thumbnail, 0, 0, c.limitPerDeck, UICardMode.NumberSelected);
-                        })
-                        .ToList();
+        allCards = Globals.Cards.OrderBy(c => c.productionID).ToList();
+        // Removing blank card for DeckBuilder
+        allCards.RemoveAt(0);
+
+        // allCards = Globals.CardsObjects()
+        //                     .OrderBy((card) => card.productionID)
+        //                     .Select(card => {
+        //                     return new CardObject(card);
+        //                 })
+        //                 .ToList();
     }
     
-    void DidClickOnCard(CardObject card) {
+    void DidClickOnCard(CardData card) {
         cardsInDeckList.AddCard(card);
     }
+    // void DidClickOnCard(CardObject card) {
+    //     cardsInDeckList.AddCard(card);
+    // }
 
-    void DidLoadDeck(CardObject[] cards) {
-        foreach (CardObject card in cards) {
+    void DidLoadDeck(CardData[] cards) {
+        foreach (CardData card in cards) {
             allCardsListView.EnableCard(card, false);
         }
     }
 
-    void DidRemoveCard(CardObject card) {
+    void DidRemoveCard(CardData card) {
         allCardsListView.EnableCard(card, true);
     }
 

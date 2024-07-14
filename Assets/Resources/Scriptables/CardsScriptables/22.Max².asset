@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: "22.Max\xB2"
+  m_EditorClassIdentifier: 
+  objName: "22.Max\xB2"
+  fullName: "Max\xB2"
+  faction: 7
+  CARD_ID: PW01-RO01
+  productionID: 22
+  level: 4
+  battalion: 1
+  subtitle: 'Unit: Robot'
+  description: "In the binary symphony of destruction, Max\xB2, the Dual Dreadnought,
+    echoes havoc with twin minds, a relentless force in the metallic tide."
+  abilityDescription: "Can be combined with \u201CE1000\u201D."
+  isHero: 0
+  ability: 4
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 5f68b41393cb845f0a6d4b3d11f72df1, type: 3}
+  thumbnail: {fileID: 2800000, guid: ef2bf2711272247d5888203ab1aaab09, type: 3}
+  materialFront: {fileID: 2100000, guid: 174110be1f933438086e8dad12df014f, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

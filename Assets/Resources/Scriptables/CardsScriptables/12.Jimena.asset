@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 12.Jimena
+  m_EditorClassIdentifier: 
+  objName: 12.Jimena
+  fullName: Jimena, Author of the Dark Scriptures
+  faction: 3
+  CARD_ID: PW01-BA03
+  productionID: 12
+  level: 5
+  battalion: 1
+  subtitle: 'Unit: Bard'
+  description: In the ink of shadows, and verses of night, Jimena, Author of the
+    Dark Scriptures, weaves tales that dance in the absence of light.
+  abilityDescription: 
+  isHero: 0
+  ability: 2
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 478b691b0f109483eabf1c5bf4df40cf, type: 3}
+  thumbnail: {fileID: 2800000, guid: 41f689b70e365441ea1e43f5c272457c, type: 3}
+  materialFront: {fileID: 2100000, guid: 735a9a2eda8024b4c834fc5756f4278c, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}

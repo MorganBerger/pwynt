@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e45e0b1b5db46c6ab82ca17059142e, type: 3}
+  m_Name: 62.Jazz
+  m_EditorClassIdentifier: 
+  objName: 62.Jazz
+  fullName: Jazz, Bringer of Doom
+  faction: 10
+  CARD_ID: PW01-CO04
+  productionID: 62
+  level: 1
+  battalion: 0
+  subtitle: 'Unit: Companion'
+  description: "\u201C[Ding! Ding!]\u201D"
+  abilityDescription: 
+  isHero: 0
+  ability: 0
+  effect: {fileID: 0}
+  targetUpgraded: -1
+  texture2D: {fileID: 2800000, guid: 194bb05f8f97c4b6c88a5f8ec301a79c, type: 3}
+  thumbnail: {fileID: 2800000, guid: 962a62f33ab014a04992fdb2a690d2a8, type: 3}
+  materialFront: {fileID: 2100000, guid: a445d236ddc5c4fe89cd15a7d73be58f, type: 2}
+  materialBack: {fileID: 2100000, guid: 111f0bb53bf3c4f878999a93d3bcfd29, type: 2}
