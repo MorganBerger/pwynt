@@ -24,6 +24,7 @@ public class UICardList : MonoBehaviour {
         var uiCard = uiCardList.Find(uiCard => {
             return uiCard.GetCard().productionID == card.productionID;
         });
+        print("Enabling: " + card.fullName);
         uiCard.SetEnabled(enabled);
     }
 

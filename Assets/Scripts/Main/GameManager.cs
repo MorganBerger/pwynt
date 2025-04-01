@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
         //     // _player.hand.UndoPlay();
         // }
 
+        CardBehaviour playedCard = null;
         if (DraggedOutOfHand(from)) {            
             var card = obj.GetComponent<CardBehaviour>();
             if (card != null) {
@@ -71,16 +72,25 @@ public class GameManager : MonoBehaviour
                     hoverBehaviour.isEnabled = false;
                 }
 
-                _player._hand.Play(card);
+                playedCard = _player._hand.Play(card);
             }
         }
+        var fromBoard = from.gameObject == board.gameObject;
+        var toHand = to.gameObject == _player._hand.gameObject;
 
-        var fromIsBoard = from.gameObject == board.gameObject;
-        var toIsHand = to.gameObject == _player._hand.gameObject;
-
-        if (toIsHand && fromIsBoard) {
+        if (toHand && fromBoard) {
             UndoPlay(obj, false);
         }
+
+        // var fromHand = from.gameObject == _player._hand.gameObject;
+        // var toMagicPlane = to.gameObject == magicDragPlaneGO;
+
+        // if (fromHand && toMagicPlane && playedCard != null) {
+        //     var dissolve = playedCard.GetComponent<CardDissolve>();
+        //     CardDieStyle style = Resources.Load<CardDieStyle>("Scriptables/DieStyleScriptables/MagicUsed");
+        //     dissolve.SetDieStyle(style);
+        //     playedCard.UseMagic();
+        // }
     }
 
     bool DraggedBackToHand(DraggableObject obj, DragPlane to) {
@@ -95,12 +105,20 @@ public class GameManager : MonoBehaviour
         print("-- dropped: '" + obj.name + "' on: " + plane.name);
         stepsDragged = 0;
 
-        if (obj.canDrop) {
-            DropCard(obj);
-        } else if (!plane.Is(_player._hand)) {
-            UndoPlay(obj);
-        } else if (plane.Is(_player._hand)) {
-            _player._hand.TidyUpHand();
+        if (plane.gameObject == board.gameObject) {
+            if (obj.canDrop) {
+                DropCard(obj);
+            } else if (!plane.Is(_player._hand)) {
+                UndoPlay(obj);
+            } else if (plane.Is(_player._hand)) {
+                _player._hand.TidyUpHand();
+            }
+        } else if (plane.gameObject == magicDragPlaneGO) {
+            var playedCard = obj.GetComponent<CardBehaviour>();
+            var dissolve = playedCard.GetComponent<CardDissolve>();
+            CardDieStyle style = Resources.Load<CardDieStyle>("Scriptables/DieStyleScriptables/MagicUsed");
+            dissolve.SetDieStyle(style);
+            playedCard.UseMagic();
         }
 
         StartCoroutine(DelaysShit());
@@ -166,7 +184,7 @@ public class GameManager : MonoBehaviour
 
         if (index < 0) return;
 
-        int tmpSteps = 0;
+        int tmpSteps;
         double numberOfSteps = distance.x / _player._hand.cardStep;
 
         if ((int)numberOfSteps > 0) {
@@ -190,8 +208,15 @@ public class GameManager : MonoBehaviour
         stepsDragged = tmpSteps;
     }
 
+    public GameObject magicDragPlaneGO;
     void DidStartDragging(DraggableObject obj) {
         stepsDragged = 0;
+
+        var card = obj.GetComponent<CardBehaviour>();
+        bool isMagicCard = card.data.battalion == Battalion.None;
+
+        magicDragPlaneGO.SetActive(isMagicCard);
+
         _player._hand.hoverEnabled = false;
     }
 

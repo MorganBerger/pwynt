@@ -2,7 +2,6 @@ using UnityEngine;
 using Unity.Multiplayer.Playmode;
 using System.Linq;
 using System.Collections.Generic;
-using Unity.Networking.Transport.Error;
 
 public static class Globals {
     public static GameObject cardUIPrefab = (GameObject)Resources.Load("Prefabs/CardsUI/UICard", typeof(GameObject));
@@ -25,11 +24,11 @@ public static class Globals {
         }
     }
 
-    public static CardData CardScriptableForID(int id) {
+    public static CardData CardDataForID(int id) {
         return Cards.First(c => c.productionID == id);
     }
 
-    public static List<CardData> CardScriptableForIDs(int[] IDs) {
+    public static List<CardData> CardDatasForIDs(int[] IDs) {
         return Cards.FindAll(c => IDs.Contains(c.productionID));
     }
 

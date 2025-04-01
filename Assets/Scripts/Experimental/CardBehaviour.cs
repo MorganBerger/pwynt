@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class CardBehaviour: MonoBehaviour { 
     
     [SerializeField]
@@ -12,15 +11,23 @@ public class CardBehaviour: MonoBehaviour {
         set {
             if (data == null || _data.productionID != value.productionID) {
                 _data = value;
-                needsUpdate = true;
+                _needsUpdate = true;
             }
         }
     }
+    
+    void Awake() {
+        // UpdateMaterials();
+    }
 
+    void Start() {
+        // UpdateMaterials();
+    }
+
+    bool _needsUpdate = false;
     void Update() {
-        if (needsUpdate) {
+        if (_needsUpdate) {
             UpdateMaterials();
-            needsUpdate = false;
         }
     }
 
@@ -29,12 +36,33 @@ public class CardBehaviour: MonoBehaviour {
         Material[] materials = new Material[2] { data.materialFront, data.materialBack };
 
         renderer.materials = materials;
+        _needsUpdate = false;
     }
 
     public bool needsUpdate = false;
     public void SetCardData(CardData cardScriptable) {
         gameObject.name = cardScriptable.objName;
         data = cardScriptable;
-        needsUpdate = true;
+        UpdateMaterials();
+    }
+
+    [SerializeField]
+    private GameObject particlesContainer;
+    public void UseMagic() {
+        if (particlesContainer == null) {
+            GameObject container = Resources.Load<GameObject>("Prefabs/Particles/ParticlesContainer");
+
+            particlesContainer = Instantiate(container, transform, false);
+            particlesContainer.transform.SetParent(transform);
+        }
+        ParticlesContainer particles = particlesContainer.GetComponent<ParticlesContainer>();
+        particles.Play();
+
+        Die();
+    }
+
+    public void Die() {
+        CardDissolve dissolve = GetComponent<CardDissolve>();
+        dissolve.Die();
     }
 }

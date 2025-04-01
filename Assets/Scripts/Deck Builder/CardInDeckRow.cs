@@ -37,9 +37,10 @@ public class CardInDeckRow : MonoBehaviour
     }
 
     public void SetCard(CardData card) {
+        this.card = card;
         cardName.text = card.fullName;
         cardLevel.text = card.level + "";
-        SetTexture(card.texture2D);
+        SetTexture(card.thumbnail);
     }
 
     // public void SetCard(CardObject card) {

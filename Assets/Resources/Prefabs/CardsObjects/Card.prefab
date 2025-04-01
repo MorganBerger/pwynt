@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 893316370644866241}
   - component: {fileID: 3588000011456076206}
   - component: {fileID: 4125175797163849842}
-  - component: {fileID: 2210327749701405653}
   - component: {fileID: -4734109613104626320}
   - component: {fileID: -4289952179151982326}
+  - component: {fileID: 2210327749701405653}
   - component: {fileID: -768063468552495664}
   - component: {fileID: 2608706588359686315}
+  - component: {fileID: 467090150130741392}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -91,18 +92,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2210327749701405653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100235125324960246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abeb19a4e550048b786e434f0461f969, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &-4734109613104626320
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -151,6 +140,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &2210327749701405653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100235125324960246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abeb19a4e550048b786e434f0461f969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 0}
+  needsUpdate: 0
+  particlesContainer: {fileID: 0}
 --- !u!114 &-768063468552495664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,3 +196,17 @@ MonoBehaviour:
   onHover:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &467090150130741392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100235125324960246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57f0dccd54bd4fb692a64bf326ec9b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dieStyle: {fileID: 0}
+  dissolveDuration: 2

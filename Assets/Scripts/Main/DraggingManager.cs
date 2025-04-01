@@ -94,7 +94,7 @@ class DraggingManager: MonoBehaviour {
     // }
 
     [SerializeField]
-    public RaycastHit[] currenthits;
+    // public RaycastHit[] currenthits;
     private void LateUpdate() {
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -103,7 +103,7 @@ class DraggingManager: MonoBehaviour {
         if (hits.Length == 0) {
             return;
         }
-        currenthits = hits;
+        // currenthits = hits;
 
         DragPlane targetPlane = null;
         RaycastHit hit = new RaycastHit();
@@ -129,8 +129,8 @@ class DraggingManager: MonoBehaviour {
         var oldPlane = currentPlane;
         currentPlane = targetPlane;
 
-        if (oldPlane == null)
-            oldPlane = currentPlane;
+        // if (oldPlane == null)
+        //     oldPlane = currentPlane;
 
         if (oldPlane != targetPlane && _currentDraggedObject != null) {
             objectDidChangePlane.Invoke(_currentDraggedObject, oldPlane, currentPlane);

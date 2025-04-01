@@ -64,14 +64,10 @@ public class CardsInDeckList : MonoBehaviour
         RemoveAllCards();
 
         foreach (var cardID in idList) {
-            // var cardGO = Globals.CardForID(cardID);
-            // var card = cardGO.GetComponent<Card>();
-            var card = Globals.CardScriptableForID(cardID);
-
-            // var cardObj = new CardObject(cardSc);
+            var card = Globals.CardDataForID(cardID);
             AddCard(card, false);
         }
-        didLoadDeck.Invoke(cardsInDeck.Select(cardRow => { return cardRow.GetCard(); }).ToArray());
+        didLoadDeck.Invoke(cardsInDeck.Select(row => { return row.GetCard(); }).ToArray());
 
         deckNameTextfield.text = deck;
     }

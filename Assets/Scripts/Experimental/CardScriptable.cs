@@ -5,7 +5,6 @@ public class CardData: ScriptableObject {
 
     public string objName;
 
-    [Tooltip("Full name")]
     public string fullName;
     
     public Faction faction;
@@ -34,5 +33,9 @@ public class CardData: ScriptableObject {
 
     public Material materialFront;
     public Material materialBack;
+
+    public string ToString() {
+        return string.Format("fullname: {0}", fullName);
+    }
 
 }

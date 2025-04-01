@@ -46,9 +46,9 @@ public class Deck : MonoBehaviour
 
     private void instantiateCard(int cardId) {
         GameObject cardGO = Instantiate(_cardPrefab);
-        CardBehaviour cardBehaviour= cardGO.GetComponent<CardBehaviour>();
+        CardBehaviour cardBehaviour = cardGO.GetComponent<CardBehaviour>();
 
-        CardData newCardData = Globals.CardScriptableForID(cardId);
+        CardData newCardData = Globals.CardDataForID(cardId);
         cardBehaviour.SetCardData(newCardData);
         
         cardsInDeck.Add(cardBehaviour);

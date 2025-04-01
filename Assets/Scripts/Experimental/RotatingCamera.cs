@@ -16,8 +16,8 @@ public class RotatingCamera: MonoBehaviour {
 
     private IEnumerator RotateCamera() {
         while (true) {
-            transform.RotateAround(target.position, Vector3.up, rotationSpeed * Time.deltaTime);
-            transform.LookAt(focusPoint);
+            // transform.RotateAround(target.position, Vector3.up, rotationSpeed * Time.deltaTime);
+            // transform.LookAt(focusPoint);
             
             yield return null;
         }

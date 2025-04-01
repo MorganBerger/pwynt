@@ -23,7 +23,13 @@ public class DeckBuilderManager : MonoBehaviour {
         Setup();
     }
 
+    public CardScriptableList selfCardList;
     void Setup() {
+        if (Globals.cardsList == null) {
+            // Globals.cardsList = Resources.Load<CardScriptableList>("Scriptables/AllCardsList");
+            Globals.cardsList = selfCardList;
+        }
+
         allCardsListView = allCardsContainer.GetComponentInChildren<UICardList>();
         cardsInDeckList = cardsInDeckContainer.GetComponent<CardsInDeckList>();
 
@@ -40,9 +46,9 @@ public class DeckBuilderManager : MonoBehaviour {
     }
 
     void CreateAllCards() {
-        allCards = Globals.Cards.OrderBy(c => c.productionID).ToList();
+        allCards = Globals.playableCards.OrderBy(c => c.productionID).ToList();
         // Removing blank card for DeckBuilder
-        allCards.RemoveAt(0);
+        // allCards.RemoveAt(0);
 
         // allCards = Globals.CardsObjects()
         //                     .OrderBy((card) => card.productionID)
@@ -60,7 +66,9 @@ public class DeckBuilderManager : MonoBehaviour {
     // }
 
     void DidLoadDeck(CardData[] cards) {
+        print("Loading " + cards.Length + " cards.");
         foreach (CardData card in cards) {
+            print(card.productionID);
             allCardsListView.EnableCard(card, false);
         }
     }
