@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     private void SetDeckMainPlayer() {
         var chosenDeck = GameHelper.chosenDeck;
         if (chosenDeck.Length == 0) {
-            chosenDeck = "something";
+            chosenDeck = "Test deck";
             // chosenDeck = "1234";
             // chosenDeck = "2rows";
             // chosenDeck = "deck uno";
