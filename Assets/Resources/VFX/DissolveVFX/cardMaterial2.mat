@@ -136,7 +136,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _dissolveScale: 45
-    - _dissolveStr: 0.33
+    - _dissolveStr: -0.12
     - _inverted: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
