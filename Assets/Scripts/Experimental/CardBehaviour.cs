@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CardBehaviour: MonoBehaviour { 
@@ -58,6 +59,12 @@ public class CardBehaviour: MonoBehaviour {
         ParticlesContainer particles = particlesContainer.GetComponent<ParticlesContainer>();
         particles.Play();
 
+        // Die();
+        StartCoroutine(DelayDie());
+    }
+
+    IEnumerator DelayDie() {
+        yield return new WaitForSeconds(0.5f);
         Die();
     }
 
