@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public static class Globals {
     public static GameObject cardUIPrefab = (GameObject)Resources.Load("Prefabs/CardsUI/UICard", typeof(GameObject));
    
+   
     public static GameObject cardPrefab = Resources.Load<GameObject>("Prefabs/CardsObjects/Card");
     public static CardBehaviour cardPrefabBehaviour = cardPrefab.GetComponent<CardBehaviour>();
 
