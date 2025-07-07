@@ -41,10 +41,11 @@ public class CardBehaviour: MonoBehaviour {
     }
 
     public bool needsUpdate = false;
-    public void SetCardData(CardData cardScriptable) {
+    public void SetCardData(CardData cardScriptable)
+    {
         gameObject.name = cardScriptable.objName;
         data = cardScriptable;
-        UpdateMaterials();
+        _needsUpdate = true;
     }
 
     [SerializeField]
