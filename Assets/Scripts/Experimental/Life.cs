@@ -36,7 +36,6 @@ public class Life : MonoBehaviour
 
     bool hasCollisionned = false;
 
-
     void OnCollisionEnter(Collision collision) {
         if (!hasCollisionned) {
             print("COLLISION");
