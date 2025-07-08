@@ -9,11 +9,6 @@ public class Life : MonoBehaviour
         splitedPrefab = Resources.Load<GameObject>("Prefabs/Lives/splitedDiamond"); 
     }
 
-    // Update is called once per frame
-    void Update() {
-         
-    }
-
     void CreateSplits() {
         Rigidbody mainRb = GetComponent<Rigidbody>();
         Material mainMat = GetComponent<Renderer>().materials[0];
@@ -38,11 +33,8 @@ public class Life : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) {
         if (!hasCollisionned) {
-            print("COLLISION");
             hasCollisionned = true;
             CreateSplits();
         }
-        // }
     }
-    // oncol
 }
