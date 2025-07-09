@@ -4,7 +4,6 @@ public class Life : MonoBehaviour
 {
     GameObject splitedPrefab;
 
-    // Start is called before the first frame update
     void Start() {
         splitedPrefab = Resources.Load<GameObject>("Prefabs/Lives/splitedDiamond"); 
     }
@@ -25,7 +24,6 @@ public class Life : MonoBehaviour
             Rigidbody rb = t.GetComponent<Rigidbody>();
             rb.velocity = mainRb.velocity;
         }
-
         Destroy(gameObject);
     }
 

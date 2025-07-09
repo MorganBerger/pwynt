@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     public GameObject cardNumberText;
     public int numberToDraw = 1;
     
-    // Player[] _players;
     public Player _player;
     public Player _opponent;
 
@@ -26,15 +25,11 @@ public class GameManager : MonoBehaviour
 
     public CardScriptableList cardsList;
 
-    // Start is called before the first frame update
     void Awake() {
-        print("Game manager awake");
         Globals.cardsList = cardsList;
     }
 
-    void Start() {
-        print("GameManager start");
-        
+    void Start() {        
         if (cardUIPanelGO) {
             cardUIPanel = cardUIPanelGO.GetComponent<CardPanel>();
             cardUIPanelGO.SetActive(false);
