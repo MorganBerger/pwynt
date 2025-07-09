@@ -359,7 +359,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2074634084}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
         m_MethodName: GoBackToMenu
         m_Mode: 1
