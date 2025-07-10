@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Life : MonoBehaviour
 {
+    // Haha
     GameObject splitedPrefab;
 
     void Start() {
