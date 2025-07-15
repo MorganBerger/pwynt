@@ -361,7 +361,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2074634084}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: GoBackToMenu
+        m_MethodName: LoadMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

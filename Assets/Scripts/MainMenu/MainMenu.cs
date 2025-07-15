@@ -2,7 +2,13 @@ using Unity.Multiplayer.Playmode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour {
+public class MenuHelper {
+    public static bool backFromLobby = false;
+}
+
+
+public class MainMenu : MonoBehaviour
+{
 
     public GameObject startButtonGO;
     MenuButton startButton;
@@ -17,16 +23,28 @@ public class MainMenu : MonoBehaviour {
 
     public GameObject pophover;
 
-    void Awake() {
+    public GameObject mainPageGO;
+    public GameObject onlinePageGO;
+
+    void Awake()
+    {
         startButton = startButtonGO.GetComponent<MenuButton>();
 
         joinGamePopup = popupPanel.GetComponentInChildren<JoinGamePopup>(true);
         playerNamePopup = popupPanel.GetComponentInChildren<PlayerNamePopup>(true);
         networkErrorPopup = popupPanel.GetComponentInChildren<NetworkErrorPopup>(true);
+
+        if (MenuHelper.backFromLobby)
+        {
+            mainPageGO.SetActive(false);
+            onlinePageGO.SetActive(true);
+            MenuHelper.backFromLobby = false;
+        }
     }
 
     bool startButtonEnabled = false;
-    void Start() {
+    void Start()
+    {
         startButtonEnabled = DeckStorageHandler.ListSavedDecks().Length > 0;
         startButton.SetEnabled(startButtonEnabled);
         startButton.wasHovered.AddListener(StartButtonWasHovered);
@@ -37,7 +55,8 @@ public class MainMenu : MonoBehaviour {
         CheckForNetworkError();
     }
 
-    void CheckForPlayername() {
+    void CheckForPlayername()
+    {
         // PlayerPrefs.DeleteAll();
 
         var key = Globals.PlayerPrefsKey.playerName;
@@ -45,14 +64,17 @@ public class MainMenu : MonoBehaviour {
 
         print("player name: '" + name + "'");
 
-        if (name == null || name.Length == 0) {
+        if (name == null || name.Length == 0)
+        {
             popupPanel.SetActive(true);
             playerNamePopup.gameObject.SetActive(true);
         }
     }
 
-    void CheckForNetworkError() {
-        if (NetworkHelper.networkError.Length > 0) {
+    void CheckForNetworkError()
+    {
+        if (NetworkHelper.networkError.Length > 0)
+        {
             networkErrorPopup.SetErrorDescription(NetworkHelper.networkError);
 
             popupPanel.SetActive(true);
@@ -61,15 +83,18 @@ public class MainMenu : MonoBehaviour {
     }
 
     bool buttonHovered = false;
-    void StartButtonWasHovered(bool hovered) {
+    void StartButtonWasHovered(bool hovered)
+    {
         if (startButtonEnabled) { return; }
 
         buttonHovered = hovered;
         pophover.SetActive(hovered);
     }
 
-    void LateUpdate() {
-        if (buttonHovered) {
+    void LateUpdate()
+    {
+        if (buttonHovered)
+        {
             var mouse = Input.mousePosition;
             mouse.x = mouse.x + 245;
             mouse.y = mouse.y - 50;
@@ -77,21 +102,25 @@ public class MainMenu : MonoBehaviour {
         }
     }
 
-    public void CreateGame() {
+    public void CreateGame()
+    {
         NetworkHelper.isHost = true;
         SceneManager.LoadScene("LobbyScene");
     }
 
-    public void JoinGame() {
+    public void JoinGame()
+    {
         NetworkHelper.isHost = false;
         SceneManager.LoadScene("LobbyScene");
     }
 
-    public void BuildDeck() {
+    public void BuildDeck()
+    {
         SceneManager.LoadScene("DeckMaker");
     }
-    
-    public void QuitGame() {
+
+    public void QuitGame()
+    {
         Application.Quit();
     }
 }
