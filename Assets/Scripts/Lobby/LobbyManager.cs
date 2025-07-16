@@ -114,7 +114,17 @@ public class LobbyManager: NetworkBehaviour {
         networkManager.Shutdown();
     }
 
-    public void GoBackToMenu() {
+    public void LoadMenu()
+    {
+        MenuHelper.backFromLobby = true;
+        StopNetworking();
+        SceneManager.LoadScene("MainMenuScene");
+        
+    }
+
+    public void GoBackToMenu()
+    {
+        // MenuHelper.backFromLobby = true;
         SceneManager.LoadScene("MainMenuScene");
         StopNetworking();
         Destroy(gameObject);
