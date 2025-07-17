@@ -37,7 +37,6 @@ public class LobbyManager: NetworkBehaviour {
             readyButton.onClick.AddListener(OnClickStartGame);
 
             waitForHostLabel.gameObject.SetActive(false);
-
         } else { 
             print("Starting as Client");
             networkManager.GetComponent<UnityTransport>().SetConnectionData(
