@@ -29,7 +29,7 @@ public class LobbyManager: NetworkBehaviour {
 
     void CreateLobby() {
         if (NetworkHelper.isHost) {
-            print("Starting as host");
+            // print("Starting as host");
             networkManager.StartHost();
 
             readyButton.GetComponentInChildren<TextMeshProUGUI>().text = "Let's fight!";
