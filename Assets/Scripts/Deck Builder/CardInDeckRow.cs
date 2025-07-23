@@ -20,7 +20,6 @@ public class CardInDeckRow : MonoBehaviour
 
     public UnityEvent<CardInDeckRow> onClick;
 
-    // Start is called before the first frame update
     void Awake() {
         cardImage = imageGO.GetComponent<Image>();
         button = GetComponent<Button>();
