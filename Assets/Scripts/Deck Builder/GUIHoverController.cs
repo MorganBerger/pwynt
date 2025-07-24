@@ -8,8 +8,9 @@ public class GUIHoverController: MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerEnter(PointerEventData eventData) {
         onHover.Invoke(true);
     }
-
-    public void OnPointerExit(PointerEventData eventData) {
+    
+    public void OnPointerExit(PointerEventData eventData)
+    {
         onHover.Invoke(false);
     }
 }

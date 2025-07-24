@@ -16,13 +16,15 @@ public class CardBehaviour: MonoBehaviour {
             }
         }
     }
-    
-    void Awake() {
-        // UpdateMaterials();
+
+    void Awake()
+    {
+
     }
 
-    void Start() {
-        // UpdateMaterials();
+    void Start()
+    {
+
     }
 
     bool _needsUpdate = false;
