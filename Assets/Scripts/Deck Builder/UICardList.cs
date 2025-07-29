@@ -7,18 +7,12 @@ public class UICardList : MonoBehaviour {
     List<CardData> cardList = new List<CardData>();
     List<UICard> uiCardList = new List<UICard>();
 
-    // public UnityEvent<CardObject> didClickOnCard;
     public UnityEvent<CardData> didClickOnCard;
 
     public void SetCards(List<CardData> list) {
         cardList = list;
         UpdateList();
     }
-
-    // public void SetCards(List<CardObject> list) {
-    //     cardList = list;
-    //     UpdateList();
-    // }
 
     public void EnableCard(CardData card, bool enabled) {
         var uiCard = uiCardList.Find(uiCard => {
